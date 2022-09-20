@@ -9,36 +9,27 @@
     tools:context=".MainActivity">
 
     <Spinner
-        android:id="@+id/some_spinner"
+        android:id="@+id/unit_category_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/some_text_view"
-        android:layout_width="match_parent"
+    <Spinner
+        android:id="@+id/source_unit_spinner"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/hello_blank_fragment"
-        app:layout_constraintTop_toBottomOf="@id/some_spinner"
+        app:layout_constraintTop_toBottomOf="@id/unit_category_spinner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/destination_unit_spinner" />
 
-    <Button
-        android:layout_width="match_parent"
+    <Spinner
+        android:id="@+id/destination_unit_spinner"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        app:layout_constraintTop_toBottomOf="@id/some_text_view"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/unit_category_spinner"
+        app:layout_constraintStart_toEndOf="@id/source_unit_spinner"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <!--
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment" />
-    -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

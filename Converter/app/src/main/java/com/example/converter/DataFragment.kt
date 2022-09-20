@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.converter.databinding.FragmentDataBinding
 
 class DataFragment : Fragment() {
@@ -24,12 +23,22 @@ class DataFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val spinner: Spinner = binding.someSpinner
-        val choices: Array<String> = arrayOf("choice 1", "choice 2", "choice 3")
-        spinner.adapter = ArrayAdapter(
+        val spinnerItemLayoutId: Int = android.R.layout.simple_spinner_dropdown_item
+
+        binding.unitCategorySpinner.adapter = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            choices
+            spinnerItemLayoutId,
+            arrayOf("distance", "mass", "currency")
+        )
+        binding.sourceUnitSpinner.adapter = ArrayAdapter(
+            requireContext(),
+            spinnerItemLayoutId,
+            arrayOf("meters", "feet", "inches")
+        )
+        binding.destinationUnitSpinner.adapter = ArrayAdapter(
+            requireContext(),
+            spinnerItemLayoutId,
+            arrayOf("meters", "feet", "inches")
         )
     }
 
