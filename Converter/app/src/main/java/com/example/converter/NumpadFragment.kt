@@ -3,6 +3,7 @@ package com.example.converter
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.converter.databinding.FragmentNumpadBinding
 
@@ -23,6 +24,9 @@ class NumpadFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.numpadRecyclerView
+        // this also can be important
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        recyclerView.adapter = NumAdapter() // IMPORTANT
     }
 
     override fun onDestroyView() {

@@ -1,10 +1,13 @@
 package com.example.converter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
+
+const val TAG = "NumAdapter"
 
 class NumAdapter : RecyclerView.Adapter<NumAdapter.NumberViewHolder>() {
     // buttons for the numpad
@@ -13,7 +16,7 @@ class NumAdapter : RecyclerView.Adapter<NumAdapter.NumberViewHolder>() {
     /**
      * Provides a reference for the views needed to display items in your list.
      */
-    class NumberViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    class NumberViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val button: Button = view.findViewById(R.id.num_button_item)
     }
 
@@ -25,6 +28,8 @@ class NumAdapter : RecyclerView.Adapter<NumAdapter.NumberViewHolder>() {
      * Creates new views with R.layout.item_view as its template
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NumberViewHolder {
+        Log.d(TAG, "onCreateViewHolder() called")
+
         val layout =
             LayoutInflater
             .from(parent.context)
@@ -37,6 +42,8 @@ class NumAdapter : RecyclerView.Adapter<NumAdapter.NumberViewHolder>() {
      * Replaces the content of an existing view with new data
      */
     override fun onBindViewHolder(holder: NumberViewHolder, position: Int) {
+        Log.d(TAG, "onBindViewHolder() called")
+
         val item: Char = list[position]
         holder.button.text = item.toString()
         holder.button.setOnClickListener {
