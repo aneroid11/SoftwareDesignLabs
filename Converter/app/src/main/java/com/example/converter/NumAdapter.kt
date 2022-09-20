@@ -28,8 +28,6 @@ class NumAdapter : RecyclerView.Adapter<NumAdapter.NumberViewHolder>() {
      * Creates new views with R.layout.item_view as its template
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NumberViewHolder {
-        Log.d(TAG, "onCreateViewHolder() called")
-
         val layout =
             LayoutInflater
             .from(parent.context)
@@ -42,8 +40,6 @@ class NumAdapter : RecyclerView.Adapter<NumAdapter.NumberViewHolder>() {
      * Replaces the content of an existing view with new data
      */
     override fun onBindViewHolder(holder: NumberViewHolder, position: Int) {
-        Log.d(TAG, "onBindViewHolder() called")
-
         val item: Char = list[position]
         holder.button.text = item.toString()
         holder.button.setOnClickListener {
