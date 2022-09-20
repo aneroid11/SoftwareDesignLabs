@@ -47,9 +47,7 @@ class NumAdapter : RecyclerView.Adapter<NumAdapter.NumberViewHolder>() {
         val item: Char = list[position]
         holder.button.text = item.toString()
         holder.button.setOnClickListener {
-            TODO("Handle the numpad button click")
-            // val action = LetterListFragmentDirections.actionLetterListFragmentToWordListFragment(item.toString())
-            // holder.view.findNavController().navigate(action)
+            Log.d(TAG, "onClickListener for $item")
         }
     }
 }
