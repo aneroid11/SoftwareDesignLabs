@@ -5,12 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-const val TAG = "NumAdapter"
-
-class NumAdapter : RecyclerView.Adapter<NumAdapter.NumberViewHolder>() {
+class NumAdapter(val clickHandler: NumpadClickHandler) : RecyclerView.Adapter<NumAdapter.NumberViewHolder>() {
     // buttons for the numpad
     private val list = ('0').rangeTo('9').toList() + listOf<Char>('.', 'C')
 
@@ -44,7 +41,8 @@ class NumAdapter : RecyclerView.Adapter<NumAdapter.NumberViewHolder>() {
         val item: Char = list[position]
         holder.button.text = item.toString()
         holder.button.setOnClickListener {
-            Log.d(TAG, "onClickListener for $item")
+            Log.d("NumAdapter", "onClickListener for $item")
+            clickHandler.handleClick(item)
         }
     }
 }
