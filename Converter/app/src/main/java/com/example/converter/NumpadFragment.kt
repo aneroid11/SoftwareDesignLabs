@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.converter.databinding.FragmentNumpadBinding
@@ -16,7 +16,8 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
 
     private lateinit var recyclerView: RecyclerView
 
-    private val viewModel: DataViewModel by viewModels()
+    //private val dataViewModel: DataViewModel by viewModels()
+    private val dataViewModel: DataViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,5 +42,12 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
 
     override fun handleClick(pressedKey: Char) {
         Log.d("NumpadFragment", "handleClick(\'$pressedKey\')")
+
+        if (pressedKey.isDigit()) {
+            val value = pressedKey.toString().toDouble()
+            Log.d("NumpadFragment", "setSourceValue($value)")
+
+            dataViewModel.setSourceValue(value)
+        }
     }
 }
