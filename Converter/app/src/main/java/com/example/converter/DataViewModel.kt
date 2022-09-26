@@ -18,5 +18,11 @@ class DataViewModel : ViewModel() {
     fun setSourceValue(srcVal: Double) {
         Log.d("DataViewModel", "setSourceValue($srcVal) called")
         _sourceValue.value = srcVal
+
+        updateDestinationValue()
+    }
+
+    private fun updateDestinationValue() {
+        _destinationValue.value = _sourceValue.value?.times(34.31289)
     }
 }
