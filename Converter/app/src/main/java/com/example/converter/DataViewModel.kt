@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class DataViewModel : ViewModel() {
-    private val _sourceValue: MutableLiveData<Double> = MutableLiveData<Double>()
-    private val _destinationValue: MutableLiveData<Double> = MutableLiveData<Double>()
+    private val _sourceValue: MutableLiveData<Double> = MutableLiveData<Double>(0.0)
+    private val _destinationValue: MutableLiveData<Double> = MutableLiveData<Double>(0.0)
 
     private var _units: Map<String, Array<String>> = mapOf(
         "currency" to arrayOf("dollars (US)", "euro", "BYN"),
@@ -50,7 +50,18 @@ class DataViewModel : ViewModel() {
         _destinationUnits = currentUnits[0]
     }
 
+    fun changeSourceUnits(sourceUnits: String) {
+        _sourceUnits = sourceUnits
+        updateDestinationValue()
+    }
+
+    fun changeDestinationUnits(destinationUnits: String) {
+        _destinationUnits = destinationUnits
+        updateDestinationValue()
+    }
+
     private fun updateDestinationValue() {
+        // Updates the destination value using source units and destination units.
         _destinationValue.value = _sourceValue.value?.times(34.31289)
     }
 }

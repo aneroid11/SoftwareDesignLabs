@@ -84,12 +84,14 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     "DataFragment",
                     "source_unit_spinner: $item"
                 )
+                dataViewModel.changeSourceUnits(item as String)
             }
             R.id.destination_unit_spinner -> {
                 Log.d(
                     "DataFragment",
                     "destination_unit_spinner: $item"
                 )
+                dataViewModel.changeDestinationUnits(item as String)
             }
             R.id.unit_category_spinner -> {
                 Log.d(
