@@ -80,33 +80,14 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         when (parentView.id) {
             R.id.source_unit_spinner -> {
-                Log.d(
-                    "DataFragment",
-                    "source_unit_spinner: $item"
-                )
                 dataViewModel.changeSourceUnits(item as String)
             }
             R.id.destination_unit_spinner -> {
-                Log.d(
-                    "DataFragment",
-                    "destination_unit_spinner: $item"
-                )
                 dataViewModel.changeDestinationUnits(item as String)
             }
             R.id.unit_category_spinner -> {
-                Log.d(
-                    "DataFragment",
-                    "unit_category_spinner: $item"
-                )
-                Log.d(
-                    "DataFragment",
-                    "item as String == " + item as String
-                )
                 dataViewModel.changeUnitsType(item as String)
-                Log.d(
-                    "DataFragment",
-                    "dataViewModel.unitsType == " + dataViewModel.unitsType
-                )
+
                 binding.destinationUnitSpinner.adapter = ArrayAdapter(
                     requireContext(),
                     spinnerItemLayoutId,

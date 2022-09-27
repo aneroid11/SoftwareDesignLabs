@@ -49,10 +49,6 @@ class DataViewModel : ViewModel() {
 
     val unitsType: String get() =
         _unitsType
-    /*val sourceUnits: String get() =
-        _sourceUnits
-    val destinationUnits: String get() =
-        _destinationUnits*/
 
     val sourceValue: LiveData<Double> get() =
         _sourceValue
@@ -61,7 +57,6 @@ class DataViewModel : ViewModel() {
 
     // maybe there is a better way to do this.
     fun setSourceValue(srcVal: Double) {
-        Log.d("DataViewModel", "setSourceValue($srcVal) called")
         _sourceValue.value = srcVal
 
         updateDestinationValue()

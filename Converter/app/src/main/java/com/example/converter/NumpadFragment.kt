@@ -17,6 +17,8 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
 
     private val dataViewModel: DataViewModel by activityViewModels()
 
+    private var dotPressed: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,13 +41,25 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
     }
 
     override fun handleClick(pressedKey: Char) {
-        Log.d("NumpadFragment", "handleClick(\'$pressedKey\')")
-
         if (pressedKey.isDigit()) {
-            val value = pressedKey.toString().toDouble()
-            Log.d("NumpadFragment", "setSourceValue($value)")
+            val digitValue: Int = pressedKey.toString().toInt()
+            var nextSourceValue: Double = dataViewModel.sourceValue.value!!
 
-            dataViewModel.setSourceValue(value)
+            if (!dotPressed) {
+                nextSourceValue = nextSourceValue.times(10)
+                nextSourceValue = nextSourceValue.plus(digitValue)
+            } else {
+                nextSourceValue = digitValue.toDouble()
+            }
+
+            dataViewModel.setSourceValue(nextSourceValue)
+        }
+        else if (pressedKey == '.') {
+            dotPressed = true
+        }
+        else if (pressedKey == 'C') {
+            dataViewModel.setSourceValue(0.0)
+            dotPressed = false
         }
     }
 }
