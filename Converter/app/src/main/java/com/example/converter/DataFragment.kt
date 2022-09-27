@@ -58,7 +58,7 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
             binding.sourceValue.text = it
         }
         dataViewModel.destinationValue.observe(viewLifecycleOwner) {
-            binding.destinationValue.text = it.toString()
+            binding.destinationValue.text = it.toPlainString()
         }
     }
 

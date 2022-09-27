@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import java.math.BigDecimal
+import java.math.MathContext
+import java.math.RoundingMode
 
 class DataViewModel : ViewModel() {
     private val _sourceValueStr: MutableLiveData<String> = MutableLiveData<String>("0")
@@ -29,6 +31,23 @@ class DataViewModel : ViewModel() {
             "yards" to BigDecimal("0.9144")
         )
     )
+    /*private val _unitsCoefficients: Map<String, Map<String, Double>> = mapOf(
+        "currency" to mapOf(
+            "dollars (US)" to 1.0,
+            "euro" to 0.96,
+            "BYN" to 0.4
+        ),
+        "mass" to mapOf(
+            "kilograms" to 1.0,
+            "pounds" to 0.45,
+            "ounces" to 0.028
+        ),
+        "distance" to mapOf(
+            "meters" to 1.0,
+            "inches" to 0.025,
+            "yards" to 0.91
+        )
+    )*/
 
     private fun unitsCoefficientsToUnits(): Map<String, Array<String>> {
         val unitsMap = mutableMapOf<String, Array<String>>()
@@ -53,8 +72,6 @@ class DataViewModel : ViewModel() {
     val unitsType: String get() =
         _unitsType
 
-    //val sourceValue: LiveData<Double> get() =
-    //    _sourceValue
     val sourceValueStr: LiveData<String> get() =
         _sourceValueStr
     val destinationValue: LiveData<BigDecimal> get() =
@@ -89,9 +106,13 @@ class DataViewModel : ViewModel() {
         // Updates the destination value using source units and destination units.
         val coefSource = _unitsCoefficients[_unitsType]!![_sourceUnits]!!
         val coefDest = _unitsCoefficients[_unitsType]!![_destinationUnits]!!
-        //val temp = _sourceValueStr.value!!.toDouble() * coefSource
-        val temp = BigDecimal(_sourceValueStr.value!!).times(coefSource)
 
-        _destinationValue.value = temp.divide(coefDest)
+        val convertCoef: BigDecimal = coefSource.divide(
+            coefDest,
+            3,
+            RoundingMode.HALF_EVEN
+        )
+
+        _destinationValue.value = BigDecimal(_sourceValueStr.value!!) * convertCoef
     }
 }
