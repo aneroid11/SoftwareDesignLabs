@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.converter.databinding.FragmentNumpadBinding
+import kotlin.math.pow
 
 class NumpadFragment : Fragment(), NumpadClickHandler {
     private var _binding: FragmentNumpadBinding? = null
@@ -41,25 +42,44 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
     }
 
     override fun handleClick(pressedKey: Char) {
+        var nextSourceValueStr: String = dataViewModel.sourceValueStr.value!!
+
+        Log.d(
+            "NumpadFragment",
+            "nextSourceValueStr == $nextSourceValueStr"
+        )
+
         if (pressedKey.isDigit()) {
-            val digitValue: Int = pressedKey.toString().toInt()
+            if (nextSourceValueStr != "0") {
+                nextSourceValueStr += pressedKey
+            }
+            else {
+                nextSourceValueStr = pressedKey.toString()
+            }
+            /*val digitValue: Int = pressedKey.toString().toInt()
             var nextSourceValue: Double = dataViewModel.sourceValue.value!!
 
             if (!dotPressed) {
                 nextSourceValue = nextSourceValue.times(10)
                 nextSourceValue = nextSourceValue.plus(digitValue)
             } else {
-                nextSourceValue = digitValue.toDouble()
+                nextSourceValue = nextSourceValue.plus(
+                    digitValue.toDouble() * (0.1.pow(power10AfterDot))
+                )
+                power10AfterDot++
             }
 
-            dataViewModel.setSourceValue(nextSourceValue)
+            dataViewModel.setSourceValue(nextSourceValue)*/
         }
-        else if (pressedKey == '.') {
+        else if (pressedKey == '.' && !dotPressed) {
+            nextSourceValueStr += "."
             dotPressed = true
         }
         else if (pressedKey == 'C') {
-            dataViewModel.setSourceValue(0.0)
+            nextSourceValueStr = "0"
             dotPressed = false
         }
+
+        dataViewModel.setSourceValueStr(nextSourceValueStr)
     }
 }

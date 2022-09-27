@@ -54,8 +54,8 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
         )
         binding.destinationUnitSpinner.onItemSelectedListener = this
 
-        dataViewModel.sourceValue.observe(viewLifecycleOwner) {
-            binding.sourceValue.text = it.toString()
+        dataViewModel.sourceValueStr.observe(viewLifecycleOwner) {
+            binding.sourceValue.text = it
         }
         dataViewModel.destinationValue.observe(viewLifecycleOwner) {
             binding.destinationValue.text = it.toString()

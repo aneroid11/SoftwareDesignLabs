@@ -4,9 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlin.text.Typography.times
 
 class DataViewModel : ViewModel() {
-    private val _sourceValue: MutableLiveData<Double> = MutableLiveData<Double>(0.0)
+    //private val _sourceValue: MutableLiveData<Double> = MutableLiveData<Double>(0.0)
+    private val _sourceValueStr: MutableLiveData<String> = MutableLiveData<String>("0")
     private val _destinationValue: MutableLiveData<Double> = MutableLiveData<Double>(0.0)
 
     private val _unitsCoefficients: Map<String, Map<String, Double>> = mapOf(
@@ -50,14 +52,16 @@ class DataViewModel : ViewModel() {
     val unitsType: String get() =
         _unitsType
 
-    val sourceValue: LiveData<Double> get() =
-        _sourceValue
+    //val sourceValue: LiveData<Double> get() =
+    //    _sourceValue
+    val sourceValueStr: LiveData<String> get() =
+        _sourceValueStr
     val destinationValue: LiveData<Double> get() =
         _destinationValue
 
     // maybe there is a better way to do this.
-    fun setSourceValue(srcVal: Double) {
-        _sourceValue.value = srcVal
+    fun setSourceValueStr(srcValStr: String) {
+        _sourceValueStr.value = srcValStr
 
         updateDestinationValue()
     }
@@ -84,7 +88,7 @@ class DataViewModel : ViewModel() {
         // Updates the destination value using source units and destination units.
         val coefSource = _unitsCoefficients[_unitsType]!![_sourceUnits]!!
         val coefDest = _unitsCoefficients[_unitsType]!![_destinationUnits]!!
-        val temp = _sourceValue.value!!.times(coefSource)
+        val temp = _sourceValueStr.value!!.toDouble() * coefSource
 
         _destinationValue.value = temp / coefDest
     }
