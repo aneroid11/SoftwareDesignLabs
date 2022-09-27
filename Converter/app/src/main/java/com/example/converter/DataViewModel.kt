@@ -9,6 +9,26 @@ class DataViewModel : ViewModel() {
     private val _sourceValue: MutableLiveData<Double> = MutableLiveData<Double>()
     private val _destinationValue: MutableLiveData<Double> = MutableLiveData<Double>()
 
+    private var _units: Map<String, Array<String>> = mapOf(
+        "currency" to arrayOf("dollars (US)", "euro", "BYN"),
+        "mass" to arrayOf("pounds", "kilograms", "carats"),
+        "distance" to arrayOf("meters", "inches", "feet")
+    )
+
+    private var _unitsType: String = _units.keys.toTypedArray()[0]
+    private var _sourceUnits: String = _units[_unitsType]!![0]
+    private var _destinationUnits: String = _units[_unitsType]!![0]
+
+    val units: Map<String, Array<String>> get() =
+        _units
+
+    val unitsType: String get() =
+        _unitsType
+    val sourceUnits: String get() =
+        _sourceUnits
+    val destinationUnits: String get() =
+        _destinationUnits
+
     val sourceValue: LiveData<Double> get() =
         _sourceValue
     val destinationValue: LiveData<Double> get() =
@@ -20,6 +40,13 @@ class DataViewModel : ViewModel() {
         _sourceValue.value = srcVal
 
         updateDestinationValue()
+    }
+
+    fun changeUnitsType(unitsType: String) {
+        val currentUnits: Array<String> = _units[unitsType]!!
+
+        _sourceUnits = currentUnits[0]
+        _destinationUnits = currentUnits[0]
     }
 
     private fun updateDestinationValue() {

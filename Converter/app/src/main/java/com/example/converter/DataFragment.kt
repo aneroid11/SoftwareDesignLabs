@@ -5,16 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.converter.databinding.FragmentDataBinding
 
-class DataFragment : Fragment() {
+class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var _binding: FragmentDataBinding? = null
     private val binding get() = _binding!!
 
     private val dataViewModel: DataViewModel by activityViewModels()
+
+    private lateinit var units: Map<String, Array<String>>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,23 +29,30 @@ class DataFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        units = dataViewModel.units
+
         val spinnerItemLayoutId: Int = android.R.layout.simple_spinner_dropdown_item
 
         binding.unitCategorySpinner.adapter = ArrayAdapter(
             requireContext(),
             spinnerItemLayoutId,
-            arrayOf("distance", "mass", "currency")
+            units.keys.toTypedArray()
         )
+        binding.unitCategorySpinner.onItemSelectedListener = this
+
         binding.sourceUnitSpinner.adapter = ArrayAdapter(
             requireContext(),
             spinnerItemLayoutId,
-            arrayOf("meters", "feet", "inches")
+            units["currency"]!!
         )
+        binding.sourceUnitSpinner.onItemSelectedListener = this
+
         binding.destinationUnitSpinner.adapter = ArrayAdapter(
             requireContext(),
             spinnerItemLayoutId,
-            arrayOf("meters", "feet", "inches")
+            units["currency"]!!
         )
+        binding.destinationUnitSpinner.onItemSelectedListener = this
 
         dataViewModel.sourceValue.observe(viewLifecycleOwner) {
             binding.sourceValue.text = it.toString()
@@ -55,5 +65,47 @@ class DataFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemSelected(
+        parentView: AdapterView<*>?,
+        selectedItemView: View?,
+        position: Int,
+        id: Long
+    ) {
+        if (parentView == null) { return }
+
+        val item = parentView.getItemAtPosition(position)
+        val spinnerItemLayoutId: Int = android.R.layout.simple_spinner_dropdown_item
+
+        when (parentView.id) {
+            R.id.source_unit_spinner -> {
+                Log.d(
+                    "DataFragment",
+                    "source_unit_spinner: $item"
+                )
+            }
+            R.id.destination_unit_spinner -> {
+                Log.d(
+                    "DataFragment",
+                    "destination_unit_spinner: $item"
+                )
+            }
+            R.id.unit_category_spinner -> {
+                Log.d(
+                    "DataFragment",
+                    "unit_category_spinner: $item"
+                )
+                dataViewModel.changeUnitsType(item as String)
+                binding.destinationUnitSpinner.adapter = ArrayAdapter(
+                    requireContext(),
+                    spinnerItemLayoutId,
+                    units[dataViewModel.unitsType]!!
+                )
+            }
+        }
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
     }
 }
