@@ -8,7 +8,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.converter.databinding.FragmentNumpadBinding
-import kotlin.math.pow
 
 class NumpadFragment : Fragment(), NumpadClickHandler {
     private var _binding: FragmentNumpadBinding? = null

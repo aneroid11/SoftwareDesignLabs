@@ -4,28 +4,29 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlin.text.Typography.times
+import java.math.BigDecimal
 
 class DataViewModel : ViewModel() {
-    //private val _sourceValue: MutableLiveData<Double> = MutableLiveData<Double>(0.0)
     private val _sourceValueStr: MutableLiveData<String> = MutableLiveData<String>("0")
-    private val _destinationValue: MutableLiveData<Double> = MutableLiveData<Double>(0.0)
+    private val _destinationValue: MutableLiveData<BigDecimal> = MutableLiveData<BigDecimal>(
+        BigDecimal("0.0")
+    )
 
-    private val _unitsCoefficients: Map<String, Map<String, Double>> = mapOf(
+    private val _unitsCoefficients: Map<String, Map<String, BigDecimal>> = mapOf(
         "currency" to mapOf(
-            "dollars (US)" to 1.0,
-            "euro" to 0.96,
-            "BYN" to 0.396
+            "dollars (US)" to BigDecimal("1"),
+            "euro" to BigDecimal("0.96"),
+            "BYN" to BigDecimal("0.396")
         ),
         "mass" to mapOf(
-            "kilograms" to 1.0,
-            "pounds" to 0.4535924,
-            "ounces" to 0.02834952
+            "kilograms" to BigDecimal("1"),
+            "pounds" to BigDecimal("0.4535924"),
+            "ounces" to BigDecimal("0.02834952")
         ),
         "distance" to mapOf(
-            "meters" to 1.0,
-            "inches" to 0.0254,
-            "yards" to 0.9144
+            "meters" to BigDecimal("1"),
+            "inches" to BigDecimal("0.0254"),
+            "yards" to BigDecimal("0.9144")
         )
     )
 
@@ -56,7 +57,7 @@ class DataViewModel : ViewModel() {
     //    _sourceValue
     val sourceValueStr: LiveData<String> get() =
         _sourceValueStr
-    val destinationValue: LiveData<Double> get() =
+    val destinationValue: LiveData<BigDecimal> get() =
         _destinationValue
 
     // maybe there is a better way to do this.
@@ -88,8 +89,9 @@ class DataViewModel : ViewModel() {
         // Updates the destination value using source units and destination units.
         val coefSource = _unitsCoefficients[_unitsType]!![_sourceUnits]!!
         val coefDest = _unitsCoefficients[_unitsType]!![_destinationUnits]!!
-        val temp = _sourceValueStr.value!!.toDouble() * coefSource
+        //val temp = _sourceValueStr.value!!.toDouble() * coefSource
+        val temp = BigDecimal(_sourceValueStr.value!!).times(coefSource)
 
-        _destinationValue.value = temp / coefDest
+        _destinationValue.value = temp.divide(coefDest)
     }
 }
