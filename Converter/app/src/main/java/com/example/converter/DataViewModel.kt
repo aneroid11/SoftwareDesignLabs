@@ -43,7 +43,8 @@ class DataViewModel : ViewModel() {
     }
 
     fun changeUnitsType(unitsType: String) {
-        val currentUnits: Array<String> = _units[unitsType]!!
+        _unitsType = unitsType
+        val currentUnits: Array<String> = _units[_unitsType]!!
 
         _sourceUnits = currentUnits[0]
         _destinationUnits = currentUnits[0]

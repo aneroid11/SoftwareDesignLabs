@@ -96,8 +96,21 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     "DataFragment",
                     "unit_category_spinner: $item"
                 )
+                Log.d(
+                    "DataFragment",
+                    "item as String == " + item as String
+                )
                 dataViewModel.changeUnitsType(item as String)
+                Log.d(
+                    "DataFragment",
+                    "dataViewModel.unitsType == " + dataViewModel.unitsType
+                )
                 binding.destinationUnitSpinner.adapter = ArrayAdapter(
+                    requireContext(),
+                    spinnerItemLayoutId,
+                    units[dataViewModel.unitsType]!!
+                )
+                binding.sourceUnitSpinner.adapter = ArrayAdapter(
                     requireContext(),
                     spinnerItemLayoutId,
                     units[dataViewModel.unitsType]!!
