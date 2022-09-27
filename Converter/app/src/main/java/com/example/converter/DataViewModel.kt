@@ -39,11 +39,6 @@ class DataViewModel : ViewModel() {
     }
 
     private var _units: Map<String, Array<String>> = unitsCoefficientsToUnits()
-    /*private var _units: Map<String, Array<String>> = mapOf(
-        "currency" to arrayOf("dollars (US)", "euro", "BYN"),
-        "mass" to arrayOf("kilograms", "pounds", "carats"),
-        "distance" to arrayOf("meters", "inches", "feet")
-    )*/
 
     private var _unitsType: String = _units.keys.toTypedArray()[0]
     private var _sourceUnits: String = _units[_unitsType]!![0]
@@ -54,10 +49,10 @@ class DataViewModel : ViewModel() {
 
     val unitsType: String get() =
         _unitsType
-    val sourceUnits: String get() =
+    /*val sourceUnits: String get() =
         _sourceUnits
     val destinationUnits: String get() =
-        _destinationUnits
+        _destinationUnits*/
 
     val sourceValue: LiveData<Double> get() =
         _sourceValue
@@ -92,6 +87,10 @@ class DataViewModel : ViewModel() {
 
     private fun updateDestinationValue() {
         // Updates the destination value using source units and destination units.
-        _destinationValue.value = _sourceValue.value?.times(34.31289)
+        val coefSource = _unitsCoefficients[_unitsType]!![_sourceUnits]!!
+        val coefDest = _unitsCoefficients[_unitsType]!![_destinationUnits]!!
+        val temp = _sourceValue.value!!.times(coefSource)
+
+        _destinationValue.value = temp / coefDest
     }
 }
