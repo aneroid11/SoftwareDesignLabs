@@ -114,9 +114,16 @@ class DataViewModel : ViewModel() {
         val convertCoef = coefSource / coefDest
         Log.d("DataViewModel", "convertCoef (double) == $convertCoef")
 
-        _destinationValue.value = (
-                BigDecimal(_sourceValueStr.value!!) *
-                BigDecimal(convertCoef.toString())
-                ).stripTrailingZeros()
+        var destValue: BigDecimal =
+            BigDecimal(_sourceValueStr.value!!) * BigDecimal(convertCoef.toString())
+
+        val zero: BigDecimal = BigDecimal.ZERO
+        if (destValue.compareTo(zero) == 0) {
+            destValue = zero
+        } else {
+            destValue = destValue.stripTrailingZeros()
+        }
+
+        _destinationValue.value = destValue
     }
 }

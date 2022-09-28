@@ -55,20 +55,6 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
             else {
                 nextSourceValueStr = pressedKey.toString()
             }
-            /*val digitValue: Int = pressedKey.toString().toInt()
-            var nextSourceValue: Double = dataViewModel.sourceValue.value!!
-
-            if (!dotPressed) {
-                nextSourceValue = nextSourceValue.times(10)
-                nextSourceValue = nextSourceValue.plus(digitValue)
-            } else {
-                nextSourceValue = nextSourceValue.plus(
-                    digitValue.toDouble() * (0.1.pow(power10AfterDot))
-                )
-                power10AfterDot++
-            }
-
-            dataViewModel.setSourceValue(nextSourceValue)*/
         }
         else if (pressedKey == '.' && !dotPressed) {
             nextSourceValueStr += "."
