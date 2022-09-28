@@ -23,6 +23,9 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var units: Map<String, Array<String>>
 
+    private var sourceUnitsIdInSpinner: Int = 0
+    private var destUnitsIdInSpinner: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,7 +55,11 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun switchSourceDest() {
+        val oldDestUnitsId = destUnitsIdInSpinner
+        val oldSourceUnitsId = sourceUnitsIdInSpinner
 
+        binding.sourceUnitSpinner.setSelection(oldDestUnitsId)
+        binding.destinationUnitSpinner.setSelection(oldSourceUnitsId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -112,9 +119,11 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
         when (parentView.id) {
             R.id.source_unit_spinner -> {
                 dataViewModel.changeSourceUnits(item as String)
+                sourceUnitsIdInSpinner = position
             }
             R.id.destination_unit_spinner -> {
                 dataViewModel.changeDestinationUnits(item as String)
+                destUnitsIdInSpinner = position
             }
             R.id.unit_category_spinner -> {
                 dataViewModel.changeUnitsType(item as String)
