@@ -24,6 +24,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+        android:id="@+id/copy_source_value_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="copy"
+        app:layout_constraintStart_toEndOf="@id/source_unit_spinner"
+        app:layout_constraintTop_toTopOf="@id/source_unit_spinner" />
+
     <TextView
         android:id="@+id/source_value"
         android:layout_width="wrap_content"
@@ -42,6 +50,14 @@
         app:layout_constraintTop_toBottomOf="@id/source_value"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/copy_dest_value_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="copy"
+        app:layout_constraintStart_toEndOf="@id/destination_unit_spinner"
+        app:layout_constraintTop_toTopOf="@id/destination_unit_spinner" />
 
     <TextView
         android:id="@+id/destination_value"
