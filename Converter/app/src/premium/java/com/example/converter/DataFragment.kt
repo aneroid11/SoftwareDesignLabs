@@ -60,6 +60,10 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         binding.sourceUnitSpinner.setSelection(oldDestUnitsId)
         binding.destinationUnitSpinner.setSelection(oldSourceUnitsId)
+
+        dataViewModel.setSourceValueStr(
+            dataViewModel.destinationValue.value!!.toPlainString()
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
