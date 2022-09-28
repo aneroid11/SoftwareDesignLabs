@@ -111,11 +111,6 @@ class DataViewModel : ViewModel() {
         val coefSource = _unitsCoefficients[_unitsType]!![_sourceUnits]!!
         val coefDest = _unitsCoefficients[_unitsType]!![_destinationUnits]!!
 
-        /*val convertCoef: BigDecimal = coefSource.divide(
-            coefDest,
-            3,
-            RoundingMode.HALF_EVEN
-        )*/
         val convertCoef = coefSource / coefDest
         Log.d("DataViewModel", "convertCoef (double) == $convertCoef")
 
