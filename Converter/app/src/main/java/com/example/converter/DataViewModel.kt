@@ -14,23 +14,6 @@ class DataViewModel : ViewModel() {
         BigDecimal("0.0")
     )
 
-    /*private val _unitsCoefficients: Map<String, Map<String, BigDecimal>> = mapOf(
-        "currency" to mapOf(
-            "dollars (US)" to BigDecimal("1"),
-            "euro" to BigDecimal("0.96"),
-            "BYN" to BigDecimal("0.396")
-        ),
-        "mass" to mapOf(
-            "kilograms" to BigDecimal("1"),
-            "pounds" to BigDecimal("0.4535924"),
-            "ounces" to BigDecimal("0.02834952")
-        ),
-        "distance" to mapOf(
-            "meters" to BigDecimal("1"),
-            "inches" to BigDecimal("0.0254"),
-            "yards" to BigDecimal("0.9144")
-        )
-    )*/
     private val _unitsCoefficients: Map<String, Map<String, Double>> = mapOf(
         "mass" to mapOf(
             "kilograms" to 1.0,
