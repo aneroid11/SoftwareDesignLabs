@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.converter.databinding.FragmentDataBinding
@@ -51,14 +52,7 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun switchSourceDest() {
-        val sourceUnits: String = dataViewModel.sourceUnits
-        val destinationUnits: String = dataViewModel.destinationUnits
 
-        dataViewModel.setSourceValueStr(
-            dataViewModel.destinationValue.value!!.toString()
-        )
-        dataViewModel.changeSourceUnits(destinationUnits)
-        dataViewModel.changeDestinationUnits(sourceUnits)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

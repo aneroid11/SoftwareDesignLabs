@@ -35,7 +35,7 @@ class DataViewModel : ViewModel() {
         "mass" to mapOf(
             "kilograms" to 1.0,
             "tons" to 1000.0,
-            "ounces" to 0.028
+            "pounds" to 0.45
         ),
         "distance" to mapOf(
             "meters" to 1.0,
@@ -119,6 +119,9 @@ class DataViewModel : ViewModel() {
         val convertCoef = coefSource / coefDest
         Log.d("DataViewModel", "convertCoef (double) == $convertCoef")
 
-        _destinationValue.value = BigDecimal(_sourceValueStr.value!!) * BigDecimal(convertCoef.toString())
+        _destinationValue.value = (
+                BigDecimal(_sourceValueStr.value!!) *
+                BigDecimal(convertCoef.toString())
+                ).stripTrailingZeros()
     }
 }
