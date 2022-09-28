@@ -13,8 +13,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        flavorDimensions "default"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -35,12 +33,15 @@ android {
         viewBinding = true
     }
 
+    flavorDimensions "version"
     productFlavors {
-        basic {
-            applicationId "com.example.converter.basic"
+        free {
+            dimension "version"
+            applicationIdSuffix ".free"
         }
         premium {
-            applicationId "com.example.converter.premium"
+            dimension "version"
+            applicationIdSuffix ".premium"
         }
     }
 }
