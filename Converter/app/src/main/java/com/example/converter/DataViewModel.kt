@@ -14,7 +14,7 @@ class DataViewModel : ViewModel() {
         BigDecimal("0.0")
     )
 
-    private val _unitsCoefficients: Map<String, Map<String, BigDecimal>> = mapOf(
+    /*private val _unitsCoefficients: Map<String, Map<String, BigDecimal>> = mapOf(
         "currency" to mapOf(
             "dollars (US)" to BigDecimal("1"),
             "euro" to BigDecimal("0.96"),
@@ -30,24 +30,24 @@ class DataViewModel : ViewModel() {
             "inches" to BigDecimal("0.0254"),
             "yards" to BigDecimal("0.9144")
         )
-    )
-    /*private val _unitsCoefficients: Map<String, Map<String, Double>> = mapOf(
-        "currency" to mapOf(
-            "dollars (US)" to 1.0,
-            "euro" to 0.96,
-            "BYN" to 0.4
-        ),
+    )*/
+    private val _unitsCoefficients: Map<String, Map<String, Double>> = mapOf(
         "mass" to mapOf(
             "kilograms" to 1.0,
-            "pounds" to 0.45,
+            "tons" to 1000.0,
             "ounces" to 0.028
         ),
         "distance" to mapOf(
             "meters" to 1.0,
-            "inches" to 0.025,
-            "yards" to 0.91
+            "kilometers" to 1000.0,
+            "inches" to 0.0254
+        ),
+        "time" to mapOf(
+            "seconds" to 1.0,
+            "minutes" to 60.0,
+            "hours" to 3600.0
         )
-    )*/
+    )
 
     private fun unitsCoefficientsToUnits(): Map<String, Array<String>> {
         val unitsMap = mutableMapOf<String, Array<String>>()
@@ -68,6 +68,10 @@ class DataViewModel : ViewModel() {
 
     val units: Map<String, Array<String>> get() =
         _units
+    val sourceUnits: String get() =
+        _sourceUnits
+    val destinationUnits: String get() =
+        _destinationUnits
 
     val unitsType: String get() =
         _unitsType
@@ -107,12 +111,14 @@ class DataViewModel : ViewModel() {
         val coefSource = _unitsCoefficients[_unitsType]!![_sourceUnits]!!
         val coefDest = _unitsCoefficients[_unitsType]!![_destinationUnits]!!
 
-        val convertCoef: BigDecimal = coefSource.divide(
+        /*val convertCoef: BigDecimal = coefSource.divide(
             coefDest,
             3,
             RoundingMode.HALF_EVEN
-        )
+        )*/
+        val convertCoef = coefSource / coefDest
+        Log.d("DataViewModel", "convertCoef (double) == $convertCoef")
 
-        _destinationValue.value = BigDecimal(_sourceValueStr.value!!) * convertCoef
+        _destinationValue.value = BigDecimal(_sourceValueStr.value!!) * BigDecimal(convertCoef.toString())
     }
 }

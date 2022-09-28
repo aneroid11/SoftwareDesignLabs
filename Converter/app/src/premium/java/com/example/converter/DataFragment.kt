@@ -50,6 +50,17 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
         copyStrToClipboard(binding.destinationValue.text.toString())
     }
 
+    private fun switchSourceDest() {
+        val sourceUnits: String = dataViewModel.sourceUnits
+        val destinationUnits: String = dataViewModel.destinationUnits
+
+        dataViewModel.setSourceValueStr(
+            dataViewModel.destinationValue.value!!.toString()
+        )
+        dataViewModel.changeSourceUnits(destinationUnits)
+        dataViewModel.changeDestinationUnits(sourceUnits)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         units = dataViewModel.units
 
@@ -65,14 +76,14 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.sourceUnitSpinner.adapter = ArrayAdapter(
             requireContext(),
             spinnerItemLayoutId,
-            units["currency"]!!
+            units["mass"]!!
         )
         binding.sourceUnitSpinner.onItemSelectedListener = this
 
         binding.destinationUnitSpinner.adapter = ArrayAdapter(
             requireContext(),
             spinnerItemLayoutId,
-            units["currency"]!!
+            units["mass"]!!
         )
         binding.destinationUnitSpinner.onItemSelectedListener = this
 
@@ -85,6 +96,7 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         binding.copySourceValueButton.setOnClickListener { copySourceValueToClipboard() }
         binding.copyDestValueButton.setOnClickListener { copyDestValueToClipboard() }
+        binding.switchButton.setOnClickListener { switchSourceDest() }
     }
 
     override fun onDestroyView() {

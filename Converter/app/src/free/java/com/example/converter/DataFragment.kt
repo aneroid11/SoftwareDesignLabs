@@ -43,14 +43,14 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.sourceUnitSpinner.adapter = ArrayAdapter(
             requireContext(),
             spinnerItemLayoutId,
-            units["currency"]!!
+            units["mass"]!!
         )
         binding.sourceUnitSpinner.onItemSelectedListener = this
 
         binding.destinationUnitSpinner.adapter = ArrayAdapter(
             requireContext(),
             spinnerItemLayoutId,
-            units["currency"]!!
+            units["mass"]!!
         )
         binding.destinationUnitSpinner.onItemSelectedListener = this
 
