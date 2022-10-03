@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -64,6 +65,11 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
         dataViewModel.setSourceValueStr(
             dataViewModel.destinationValue.value!!.toPlainString()
         )
+
+        Log.d(
+            "DataFragment",
+            "switchSourceDest() finished"
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,6 +97,8 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
             units["mass"]!!
         )
         binding.destinationUnitSpinner.onItemSelectedListener = this
+
+        binding.sourceValue.movementMethod = ScrollingMovementMethod()
 
         dataViewModel.sourceValueStr.observe(viewLifecycleOwner) {
             binding.sourceValue.text = it

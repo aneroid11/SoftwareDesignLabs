@@ -108,5 +108,10 @@ class DataViewModel : ViewModel() {
         }
 
         _destinationValue.value = destValue
+
+        Log.d(
+            "DataViewModel",
+            "updateDestinationValue() finished"
+        )
     }
 }
