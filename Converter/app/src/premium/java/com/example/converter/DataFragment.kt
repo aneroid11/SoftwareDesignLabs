@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
+import android.text.Editable
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
@@ -98,10 +99,10 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
         )
         binding.destinationUnitSpinner.onItemSelectedListener = this
 
-        binding.sourceValue.movementMethod = ScrollingMovementMethod()
+        binding.destinationValue.movementMethod = ScrollingMovementMethod()
 
         dataViewModel.sourceValueStr.observe(viewLifecycleOwner) {
-            binding.sourceValue.text = it
+            binding.sourceValue.setText(it)
         }
         dataViewModel.destinationValue.observe(viewLifecycleOwner) {
             binding.destinationValue.text = it.toPlainString()

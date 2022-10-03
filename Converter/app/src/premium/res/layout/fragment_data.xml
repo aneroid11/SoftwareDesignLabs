@@ -32,15 +32,14 @@
         app:layout_constraintStart_toEndOf="@id/source_unit_spinner"
         app:layout_constraintTop_toTopOf="@id/source_unit_spinner" />
 
-    <TextView
+    <EditText
         android:id="@+id/source_value"
-        android:layout_width="160dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
         android:padding="8dp"
-        android:gravity="center_horizontal"
-        android:scrollbars="vertical"
         android:textSize="20sp"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/source_unit_spinner"
@@ -73,13 +72,16 @@
 
     <TextView
         android:id="@+id/destination_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
         android:fontFamily="sans-serif-black"
         android:textSize="20sp"
         android:padding="8dp"
+        android:gravity="center_horizontal"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/destination_unit_spinner" />
+        app:layout_constraintTop_toBottomOf="@id/destination_unit_spinner"
+        tools:text="0.111111" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
