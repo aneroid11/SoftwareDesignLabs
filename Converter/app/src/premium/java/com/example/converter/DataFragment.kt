@@ -73,9 +73,6 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
             dataViewModel.destinationValue.value!!.toPlainString(),
             1
         )
-        /*dataViewModel.setSourceValueStr(
-            dataViewModel.destinationValue.value!!.toPlainString()
-        )*/
 
         Log.d(
             "DataFragment",
