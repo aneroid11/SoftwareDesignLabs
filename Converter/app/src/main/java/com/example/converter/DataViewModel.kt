@@ -1,6 +1,5 @@
 package com.example.converter
 
-import android.util.Log
 import android.view.inputmethod.InputConnection
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +9,10 @@ import java.math.BigDecimal
 class DataViewModel : ViewModel() {
     lateinit var sourceInputConnection: InputConnection
 
-    private val _sourceValueStr: MutableLiveData<String> = MutableLiveData<String>("")
+    //private val _sourceValueStr: MutableLiveData<String> = MutableLiveData<String>("")
+    private val _sourceValue: MutableLiveData<BigDecimal> = MutableLiveData<BigDecimal>(
+        BigDecimal("0.0")
+    )
     private val _destinationValue: MutableLiveData<BigDecimal> = MutableLiveData<BigDecimal>(
         BigDecimal("0.0")
     )
@@ -60,14 +62,14 @@ class DataViewModel : ViewModel() {
     val unitsType: String get() =
         _unitsType
 
-    val sourceValueStr: LiveData<String> get() =
-        _sourceValueStr
+    val sourceValue: LiveData<BigDecimal> get() =
+        _sourceValue
     val destinationValue: LiveData<BigDecimal> get() =
         _destinationValue
 
     // maybe there is a better way to do this.
-    fun setSourceValueStr(srcValStr: String) {
-        _sourceValueStr.value = srcValStr
+    fun setSourceValue(srcVal: BigDecimal) {
+        _sourceValue.value = srcVal
 
         updateDestinationValue()
     }

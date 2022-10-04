@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.converter.databinding.FragmentDataBinding
+import java.math.BigDecimal
 
 class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var _binding: FragmentDataBinding? = null
@@ -65,9 +66,13 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.sourceUnitSpinner.setSelection(oldDestUnitsId)
         binding.destinationUnitSpinner.setSelection(oldSourceUnitsId)
 
-        dataViewModel.setSourceValueStr(
-            dataViewModel.destinationValue.value!!.toPlainString()
+        dataViewModel.sourceInputConnection.commitText(
+            dataViewModel.destinationValue.value!!.toPlainString(),
+            1
         )
+        /*dataViewModel.setSourceValueStr(
+            dataViewModel.destinationValue.value!!.toPlainString()
+        )*/
 
         Log.d(
             "DataFragment",
@@ -114,16 +119,18 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
             override fun onTextChanged(s: CharSequence, start: Int,
                                        before: Int, count: Int) {
-                Log.d("TextWatcher", "text changed to: $s")
-                //dataViewModel.
+                Log.d("TextWatcher", "source value changed to: $s")
+                val convertedNumber: BigDecimal =
+                    BigDecimal(s.toString())
+                dataViewModel.setSourceValue(convertedNumber)
             }
         })
 
         binding.destinationValue.movementMethod = ScrollingMovementMethod()
 
-        dataViewModel.sourceValueStr.observe(viewLifecycleOwner) {
+        /*dataViewModel.sourceValueStr.observe(viewLifecycleOwner) {
             binding.sourceValue.setText(it)
-        }
+        }*/
         dataViewModel.destinationValue.observe(viewLifecycleOwner) {
             binding.destinationValue.text = it.toPlainString()
         }

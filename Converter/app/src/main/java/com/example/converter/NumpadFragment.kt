@@ -41,14 +41,15 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
     }
 
     override fun handleClick(pressedKey: Char) {
-        var nextSourceValueStr: String = dataViewModel.sourceValueStr.value!!
+        /*var nextSourceValueStr: String = dataViewModel.sourceValueStr.value!!
 
         Log.d(
             "NumpadFragment",
             "current source value: $nextSourceValueStr"
-        )
+        )*/
 
         if (pressedKey == 'C') {
+            // need to delete a symbol here
             return
         }
 
