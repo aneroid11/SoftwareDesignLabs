@@ -10,7 +10,7 @@ import java.math.BigDecimal
 class DataViewModel : ViewModel() {
     lateinit var sourceInputConnection: InputConnection
 
-    private val _sourceValueStr: MutableLiveData<String> = MutableLiveData<String>("0")
+    private val _sourceValueStr: MutableLiveData<String> = MutableLiveData<String>("")
     private val _destinationValue: MutableLiveData<BigDecimal> = MutableLiveData<BigDecimal>(
         BigDecimal("0.0")
     )

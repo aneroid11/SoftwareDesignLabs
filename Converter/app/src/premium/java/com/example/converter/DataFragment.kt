@@ -74,6 +74,7 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         dataViewModel.sourceInputConnection = binding.sourceValue.onCreateInputConnection(EditorInfo())
+        dataViewModel.sourceInputConnection.commitText("", 1)
 
         units = dataViewModel.units
 
