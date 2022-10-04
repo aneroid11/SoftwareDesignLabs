@@ -4,6 +4,9 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputType
+import android.text.TextWatcher
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
@@ -74,7 +77,6 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         dataViewModel.sourceInputConnection = binding.sourceValue.onCreateInputConnection(EditorInfo())
-        dataViewModel.sourceInputConnection.commitText("", 1)
 
         units = dataViewModel.units
 
@@ -102,6 +104,21 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.destinationUnitSpinner.onItemSelectedListener = this
 
         binding.sourceValue.showSoftInputOnFocus = false
+        binding.sourceValue.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                Log.d("TextWatcher", "text changed to: $s")
+                //dataViewModel.
+            }
+        })
+
         binding.destinationValue.movementMethod = ScrollingMovementMethod()
 
         dataViewModel.sourceValueStr.observe(viewLifecycleOwner) {
