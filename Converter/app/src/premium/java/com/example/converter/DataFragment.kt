@@ -120,8 +120,11 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
             override fun onTextChanged(s: CharSequence, start: Int,
                                        before: Int, count: Int) {
                 Log.d("TextWatcher", "source value changed to: $s")
-                val convertedNumber: BigDecimal =
-                    BigDecimal(s.toString())
+
+                val sStr = s.toString()
+
+                val convertedNumber =
+                    if (sStr.isEmpty()) BigDecimal("0") else BigDecimal(sStr)
                 dataViewModel.setSourceValue(convertedNumber)
             }
         })

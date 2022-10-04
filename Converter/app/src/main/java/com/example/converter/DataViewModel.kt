@@ -1,5 +1,6 @@
 package com.example.converter
 
+import android.util.Log
 import android.view.inputmethod.InputConnection
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -69,6 +70,8 @@ class DataViewModel : ViewModel() {
 
     // maybe there is a better way to do this.
     fun setSourceValue(srcVal: BigDecimal) {
+        Log.d("DataViewModel", "changing sourceValue to $srcVal")
+
         _sourceValue.value = srcVal
 
         updateDestinationValue()
