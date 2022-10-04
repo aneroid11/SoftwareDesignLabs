@@ -77,7 +77,6 @@
         android:fontFamily="sans-serif-black"
         android:textSize="20sp"
         android:padding="8dp"
-        android:gravity="center_horizontal"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

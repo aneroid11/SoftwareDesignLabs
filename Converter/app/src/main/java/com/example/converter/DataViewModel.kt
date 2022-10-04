@@ -10,12 +10,11 @@ import java.math.BigDecimal
 class DataViewModel : ViewModel() {
     lateinit var sourceInputConnection: InputConnection
 
-    //private val _sourceValueStr: MutableLiveData<String> = MutableLiveData<String>("")
     private val _sourceValue: MutableLiveData<BigDecimal> = MutableLiveData<BigDecimal>(
-        BigDecimal("0.0")
+        BigDecimal("0")
     )
     private val _destinationValue: MutableLiveData<BigDecimal> = MutableLiveData<BigDecimal>(
-        BigDecimal("0.0")
+        BigDecimal("0")
     )
 
     private val _unitsCoefficients: Map<String, Map<String, Double>> = mapOf(
@@ -97,14 +96,15 @@ class DataViewModel : ViewModel() {
 
     private fun updateDestinationValue() {
         // Updates the destination value using source units and destination units.
-        /*val coefSource = _unitsCoefficients[_unitsType]!![_sourceUnits]!!
+        val coefSource = _unitsCoefficients[_unitsType]!![_sourceUnits]!!
         val coefDest = _unitsCoefficients[_unitsType]!![_destinationUnits]!!
 
         val convertCoef = coefSource / coefDest
         Log.d("DataViewModel", "convertCoef (double) == $convertCoef")
 
         var destValue: BigDecimal =
-            BigDecimal(_sourceValueStr.value!!) * BigDecimal(convertCoef.toString())
+            _sourceValue.value!! * BigDecimal(convertCoef.toString())
+            //BigDecimal(_sourceValueStr.value!!) * BigDecimal(convertCoef.toString())
 
         val zero: BigDecimal = BigDecimal.ZERO
         if (destValue.compareTo(zero) == 0) {
@@ -118,6 +118,6 @@ class DataViewModel : ViewModel() {
         Log.d(
             "DataViewModel",
             "updateDestinationValue() finished"
-        )*/
+        )
     }
 }

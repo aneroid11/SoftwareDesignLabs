@@ -50,6 +50,8 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
 
         if (pressedKey == 'C') {
             // need to delete a symbol here
+            dataViewModel.sourceInputConnection.deleteSurroundingText(1, 0)
+            dataViewModel.sourceInputConnection.commitText("", 1)
             return
         }
 
