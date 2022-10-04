@@ -1,14 +1,15 @@
 package com.example.converter
 
 import android.util.Log
+import android.view.inputmethod.InputConnection
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import java.math.BigDecimal
-import java.math.MathContext
-import java.math.RoundingMode
 
 class DataViewModel : ViewModel() {
+    lateinit var sourceInputConnection: InputConnection
+
     private val _sourceValueStr: MutableLiveData<String> = MutableLiveData<String>("0")
     private val _destinationValue: MutableLiveData<BigDecimal> = MutableLiveData<BigDecimal>(
         BigDecimal("0.0")

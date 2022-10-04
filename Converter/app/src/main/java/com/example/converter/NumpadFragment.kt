@@ -61,7 +61,16 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
             dotPressed = true
         }
         else if (pressedKey == 'C') {
-            nextSourceValueStr = "0"
+            //nextSourceValueStr = "0"
+            nextSourceValueStr = nextSourceValueStr.removeRange(
+                nextSourceValueStr.length - 1,
+                nextSourceValueStr.length
+            )
+
+            if (nextSourceValueStr.isEmpty()) {
+                nextSourceValueStr = "0"
+            }
+
             dotPressed = false
         }
 

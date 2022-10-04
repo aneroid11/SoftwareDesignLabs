@@ -4,15 +4,14 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
-import android.text.Editable
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.converter.databinding.FragmentDataBinding
@@ -74,6 +73,8 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        dataViewModel.sourceInputConnection = binding.sourceValue.onCreateInputConnection(EditorInfo())
+
         units = dataViewModel.units
 
         val spinnerItemLayoutId: Int = android.R.layout.simple_spinner_dropdown_item
@@ -99,6 +100,7 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
         )
         binding.destinationUnitSpinner.onItemSelectedListener = this
 
+        binding.sourceValue.showSoftInputOnFocus = false
         binding.destinationValue.movementMethod = ScrollingMovementMethod()
 
         dataViewModel.sourceValueStr.observe(viewLifecycleOwner) {

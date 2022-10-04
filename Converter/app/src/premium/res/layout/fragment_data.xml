@@ -34,8 +34,8 @@
 
     <EditText
         android:id="@+id/source_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
         android:fontFamily="sans-serif-black"
         android:padding="8dp"
         android:textSize="20sp"
