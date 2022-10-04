@@ -92,7 +92,7 @@ class DataViewModel : ViewModel() {
 
     private fun updateDestinationValue() {
         // Updates the destination value using source units and destination units.
-        val coefSource = _unitsCoefficients[_unitsType]!![_sourceUnits]!!
+        /*val coefSource = _unitsCoefficients[_unitsType]!![_sourceUnits]!!
         val coefDest = _unitsCoefficients[_unitsType]!![_destinationUnits]!!
 
         val convertCoef = coefSource / coefDest
@@ -113,6 +113,6 @@ class DataViewModel : ViewModel() {
         Log.d(
             "DataViewModel",
             "updateDestinationValue() finished"
-        )
+        )*/
     }
 }

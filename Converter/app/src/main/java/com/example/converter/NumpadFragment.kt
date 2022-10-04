@@ -45,10 +45,19 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
 
         Log.d(
             "NumpadFragment",
-            "nextSourceValueStr == $nextSourceValueStr"
+            "current source value: $nextSourceValueStr"
         )
 
-        if (pressedKey.isDigit()) {
+        if (pressedKey == 'C') {
+            return
+        }
+
+        dataViewModel.sourceInputConnection.commitText(
+            pressedKey.toString(),
+            0
+        )
+
+        /*if (pressedKey.isDigit()) {
             if (nextSourceValueStr != "0") {
                 nextSourceValueStr += pressedKey
             }
@@ -72,8 +81,8 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
             }
 
             dotPressed = false
-        }
+        }*/
 
-        dataViewModel.setSourceValueStr(nextSourceValueStr)
+        //dataViewModel.setSourceValueStr(nextSourceValueStr)
     }
 }
