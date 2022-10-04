@@ -66,6 +66,9 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.sourceUnitSpinner.setSelection(oldDestUnitsId)
         binding.destinationUnitSpinner.setSelection(oldSourceUnitsId)
 
+        dataViewModel.sourceInputConnection.setSelection(
+            0, binding.sourceValue.text.length
+        )
         dataViewModel.sourceInputConnection.commitText(
             dataViewModel.destinationValue.value!!.toPlainString(),
             1
