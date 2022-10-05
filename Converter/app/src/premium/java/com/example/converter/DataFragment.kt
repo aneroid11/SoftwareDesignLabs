@@ -129,7 +129,10 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 val sStr = s.toString()
 
                 val convertedNumber =
-                    if (sStr.isEmpty()) BigDecimal("0") else BigDecimal(sStr)
+                    if (sStr.isEmpty() || sStr == ".")
+                        BigDecimal("0")
+                    else
+                        BigDecimal(sStr)
                 dataViewModel.setSourceValue(convertedNumber)
             }
         })
