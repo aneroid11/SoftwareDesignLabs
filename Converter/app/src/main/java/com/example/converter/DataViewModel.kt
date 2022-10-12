@@ -19,19 +19,19 @@ class DataViewModel : ViewModel() {
 
     private val _unitsCoefficients: Map<String, Map<String, Double>> = mapOf(
         "mass" to mapOf(
-            "kilograms" to 1.0,
-            "tons" to 1000.0,
-            "pounds" to 0.45
+            "grams" to 1.0,
+            "kilograms" to 1000.0,
+            "tons" to 1000000.0
         ),
         "distance" to mapOf(
             "meters" to 1.0,
             "kilometers" to 1000.0,
-            "inches" to 0.0254
+            "centimeters" to 0.01
         ),
         "time" to mapOf(
-            "seconds" to 1.0,
-            "minutes" to 60.0,
-            "hours" to 3600.0
+            "years" to 1.0,
+            "centuries" to 100.0,
+            "millennium" to 1000.0
         )
     )
 
