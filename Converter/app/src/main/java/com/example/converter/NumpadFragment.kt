@@ -3,6 +3,8 @@ package com.example.converter
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.ExtractedTextRequest
+import android.view.inputmethod.InputConnection
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,7 +19,7 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
 
     private val dataViewModel: DataViewModel by activityViewModels()
 
-    private var dotPressed: Boolean = false
+    //private var dotPressed: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,13 +43,6 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
     }
 
     override fun handleClick(pressedKey: Char) {
-        /*var nextSourceValueStr: String = dataViewModel.sourceValueStr.value!!
-
-        Log.d(
-            "NumpadFragment",
-            "current source value: $nextSourceValueStr"
-        )*/
-
         if (pressedKey == 'C') {
             // need to delete a symbol here
             dataViewModel.sourceInputConnection.deleteSurroundingText(1, 0)
@@ -59,33 +54,22 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
             pressedKey.toString(),
             0
         )
+    }
 
-        /*if (pressedKey.isDigit()) {
-            if (nextSourceValueStr != "0") {
-                nextSourceValueStr += pressedKey
-            }
-            else {
-                nextSourceValueStr = pressedKey.toString()
-            }
-        }
-        else if (pressedKey == '.' && !dotPressed) {
-            nextSourceValueStr += "."
-            dotPressed = true
-        }
-        else if (pressedKey == 'C') {
-            //nextSourceValueStr = "0"
-            nextSourceValueStr = nextSourceValueStr.removeRange(
-                nextSourceValueStr.length - 1,
-                nextSourceValueStr.length
+    override fun handleLongClick(pressedKey: Char) {
+        if (pressedKey == 'C') {
+            val inputConnection: InputConnection =
+                dataViewModel.sourceInputConnection
+
+            val currText: CharSequence = inputConnection.getExtractedText(ExtractedTextRequest(), 0).text
+            val beforeCursorText: CharSequence =
+                inputConnection.getTextBeforeCursor(currText.length, 0)!!
+            val afterCursorText: CharSequence =
+                inputConnection.getTextAfterCursor(currText.length, 0)!!
+            inputConnection.deleteSurroundingText(
+                beforeCursorText.length,
+                afterCursorText.length
             )
-
-            if (nextSourceValueStr.isEmpty()) {
-                nextSourceValueStr = "0"
-            }
-
-            dotPressed = false
-        }*/
-
-        //dataViewModel.setSourceValueStr(nextSourceValueStr)
+        }
     }
 }

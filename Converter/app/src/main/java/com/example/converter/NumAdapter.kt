@@ -40,9 +40,14 @@ class NumAdapter(val clickHandler: NumpadClickHandler) : RecyclerView.Adapter<Nu
     override fun onBindViewHolder(holder: NumberViewHolder, position: Int) {
         val item: Char = list[position]
         holder.button.text = item.toString()
+
         holder.button.setOnClickListener {
             Log.d("NumAdapter", "onClickListener for $item")
             clickHandler.handleClick(item)
+        }
+        holder.button.setOnLongClickListener {
+            clickHandler.handleLongClick(item)
+            return@setOnLongClickListener true
         }
     }
 }
