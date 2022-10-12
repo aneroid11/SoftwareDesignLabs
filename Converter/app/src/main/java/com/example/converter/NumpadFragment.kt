@@ -64,11 +64,11 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
             val currText: CharSequence = inputConnection.getExtractedText(ExtractedTextRequest(), 0).text
             val beforeCursorText: CharSequence =
                 inputConnection.getTextBeforeCursor(currText.length, 0)!!
-            val afterCursorText: CharSequence =
-                inputConnection.getTextAfterCursor(currText.length, 0)!!
+            /*val afterCursorText: CharSequence =
+                inputConnection.getTextAfterCursor(currText.length, 0)!!*/
             inputConnection.deleteSurroundingText(
                 beforeCursorText.length,
-                afterCursorText.length
+                0
             )
         }
     }
