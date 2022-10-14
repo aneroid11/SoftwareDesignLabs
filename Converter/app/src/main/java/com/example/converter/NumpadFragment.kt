@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.ExtractedTextRequest
 import android.view.inputmethod.InputConnection
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -43,12 +44,33 @@ class NumpadFragment : Fragment(), NumpadClickHandler {
     }
 
     override fun handleClick(pressedKey: Char) {
+        val inputConnection: InputConnection =
+            dataViewModel.sourceInputConnection
+        val currText: String = inputConnection.getExtractedText(
+            ExtractedTextRequest(),
+            0
+        ).text.toString()
+
         if (pressedKey == 'C') {
             // need to delete a symbol here
-            dataViewModel.sourceInputConnection.deleteSurroundingText(1, 0)
-            dataViewModel.sourceInputConnection.commitText("", 1)
+            inputConnection.deleteSurroundingText(1, 0)
+            inputConnection.commitText("", 1)
             return
-        }
+        } else if (pressedKey == '.') {
+            val hasDotAlready: Boolean = currText.findAnyOf(listOf(".")) != null
+
+            if (hasDotAlready) {
+                val errToast: Toast = Toast.makeText(
+                    requireContext(),
+                    "already has one dot!",
+                    Toast.LENGTH_SHORT
+                )
+                errToast.show()
+                return
+            }
+        } /*else if (pressedKey == '0') {
+
+        }*/
 
         dataViewModel.sourceInputConnection.commitText(
             pressedKey.toString(),
