@@ -72,7 +72,7 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.destinationUnitSpinner.setSelection(oldSourceUnitsId)
 
         dataViewModel.sourceInputConnection.setSelection(
-            0, binding.sourceValue.text.length
+            0, binding.sourceValue.text!!.length
         )
         dataViewModel.sourceInputConnection.commitText(
             dataViewModel.destinationValue.value!!.toPlainString(),
@@ -86,7 +86,7 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        dataViewModel.sourceInputConnection = binding.sourceValue.onCreateInputConnection(EditorInfo())
+        dataViewModel.sourceInputConnection = binding.sourceValue.onCreateInputConnection(EditorInfo())!!
 
         units = dataViewModel.units
 
