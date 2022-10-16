@@ -28,15 +28,13 @@ class MonitoringEditText : androidx.appcompat.widget.AppCompatEditText {
     }
 
     override fun onTextContextMenuItem(id: Int): Boolean {
-        val consumed: Boolean = super.onTextContextMenuItem(id)
-
-        when (id) {
-            //android.R.id.cut -> onTextCut()
-            //android.R.id.copy -> onTextCopy()
-            android.R.id.paste -> onTextPaste()
+        if (id == android.R.id.paste) {
+            if (!onTextPaste()) {
+                return false
+            }
         }
 
-        return consumed
+        return super.onTextContextMenuItem(id)
     }
 
     /*private fun onTextCut() {
@@ -57,7 +55,7 @@ class MonitoringEditText : androidx.appcompat.widget.AppCompatEditText {
         return true
     }
 
-    private fun onTextPaste() {
+    private fun onTextPaste(): Boolean {
         val clipboardManager: ClipboardManager =
             context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         val pData = clipboardManager.primaryClip
@@ -76,6 +74,7 @@ class MonitoringEditText : androidx.appcompat.widget.AppCompatEditText {
                     "already has one dot!",
                     Toast.LENGTH_SHORT
                 ).show()
+                return false
             }
         }
         else {
@@ -84,8 +83,9 @@ class MonitoringEditText : androidx.appcompat.widget.AppCompatEditText {
                 "the text you're trying to paste has invalid characters!",
                 Toast.LENGTH_SHORT
             ).show()
+            return false
         }
 
-        //Toast.makeText(context, "Paste!", Toast.LENGTH_SHORT).show()
+        return true
     }
 }
