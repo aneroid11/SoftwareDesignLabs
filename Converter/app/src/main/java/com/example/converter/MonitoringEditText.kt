@@ -67,7 +67,16 @@ class MonitoringEditText : androidx.appcompat.widget.AppCompatEditText {
         val txtCurrent: String = text.toString()
 
         if (checkForDigitsAndDots(txtPaste)) {
-            
+            val currTextHasDot: Boolean = txtCurrent.findAnyOf(listOf(".")) != null
+            val pasteTextHasDot: Boolean = txtPaste.findAnyOf(listOf(".")) != null
+
+            if (currTextHasDot && pasteTextHasDot) {
+                Toast.makeText(
+                    context,
+                    "already has one dot!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
         else {
             Toast.makeText(
