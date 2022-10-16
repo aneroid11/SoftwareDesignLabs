@@ -16,6 +16,7 @@ import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.converter.databinding.FragmentDataBinding
@@ -31,6 +32,15 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private var sourceUnitsIdInSpinner: Int = 0
     private var destUnitsIdInSpinner: Int = 0
+
+    private fun showToast(msg: String) {
+        val switchToast: Toast = Toast.makeText(
+            requireContext(),
+            msg,
+            Toast.LENGTH_SHORT
+        )
+        switchToast.show()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,10 +68,12 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private fun copySourceValueToClipboard() {
         copyStrToClipboard(binding.sourceValue.text.toString())
+        showToast("copied original value!")
     }
 
     private fun copyDestValueToClipboard() {
         copyStrToClipboard(binding.destinationValue.text.toString())
+        showToast("copied converted value!")
     }
 
     private fun switchSourceDest() {
@@ -79,10 +91,7 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
             1
         )
 
-        Log.d(
-            "DataFragment",
-            "switchSourceDest() finished"
-        )
+        showToast("switched units and values!")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
