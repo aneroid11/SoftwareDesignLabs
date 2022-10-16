@@ -4,11 +4,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
 import android.util.AttributeSet
-import android.widget.EditText
-//import android.widget.EditText
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.getSystemService
 
 class MonitoringEditText : androidx.appcompat.widget.AppCompatEditText {
     private var monContext: Context
