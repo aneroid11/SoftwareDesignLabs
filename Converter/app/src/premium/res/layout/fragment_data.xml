@@ -32,7 +32,7 @@
         app:layout_constraintStart_toEndOf="@id/source_unit_spinner"
         app:layout_constraintTop_toTopOf="@id/source_unit_spinner" />
 
-    <com.example.converter.NoMenuEditText
+    <com.example.converter.MonitoringEditText
         android:id="@+id/source_value"
         android:layout_width="160dp"
         android:layout_height="50dp"

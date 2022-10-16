@@ -7,7 +7,6 @@ import android.widget.EditText
 import android.widget.Toast
 
 class MonitoringEditText : androidx.appcompat.widget.AppCompatEditText {
-//class MonitoringEditText : EditText {
     private var monContext: Context
 
     constructor(context: Context) : super(context) {
