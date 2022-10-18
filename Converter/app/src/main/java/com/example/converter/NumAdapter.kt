@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 
-class NumAdapter(val clickHandler: NumpadClickHandler) : RecyclerView.Adapter<NumAdapter.NumberViewHolder>() {
+class NumAdapter(private val clickHandler: NumpadClickHandler) : RecyclerView.Adapter<NumAdapter.NumberViewHolder>() {
     // buttons for the numpad
     private val list = ('0').rangeTo('9').toList() + listOf<Char>('.', 'C')
 

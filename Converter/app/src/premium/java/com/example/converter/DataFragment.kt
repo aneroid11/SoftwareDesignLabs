@@ -34,12 +34,12 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var destUnitsIdInSpinner: Int = 0
 
     private fun showToast(msg: String) {
-        val switchToast: Toast = Toast.makeText(
+        val toast: Toast = Toast.makeText(
             requireContext(),
             msg,
             Toast.LENGTH_SHORT
         )
-        switchToast.show()
+        toast.show()
     }
 
     override fun onCreateView(
@@ -91,7 +91,7 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
             1
         )
 
-        showToast("switched units and values!")
+        //showToast("switched units and values!")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -124,8 +124,17 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         binding.sourceValue.showSoftInputOnFocus = false
         binding.sourceValue.addTextChangedListener(object: TextWatcher {
+            private var react: Boolean = true
+            private lateinit var prevText: String
+            private var prevCursorPos: Int = 0
+
             override fun beforeTextChanged(s: CharSequence, start: Int,
                                            count: Int, after: Int) {
+                if (!react) { return }
+
+                Log.d("TextWatcher", "source value before: $s")
+                prevText = s.toString()
+                prevCursorPos = start
             }
 
             override fun afterTextChanged(s: Editable) {
@@ -133,9 +142,33 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
             override fun onTextChanged(s: CharSequence, start: Int,
                                        before: Int, count: Int) {
+                if (!react) { return }
+
                 Log.d("TextWatcher", "source value changed to: $s")
 
-                val sStr = s.toString()
+                val sStr: String = s.toString()
+                val cursorPos: Int = binding.sourceValue.selectionStart
+
+                if (sStr.startsWith("0")) {
+                    if (sStr != "0" && !sStr.startsWith("0.")) {
+                        react = false
+                        binding.sourceValue.setText(prevText)
+                        binding.sourceValue.setSelection(prevCursorPos)
+                        react = true
+
+                        showToast("cannot have extra forward zeros!")
+
+                        return
+                    }
+                }
+                if (sStr.startsWith(".") && cursorPos != 0) {
+                    Log.d("TextWatcher", "starts with . and start != 0")
+
+                    react = false
+                    binding.sourceValue.setText("0" + sStr)
+                    binding.sourceValue.setSelection(cursorPos + 1)
+                    react = true
+                }
 
                 val convertedNumber =
                     if (sStr.isEmpty() || sStr == ".")
