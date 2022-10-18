@@ -24,8 +24,14 @@ class MonitoringEditText : androidx.appcompat.widget.AppCompatEditText {
     }
 
     override fun onTextContextMenuItem(id: Int): Boolean {
-        if (id == android.R.id.paste) {
-            if (!onTextPaste()) {
+        when (id) {
+            android.R.id.paste -> {
+                if (!onTextPaste()) {
+                    return false
+                }
+            }
+            android.R.id.addToDictionary -> {
+                Toast.makeText(context, "that was a clickbait", Toast.LENGTH_SHORT).show()
                 return false
             }
         }
