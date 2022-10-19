@@ -39,14 +39,6 @@ class MonitoringEditText : androidx.appcompat.widget.AppCompatEditText {
         return super.onTextContextMenuItem(id)
     }
 
-    /*private fun onTextCut() {
-        Toast.makeText(context, "Cut!", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun onTextCopy() {
-        Toast.makeText(context, "Copy!", Toast.LENGTH_SHORT).show()
-    }*/
-
     private fun checkForDigitsAndDots(str: String): Boolean {
         for (ch: Char in str) {
             if (ch != '.' && !ch.isDigit()) {
