@@ -128,6 +128,23 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
             private lateinit var prevText: String
             private var prevCursorPos: Int = 0
 
+            // return the resulting string and the number of deleted zeros
+            private fun removeLeadingZeros(s: String): Pair<String, Int> {
+                var result: String = s
+                var index: Int = 0
+
+                while (
+                    result != "0" &&
+                    !result.startsWith("0.") &&
+                    result.startsWith("0")
+                ) {
+                    result = result.removePrefix("0")
+                    index++
+                }
+
+                return Pair(result, index)
+            }
+
             override fun beforeTextChanged(s: CharSequence, start: Int,
                                            count: Int, after: Int) {
                 if (!react) { return }
@@ -152,13 +169,20 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 if (sStr.startsWith("0")) {
                     if (sStr != "0" && !sStr.startsWith("0.")) {
                         react = false
-                        binding.sourceValue.setText(prevText)
-                        binding.sourceValue.setSelection(prevCursorPos)
+                        /*binding.sourceValue.setText(
+                            prevText
+                        )*/
+                        val (strWithoutZeros, numZeros) = removeLeadingZeros(sStr)
+                        binding.sourceValue.setText(strWithoutZeros)
+                        //binding.sourceValue.setSelection(prevCursorPos)
+                        var newCursorPos = cursorPos - numZeros
+                        newCursorPos = if (newCursorPos < 0) 0 else newCursorPos
+                        binding.sourceValue.setSelection(newCursorPos)
                         react = true
 
-                        showToast("cannot have extra forward zeros!")
+                        showToast("cannot have extra leading zeros!")
 
-                        return
+                        //return
                     }
                 }
                 if (sStr.startsWith(".") && cursorPos != 0) {
