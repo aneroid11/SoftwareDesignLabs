@@ -169,20 +169,18 @@ class DataFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 if (sStr.startsWith("0")) {
                     if (sStr != "0" && !sStr.startsWith("0.")) {
                         react = false
-                        /*binding.sourceValue.setText(
-                            prevText
-                        )*/
+
                         val (strWithoutZeros, numZeros) = removeLeadingZeros(sStr)
                         binding.sourceValue.setText(strWithoutZeros)
                         //binding.sourceValue.setSelection(prevCursorPos)
                         var newCursorPos = cursorPos - numZeros
                         newCursorPos = if (newCursorPos < 0) 0 else newCursorPos
+
                         binding.sourceValue.setSelection(newCursorPos)
+
                         react = true
 
                         showToast("cannot have extra leading zeros!")
-
-                        //return
                     }
                 }
                 if (sStr.startsWith(".") && cursorPos != 0) {

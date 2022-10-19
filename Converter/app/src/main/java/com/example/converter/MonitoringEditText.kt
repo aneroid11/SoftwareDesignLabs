@@ -70,6 +70,23 @@ class MonitoringEditText : androidx.appcompat.widget.AppCompatEditText {
                 ).show()
                 return false
             }
+
+            var pasteTxtDots: Int = 0
+
+            for (c: Char in txtPaste) {
+                if (c == '.') {
+                    pasteTxtDots++
+                }
+            }
+
+            if (pasteTxtDots > 1) {
+                Toast.makeText(
+                    context,
+                    "the text you're trying to paste has more than one dot!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
+            }
         }
         else {
             Toast.makeText(
