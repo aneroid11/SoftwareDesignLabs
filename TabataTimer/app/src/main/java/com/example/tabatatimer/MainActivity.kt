@@ -1,5 +1,7 @@
 package com.example.tabatatimer
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +21,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.settings_item) {
-            Log.d("MainActivity","settings button pressed")
+            Log.d("MainActivity","settings button pressed. start the settings activity")
+
+            val context: Context = this
+            val intent: Intent = Intent(context, SettingsActivity::class.java)
+            context.startActivity(intent)
+
             return true
         }
 
