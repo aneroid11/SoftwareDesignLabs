@@ -3,11 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <SwitchPreferenceCompat
-        app:key="notifications"
-        app:title="Enable message notifications"/>
+        app:key="night_theme_on"
+        app:title="@string/enable_night_theme" />
+
+    <DropDownPreference
+        app:key="font_size"
+        app:title="@string/select_font_size"
+        app:entries="@array/font_size_entries"
+        app:entryValues="@array/font_size_entries" />
 
     <Preference
-        app:key="feedback"
-        app:title="Send feedback"
-        app:summary="Report technical issues or suggest new features"/>
+        app:key="clear_data"
+        app:title="@string/clear"
+        app:summary="@string/press_this_to_clear_data" />
+
+    <DropDownPreference
+        app:key="select_lang"
+        app:title="@string/select_language"
+        app:entries="@array/select_lang_entries"
+        app:entryValues="@array/select_lang_entries" />
 </PreferenceScreen>
