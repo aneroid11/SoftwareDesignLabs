@@ -1,5 +1,6 @@
 package com.example.tabatatimer
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
@@ -17,6 +18,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val clearDataPref = findPreference("clear_data")
         val selectLangPref = findPreference("select_lang")
 
+        clearDataPref.onPreferenceClickListener =
+            Preference.OnPreferenceClickListener {
+                Log.d("SettingsFragment", "Delete all data")
+                deleteAllData()
+                return@OnPreferenceClickListener true
+            }
+
         nightThemePref.onPreferenceClickListener =
             Preference.OnPreferenceClickListener {
                 Log.d("SettingsFragment", "Changed the app theme!")
@@ -30,6 +38,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 updateLanguage(value.toString())
                 return@OnPreferenceChangeListener true
             }
+    }
+
+    private fun deleteAllData() {
+        // for now, only delete all settings
+        val prefs: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(context)
+        val editor: SharedPreferences.Editor =
+            prefs.edit()
+
+        editor.putBoolean("night_theme_on", false)
+        editor.putString("select_lang", "en")
+        editor.putString("font_size", getString(R.string.medium))
+        editor.commit()
+
+        updateTheme()
+        updateLanguage("en")
     }
 
     private fun updateTheme() {
