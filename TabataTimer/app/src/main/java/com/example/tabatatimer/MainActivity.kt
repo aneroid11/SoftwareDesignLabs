@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.preference.PreferenceManager
 import java.util.*
 
@@ -18,7 +19,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        updateTheme()
+        updateTheme()  // this is normal
+        //updateLanguage() // this is not
     }
 
     private fun updateTheme() {
@@ -34,6 +36,15 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
+
+    /*private fun updateLanguage() {
+        val sharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(this)
+        val lang: String =
+            sharedPreferences.getString("select_lang", "en")!!
+        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(lang)
+        AppCompatDelegate.setApplicationLocales(appLocale)
+    }*/
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_activity_menu, menu)
