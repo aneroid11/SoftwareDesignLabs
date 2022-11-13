@@ -13,4 +13,5 @@
     <string name="russian_loc" translatable="false">ru</string>
     <string name="english_loc" translatable="false">en</string>
     <string name="only_after_app_restart">This will apply only after the app restart</string>
+    <string name="home_activity">home activity</string>
 </resources>

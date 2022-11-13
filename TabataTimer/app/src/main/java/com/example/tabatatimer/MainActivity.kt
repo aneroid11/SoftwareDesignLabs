@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         updateTheme()
-        updateLocale()
     }
 
     private fun updateTheme() {
@@ -34,19 +33,6 @@ class MainActivity : AppCompatActivity() {
         else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-    }
-
-    private fun updateLocale() {
-        val sharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(this)
-        val lang: String =
-            sharedPreferences.getString("select_lang", "en")!!
-        val loc = Locale(lang)
-        Locale.setDefault(loc)
-        val conf = Configuration()
-        conf.setLocale(loc)
-
-        baseContext.resources.updateConfiguration(conf, baseContext.resources.displayMetrics)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
