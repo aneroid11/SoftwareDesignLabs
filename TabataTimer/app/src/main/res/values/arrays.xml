@@ -10,4 +10,9 @@
         <item>@string/english</item>
         <item>@string/russian</item>
     </array>
+
+    <array name="select_lang_entry_values">
+        <item>@string/english_loc</item>
+        <item>@string/russian_loc</item>
+    </array>
 </resources>

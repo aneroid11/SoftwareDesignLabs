@@ -10,8 +10,7 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         val settingsFragment = SettingsFragment()
-        settingsFragment.activity = this
-
+        //settingsFragment.activity = this
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.settings_container, settingsFragment)

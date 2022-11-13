@@ -20,6 +20,7 @@
     <DropDownPreference
         app:key="select_lang"
         app:title="@string/select_language"
+        app:summary="@string/only_after_app_restart"
         app:entries="@array/select_lang_entries"
-        app:entryValues="@array/select_lang_entries" />
+        app:entryValues="@array/select_lang_entry_values" />
 </PreferenceScreen>
