@@ -13,4 +13,7 @@
     <string name="only_after_app_restart">Применится только после перезапуска приложения</string>
     <string name="home_activity">Домашнаяя активность</string>
     <string name="font_size_changed">Размер текста изменён на: </string>
+    <string name="edit">изменить</string>
+    <string name="delete">удалить</string>
+    <string name="add_sequence">добавить тренировку</string>
 </resources>

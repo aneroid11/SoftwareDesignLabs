@@ -18,7 +18,7 @@
 
             <Button
                 android:id="@+id/edit_sequence_button"
-                android:text="edit"
+                android:text="@string/edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
@@ -26,7 +26,7 @@
 
             <Button
                 android:id="@+id/delete_sequence_button"
-                android:text="delete"
+                android:text="@string/delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"

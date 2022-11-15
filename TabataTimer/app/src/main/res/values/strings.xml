@@ -17,4 +17,7 @@
     <string name="only_after_app_restart">This will apply only after the app restart</string>
     <string name="home_activity">home activity</string>
     <string name="font_size_changed">Font size changed to: </string>
+    <string name="edit">edit</string>
+    <string name="delete">delete</string>
+    <string name="add_sequence">add sequence</string>
 </resources>
