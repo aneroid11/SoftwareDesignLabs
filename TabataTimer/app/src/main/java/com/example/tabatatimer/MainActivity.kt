@@ -7,12 +7,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+    private val sequencesViewModel: SequencesViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTextTheme()
 
@@ -21,28 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val seqRecyclerView: RecyclerView = findViewById(R.id.sequences_recycler_view)
         seqRecyclerView.layoutManager = LinearLayoutManager(this)
-        seqRecyclerView.adapter = SequenceRecyclerAdapter(
-            listOf(
-                "hard training",
-                "medium training",
-                "easy training",
-                "very easy training",
-                "very hard training",
-                "very very easy training",
-                "hard training",
-                "medium training",
-                "easy training",
-                "very easy training",
-                "very hard training",
-                "very very easy training",
-                "hard training",
-                "medium training",
-                "easy training",
-                "very easy training",
-                "very hard training",
-                "very very easy training"
-            )
-        )
+        seqRecyclerView.adapter = SequenceRecyclerAdapter(sequencesViewModel)
 
         updateTheme()  // this is normal
         //updateLanguage() // this is not

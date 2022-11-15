@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import kotlin.random.Random
 
-class SequenceRecyclerAdapter(private val names: List<String>) :
+class SequenceRecyclerAdapter(private val seqViewModel: SequencesViewModel) :
     RecyclerView.Adapter<SequenceRecyclerAdapter.SequenceViewHolder>() {
 
     class SequenceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -38,13 +38,13 @@ class SequenceRecyclerAdapter(private val names: List<String>) :
     override fun onBindViewHolder(holder: SequenceViewHolder, position: Int) {
         val color: Int = getRandomColor()
         holder.cardView.setBackgroundColor(color)
-        holder.seqTitleView.text = names[position]
+        holder.seqTitleView.text = seqViewModel.sequencesList.value!!.get(position).title
         holder.numRepetitionsView.text = "Repetitions: 4"
         holder.totalTimeView.text = "Total time: 04:00"
         holder.phasesListView.text = "1. warm-up\n2. work\n3. rest\n4. cool down"
     }
 
     override fun getItemCount(): Int {
-        return names.size
+        return seqViewModel.sequencesList.value!!.size
     }
 }
