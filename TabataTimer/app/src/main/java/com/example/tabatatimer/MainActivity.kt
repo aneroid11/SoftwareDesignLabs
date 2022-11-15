@@ -19,8 +19,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val recyclerView: RecyclerView = findViewById(R.id.sequences_recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val seqRecyclerView: RecyclerView = findViewById(R.id.sequences_recycler_view)
+        seqRecyclerView.layoutManager = LinearLayoutManager(this)
+        seqRecyclerView.adapter = SequenceRecyclerAdapter(
+            listOf(
+                "hard training",
+                "medium training",
+                "easy training",
+                "very easy training",
+                "very hard training",
+                "very very easy training"
+            )
+        )
 
         updateTheme()  // this is normal
         //updateLanguage() // this is not
