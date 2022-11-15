@@ -12,11 +12,18 @@ import androidx.preference.PreferenceManager
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTextTheme()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         updateTheme()  // this is normal
         //updateLanguage() // this is not
+    }
+
+    private fun setTextTheme() {
+        // get text theme from shared settings and set it here
+        setTheme(R.style.Theme_TabataTimer_LargeText)
     }
 
     private fun updateTheme() {

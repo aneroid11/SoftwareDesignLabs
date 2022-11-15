@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="font_size_entries">
-        <item>@string/small</item>
         <item>@string/medium</item>
         <item>@string/large</item>
     </array>
