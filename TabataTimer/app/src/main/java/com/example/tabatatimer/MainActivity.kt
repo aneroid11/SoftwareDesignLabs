@@ -28,6 +28,18 @@ class MainActivity : AppCompatActivity() {
                 "easy training",
                 "very easy training",
                 "very hard training",
+                "very very easy training",
+                "hard training",
+                "medium training",
+                "easy training",
+                "very easy training",
+                "very hard training",
+                "very very easy training",
+                "hard training",
+                "medium training",
+                "easy training",
+                "very easy training",
+                "very hard training",
                 "very very easy training"
             )
         )
