@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreferenceCompat
-        app:key="night_theme_on"
-        app:title="@string/enable_night_theme" />
+        android:key="night_theme_on"
+        android:title="@string/enable_night_theme" />
 
     <DropDownPreference
-        app:key="font_size"
-        app:title="@string/select_font_size"
-        app:entries="@array/font_size_entries"
-        app:entryValues="@array/font_size_entries" />
+        android:key="font_size"
+        android:title="@string/select_font_size"
+        android:entries="@array/font_size_entries"
+        android:entryValues="@array/font_size_entries" />
 
     <Preference
-        app:key="clear_data"
-        app:title="@string/clear"
-        app:summary="@string/press_this_to_clear_data" />
+        android:key="clear_data"
+        android:title="@string/clear"
+        android:summary="@string/press_this_to_clear_data" />
 
     <DropDownPreference
-        app:key="select_lang"
-        app:title="@string/select_language"
-        app:entries="@array/select_lang_entries"
-        app:entryValues="@array/select_lang_entry_values" />
+        android:key="select_lang"
+        android:title="@string/select_language"
+        android:entries="@array/select_lang_entries"
+        android:entryValues="@array/select_lang_entry_values" />
 </PreferenceScreen>
