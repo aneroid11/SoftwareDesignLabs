@@ -11,6 +11,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/edit_sequence_button"
+                android:text="edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                style="?textBody" />
+
+            <Button
+                android:id="@+id/delete_sequence_button"
+                android:text="delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                style="?textBody" />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/sequence_title"
             android:layout_width="wrap_content"
