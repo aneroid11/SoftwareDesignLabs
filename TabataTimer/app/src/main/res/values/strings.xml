@@ -20,4 +20,10 @@
     <string name="edit">edit</string>
     <string name="delete">delete</string>
     <string name="add_sequence">add sequence</string>
+    <string name="repetitions">Repetitions:</string>
+    <string name="sec">sec</string>
+    <string name="warmup">Warm-up</string>
+    <string name="work">Work</string>
+    <string name="rest">Rest</string>
+    <string name="cooldown">Cool down</string>
 </resources>

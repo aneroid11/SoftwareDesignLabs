@@ -16,4 +16,10 @@
     <string name="edit">изменить</string>
     <string name="delete">удалить</string>
     <string name="add_sequence">добавить тренировку</string>
+    <string name="repetitions">Повторений:</string>
+    <string name="sec">сек</string>
+    <string name="warmup">Разминка</string>
+    <string name="work">Работа</string>
+    <string name="rest">Отдых</string>
+    <string name="cooldown">Успокоиться</string>
 </resources>

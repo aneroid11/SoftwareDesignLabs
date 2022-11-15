@@ -1,6 +1,7 @@
 package com.example.tabatatimer
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,10 @@ import com.google.android.material.card.MaterialCardView
 import kotlin.math.min
 import kotlin.random.Random
 
-class SequenceRecyclerAdapter(private val seqViewModel: SequencesViewModel) :
+class SequenceRecyclerAdapter(
+    private val seqViewModel: SequencesViewModel,
+    private val activityContext: Context
+) :
     RecyclerView.Adapter<SequenceRecyclerAdapter.SequenceViewHolder>() {
 
     class SequenceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -28,13 +32,6 @@ class SequenceRecyclerAdapter(private val seqViewModel: SequencesViewModel) :
                 .from(parent.context)
                 .inflate(R.layout.recyclerview_sequence_item, parent, false)
         return SequenceViewHolder(itemView)
-    }
-
-    private fun getRandomColor(): Int {
-        val red = Random.nextInt() % 50 + 130
-        val green = Random.nextInt() % 50 + 130
-        val blue = Random.nextInt() % 50 + 130
-        return Color.rgb(red, green, blue)
     }
 
     private fun countTotalSeconds(seq: Sequence): Int {
@@ -57,7 +54,15 @@ class SequenceRecyclerAdapter(private val seqViewModel: SequencesViewModel) :
         var retStr = ""
 
         for (ph in seq.phasesList) {
-            retStr += index.toString() + ". " + ph.type + " - " + ph.durationSec + " sec\n"
+            val phaseType = when(ph.type) {
+                "warmup" -> activityContext.getString(R.string.warmup)
+                "cooldown" -> activityContext.getString(R.string.cooldown)
+                "rest" -> activityContext.getString(R.string.rest)
+                else -> activityContext.getString(R.string.work)
+            }
+
+            retStr += index.toString() + ". " + phaseType + " - " + ph.durationSec +
+                    " " + activityContext.getString(R.string.sec) + "\n"
             index++
         }
         return retStr
@@ -68,7 +73,8 @@ class SequenceRecyclerAdapter(private val seqViewModel: SequencesViewModel) :
 
         holder.cardView.setBackgroundColor(seq.color)
         holder.seqTitleView.text = seq.title
-        holder.numRepetitionsView.text = "Repetitions: " + seq.numRepetitions.toString()
+        holder.numRepetitionsView.text =
+            activityContext.getString(R.string.repetitions) + " " + seq.numRepetitions.toString()
         holder.totalTimeView.text = getTotalTimeInMinutes(countTotalSeconds(seq))
         holder.phasesListView.text = getPhasesListText(seq)
     }

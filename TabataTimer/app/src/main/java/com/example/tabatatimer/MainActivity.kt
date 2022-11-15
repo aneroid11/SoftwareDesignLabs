@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val seqRecyclerView: RecyclerView = findViewById(R.id.sequences_recycler_view)
         seqRecyclerView.layoutManager = LinearLayoutManager(this)
-        seqRecyclerView.adapter = SequenceRecyclerAdapter(sequencesViewModel)
+        seqRecyclerView.adapter = SequenceRecyclerAdapter(sequencesViewModel, this)
 
         updateTheme()  // this is normal
         //updateLanguage() // this is not
