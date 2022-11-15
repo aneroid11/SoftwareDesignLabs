@@ -8,9 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
-import java.io.BufferedReader
-import java.io.File
-import java.io.FileReader
+import java.io.*
 import java.lang.Exception
 import kotlin.random.Random
 
@@ -28,7 +26,7 @@ class SequencesViewModel(app: Application) : AndroidViewModel(app) {
         return Color.rgb(red, green, blue)
     }
 
-    init {
+    fun loadSequencesFromFile() {
         // load the sequences list from .json file
         val context = getApplication<Application>().applicationContext
 
@@ -41,6 +39,7 @@ class SequencesViewModel(app: Application) : AndroidViewModel(app) {
             val fileReader = FileReader(file)
             val bufferedReader = BufferedReader(fileReader)
             val contents: List<String> = bufferedReader.readLines()
+            bufferedReader.close()
             var contentsStr = ""
 
             for (line in contents) {
@@ -62,12 +61,31 @@ class SequencesViewModel(app: Application) : AndroidViewModel(app) {
             file.createNewFile()
             Log.d("SequencesViewModel", "file does not exist. creating a new file")
         }
+    }
 
-        /*for (i in 1..10) {
+    fun writeSequencesToFile() {
+        val sequencesJsonString =
+            Gson().toJson(_sequencesList.value!!.toTypedArray())
+        Log.d("SequencesViewModel", sequencesJsonString)
+
+        val context = getApplication<Application>().applicationContext
+
+        val file = File(context.filesDir, "sequences.json")
+        file.createNewFile()
+        val fileWriter = FileWriter(file)
+        val bufferedWriter = BufferedWriter(fileWriter)
+        bufferedWriter.write(sequencesJsonString)
+        bufferedWriter.close()
+    }
+
+    init {
+        loadSequencesFromFile()
+
+        /*for (i in 1..1) {
             _sequencesList.value!!.add(
                 Sequence(
                     getRandomColor(),
-                    "hard training",
+                    "basic training",
                     2,
                     listOf(
                         Phase("warmup","", 20),
@@ -82,5 +100,7 @@ class SequencesViewModel(app: Application) : AndroidViewModel(app) {
                 )
             )
         }*/
+
+        //writeSequencesToFile()
     }
 }
