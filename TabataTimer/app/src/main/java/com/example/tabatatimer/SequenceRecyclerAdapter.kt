@@ -14,8 +14,10 @@ class SequenceRecyclerAdapter(private val names: List<String>) :
 
     class SequenceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardView: MaterialCardView = itemView.findViewById(R.id.card)
-        val titleTextView: TextView = itemView.findViewById(R.id.title_text)
-        val bodyTextView: TextView = itemView.findViewById(R.id.body_text)
+        val seqTitleView: TextView = itemView.findViewById(R.id.sequence_title)
+        val numRepetitionsView: TextView = itemView.findViewById(R.id.num_of_repetitions)
+        val totalTimeView: TextView = itemView.findViewById(R.id.total_time)
+        val phasesListView: TextView = itemView.findViewById(R.id.list_of_phases)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SequenceViewHolder {
@@ -34,10 +36,12 @@ class SequenceRecyclerAdapter(private val names: List<String>) :
     }
 
     override fun onBindViewHolder(holder: SequenceViewHolder, position: Int) {
-        holder.bodyTextView.text = "(a sequence)"
-        holder.titleTextView.text = names[position]
         val color: Int = getRandomColor()
         holder.cardView.setBackgroundColor(color)
+        holder.seqTitleView.text = names[position]
+        holder.numRepetitionsView.text = "Repetitions: 4"
+        holder.totalTimeView.text = "Total time: 04:00"
+        holder.phasesListView.text = "1. warm-up\n2. work\n3. rest\n4. cool down"
     }
 
     override fun getItemCount(): Int {

@@ -16,4 +16,5 @@
     <string name="english_loc" translatable="false">en</string>
     <string name="only_after_app_restart">This will apply only after the app restart</string>
     <string name="home_activity">home activity</string>
+    <string name="font_size_changed">Font size changed to: </string>
 </resources>

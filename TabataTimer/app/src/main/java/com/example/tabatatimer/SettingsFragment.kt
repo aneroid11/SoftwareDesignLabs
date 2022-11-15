@@ -3,6 +3,7 @@ package com.example.tabatatimer
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import androidx.preference.Preference
@@ -36,6 +37,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Preference.OnPreferenceChangeListener { _, value: Any ->
                 Log.d("SettingsFragment", "Language changed to $value")
                 updateLanguage(value.toString())
+                return@OnPreferenceChangeListener true
+            }
+
+        fontSizePref.onPreferenceChangeListener =
+            Preference.OnPreferenceChangeListener { _, value: Any ->
+                Log.d("SettingsFragment", "font size changed to $value")
+                updateFontSize(value.toString())
                 return@OnPreferenceChangeListener true
             }
     }
@@ -75,5 +83,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(lang)
         AppCompatDelegate.setApplicationLocales(appLocale)
+    }
+
+    private fun updateFontSize(size: String) {
+        val sizeStr =
+            if (size == getString(R.string.medium_eng))
+                getString(R.string.medium)
+            else
+                getString(R.string.large)
+
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.font_size_changed) + " " + sizeStr,
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

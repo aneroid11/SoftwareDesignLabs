@@ -12,13 +12,25 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/title_text"
+            android:id="@+id/sequence_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="?textTitle" />
 
         <TextView
-            android:id="@+id/body_text"
+            android:id="@+id/total_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?textBody" />
+
+        <TextView
+            android:id="@+id/num_of_repetitions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?textBody" />
+
+        <TextView
+            android:id="@+id/list_of_phases"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="?textBody" />

@@ -12,4 +12,5 @@
     <string name="russian">Русский</string>
     <string name="only_after_app_restart">Применится только после перезапуска приложения</string>
     <string name="home_activity">Домашнаяя активность</string>
+    <string name="font_size_changed">Размер текста изменён на: </string>
 </resources>
