@@ -5,6 +5,11 @@
         <item>@string/large</item>
     </array>
 
+    <array name="font_size_entry_values">
+        <item>@string/medium_eng</item>
+        <item>@string/large_eng</item>
+    </array>
+
     <array name="select_lang_entries">
         <item>@string/english</item>
         <item>@string/russian</item>

@@ -8,6 +8,8 @@
     <string name="small">Small</string>
     <string name="medium">Medium</string>
     <string name="large">Large</string>
+    <string name="medium_eng" translatable="false">medium</string>
+    <string name="large_eng" translatable="false">large</string>
     <string name="english">English</string>
     <string name="russian">Russian</string>
     <string name="russian_loc" translatable="false">ru</string>

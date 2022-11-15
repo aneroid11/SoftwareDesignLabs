@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private fun setTextTheme() {
         // get text theme from shared settings and set it here
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val mediumStr = getString(R.string.medium)
+        val mediumStr = getString(R.string.medium_eng)
         val textSize = prefs.getString("font_size", mediumStr)!!
 
         Log.d("MainActivity", "textSize = $textSize")

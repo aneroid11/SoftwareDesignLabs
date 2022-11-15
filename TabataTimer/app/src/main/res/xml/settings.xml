@@ -11,7 +11,7 @@
         android:key="font_size"
         android:title="@string/select_font_size"
         android:entries="@array/font_size_entries"
-        android:entryValues="@array/font_size_entries" />
+        android:entryValues="@array/font_size_entry_values" />
 
     <Preference
         android:key="clear_data"
