@@ -23,7 +23,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun setTextTheme() {
         // get text theme from shared settings and set it here
-        setTheme(R.style.Theme_TabataTimer_LargeText)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val mediumStr = getString(R.string.medium)
+        val textSize = prefs.getString("font_size", mediumStr)!!
+
+        Log.d("MainActivity", "textSize = $textSize")
+
+        if (textSize == mediumStr) {
+            setTheme(R.style.Theme_TabataTimer_MediumText)
+        }
+        else {
+            setTheme(R.style.Theme_TabataTimer_LargeText)
+        }
     }
 
     private fun updateTheme() {
@@ -59,8 +70,9 @@ class MainActivity : AppCompatActivity() {
             Log.d("MainActivity","settings button pressed. start the settings activity")
 
             val context: Context = this
-            val intent: Intent = Intent(context, SettingsActivity::class.java)
+            val intent = Intent(context, SettingsActivity::class.java)
             context.startActivity(intent)
+            finish()
 
             return true
         }
