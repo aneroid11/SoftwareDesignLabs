@@ -1,5 +1,6 @@
 package com.example.tabatatimer
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import kotlin.math.min
 import kotlin.random.Random
 
 class SequenceRecyclerAdapter(private val seqViewModel: SequencesViewModel) :
@@ -35,13 +37,40 @@ class SequenceRecyclerAdapter(private val seqViewModel: SequencesViewModel) :
         return Color.rgb(red, green, blue)
     }
 
+    private fun countTotalSeconds(seq: Sequence): Int {
+        var sum = 0
+
+        for (ph in seq.phasesList) {
+            sum += ph.durationSec
+        }
+        return sum * seq.numRepetitions
+    }
+
+    private fun getTotalTimeInMinutes(seconds: Int): String {
+        val minutes = seconds / 60
+        val restSeconds = seconds - minutes * 60
+        return String.format("%d:%d", minutes, restSeconds)
+    }
+
+    private fun getPhasesListText(seq: Sequence): String {
+        var index = 1
+        var retStr = ""
+
+        for (ph in seq.phasesList) {
+            retStr += index.toString() + ". " + ph.type + " - " + ph.durationSec + " sec\n"
+            index++
+        }
+        return retStr
+    }
+
     override fun onBindViewHolder(holder: SequenceViewHolder, position: Int) {
-        val color: Int = getRandomColor()
-        holder.cardView.setBackgroundColor(color)
-        holder.seqTitleView.text = seqViewModel.sequencesList.value!!.get(position).title
-        holder.numRepetitionsView.text = "Repetitions: 4"
-        holder.totalTimeView.text = "Total time: 04:00"
-        holder.phasesListView.text = "1. warm-up\n2. work\n3. rest\n4. cool down"
+        val seq: Sequence = seqViewModel.sequencesList.value!![position]
+
+        holder.cardView.setBackgroundColor(seq.color)
+        holder.seqTitleView.text = seq.title
+        holder.numRepetitionsView.text = "Repetitions: " + seq.numRepetitions.toString()
+        holder.totalTimeView.text = getTotalTimeInMinutes(countTotalSeconds(seq))
+        holder.phasesListView.text = getPhasesListText(seq)
     }
 
     override fun getItemCount(): Int {
