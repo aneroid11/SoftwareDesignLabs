@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
@@ -24,6 +25,8 @@ class SequenceRecyclerAdapter(
         val numRepetitionsView: TextView = itemView.findViewById(R.id.num_of_repetitions)
         val totalTimeView: TextView = itemView.findViewById(R.id.total_time)
         val phasesListView: TextView = itemView.findViewById(R.id.list_of_phases)
+        val deleteButton: Button = itemView.findViewById(R.id.delete_sequence_button)
+        val editButton: Button = itemView.findViewById(R.id.edit_sequence_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SequenceViewHolder {
@@ -69,7 +72,8 @@ class SequenceRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: SequenceViewHolder, position: Int) {
-        val seq: Sequence = seqViewModel.sequencesList.value!![position]
+        val seqList = seqViewModel.sequencesList.value!!
+        val seq: Sequence = seqList[position]
 
         holder.cardView.setBackgroundColor(seq.color)
         holder.seqTitleView.text = seq.title
@@ -77,6 +81,13 @@ class SequenceRecyclerAdapter(
             activityContext.getString(R.string.repetitions) + " " + seq.numRepetitions.toString()
         holder.totalTimeView.text = getTotalTimeInMinutes(countTotalSeconds(seq))
         holder.phasesListView.text = getPhasesListText(seq)
+
+        holder.deleteButton.setOnClickListener {
+            seqViewModel.deleteSequence(position)
+            seqViewModel.writeSequencesToFile()
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, seqList.size);
+        }
     }
 
     override fun getItemCount(): Int {
