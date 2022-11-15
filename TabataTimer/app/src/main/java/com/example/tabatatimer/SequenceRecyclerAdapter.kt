@@ -2,6 +2,7 @@ package com.example.tabatatimer
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -87,6 +88,10 @@ class SequenceRecyclerAdapter(
             seqViewModel.writeSequencesToFile()
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, seqList.size);
+        }
+        holder.editButton.setOnClickListener {
+            val intent = Intent(activityContext, SequenceEditActivity::class.java)
+            activityContext.startActivity(intent)
         }
     }
 

@@ -13,7 +13,7 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ActivityBase() {
     private val sequencesViewModel: SequencesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,22 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         updateTheme()  // this is normal
         //updateLanguage() // this is not
-    }
-
-    private fun setTextTheme() {
-        // get text theme from shared settings and set it here
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val mediumStr = getString(R.string.medium_eng)
-        val textSize = prefs.getString("font_size", mediumStr)!!
-
-        Log.d("MainActivity", "textSize = $textSize")
-
-        if (textSize == mediumStr) {
-            setTheme(R.style.Theme_TabataTimer_MediumText)
-        }
-        else {
-            setTheme(R.style.Theme_TabataTimer_LargeText)
-        }
     }
 
     private fun updateTheme() {
