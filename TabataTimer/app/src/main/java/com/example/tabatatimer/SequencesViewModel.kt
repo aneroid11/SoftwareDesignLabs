@@ -79,6 +79,14 @@ class SequencesViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     init {
+        val colorsList = mutableListOf<Int>()
+
+        for (i in 0..4) {
+            colorsList.add(getRandomColor())
+        }
+
+        Log.d("SequencesViewModel", colorsList.toString())
+
         loadSequencesFromFile()
 
         /*for (i in 1..5) {

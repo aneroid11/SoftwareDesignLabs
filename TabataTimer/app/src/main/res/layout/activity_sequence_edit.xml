@@ -70,16 +70,31 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <RadioButton
+            android:id="@+id/radio_color_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/pick_color_0"
+            android:checked="true" />
+        <RadioButton
             android:id="@+id/radio_color_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/teal_700"
-            android:checked="true" />
+            android:background="@color/pick_color_1" />
         <RadioButton
             android:id="@+id/radio_color_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/purple_700" />
+            android:background="@color/pick_color_2" />
+        <RadioButton
+            android:id="@+id/radio_color_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/pick_color_3" />
+        <RadioButton
+            android:id="@+id/radio_color_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/pick_color_4" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
