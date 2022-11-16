@@ -66,17 +66,32 @@ class SequenceEditActivity : ActivityBase() {
 
         val sequenceTitleEdittext: EditText = findViewById(R.id.sequence_title_edittext)
         sequenceTitleEdittext.setText(currSeq.title)
-
         sequenceTitleEdittext.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int,
                                        before: Int, count: Int) {
                 currSeq.title = s.toString()
+            }
+        })
+
+        val repetitionsEditText: EditText = findViewById(R.id.sequence_repetitions_edittext)
+        repetitionsEditText.setText(currSeq.numRepetitions.toString())
+        repetitionsEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                try {
+                    currSeq.numRepetitions = s.toString().toInt()
+                }
+                catch (e: Exception) {
+                    currSeq.numRepetitions = 1
+                }
+
+                if (currSeq.numRepetitions == 0) { currSeq.numRepetitions = 1 }
             }
         })
     }
