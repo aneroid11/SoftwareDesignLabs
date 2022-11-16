@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,12 @@ class SequenceEditActivity : ActivityBase() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sequence_edit)
+
+        onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                handleBackPressed()
+            }
+        })
 
         val phasesRecyclerView: RecyclerView = findViewById(R.id.phases_recyclerview)
         phasesRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -62,6 +69,13 @@ class SequenceEditActivity : ActivityBase() {
                 currSeq.title = s.toString()
             }
         })
+    }
+
+    private fun handleBackPressed() {
+        val context = this
+        val intent = Intent(context, MainActivity::class.java)
+        context.startActivity(intent)
+        finish()
     }
 
     private fun saveCurrentSequence() {
