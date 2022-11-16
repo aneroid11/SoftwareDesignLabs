@@ -14,8 +14,23 @@
         android:textStyle="bold"
         android:text="99"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/timer_phases_recyclerview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/timer_phases_recyclerview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        tools:listitem="@layout/recyclerview_timer_phase_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/timer_pause_button"
+        app:layout_constraintTop_toBottomOf="@id/remaining_seconds_textview" />
 
     <Button
         style="?textBody"
@@ -25,7 +40,8 @@
         android:text="@string/back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/timer_pause_button"
-        app:layout_constraintTop_toBottomOf="@id/remaining_seconds_textview" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timer_phases_recyclerview" />
 
     <Button
         style="?textBody"
@@ -35,7 +51,8 @@
         android:text="@string/pause"
         app:layout_constraintStart_toEndOf="@id/timer_back_button"
         app:layout_constraintEnd_toStartOf="@id/timer_forth_button"
-        app:layout_constraintTop_toBottomOf="@id/remaining_seconds_textview" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timer_phases_recyclerview" />
 
     <Button
         style="?textBody"
@@ -45,6 +62,7 @@
         android:text="@string/forth"
         app:layout_constraintStart_toEndOf="@id/timer_pause_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/remaining_seconds_textview" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timer_phases_recyclerview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
