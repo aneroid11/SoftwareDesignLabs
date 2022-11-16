@@ -1,16 +1,21 @@
 package com.example.tabatatimer
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
+
 
 class SequenceEditActivity : ActivityBase() {
     private val sequencesViewModel: SequencesViewModel by viewModels()
@@ -79,6 +84,12 @@ class SequenceEditActivity : ActivityBase() {
     }
 
     private fun saveCurrentSequence() {
+        val colorPickerGroup: RadioGroup = findViewById(R.id.color_picker)
+        val selectedColor: RadioButton = colorPickerGroup.findViewById(colorPickerGroup.checkedRadioButtonId)
+        val clDrawable: ColorDrawable = selectedColor.background as ColorDrawable
+        val color: Int = clDrawable.color
+        currSeq.color = color
+
         sequencesViewModel.updateSequence(seqPos, currSeq)
         sequencesViewModel.writeSequencesToFile()
     }
