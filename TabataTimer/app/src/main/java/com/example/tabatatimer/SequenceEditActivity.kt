@@ -48,6 +48,8 @@ class SequenceEditActivity : ActivityBase() {
         }
 
         val sequenceTitleEdittext: EditText = findViewById(R.id.sequence_title_edittext)
+        sequenceTitleEdittext.setText(currSeq.title)
+
         sequenceTitleEdittext.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
 
