@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class PhaseRecyclerAdapter(
-    private val currSequence: Sequence
+    private var currSequence: Sequence
 ) : RecyclerView.Adapter<PhaseRecyclerAdapter.PhaseViewHolder>() {
 
     class PhaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

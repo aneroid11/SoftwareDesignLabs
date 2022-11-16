@@ -13,6 +13,8 @@ import java.lang.Exception
 import kotlin.random.Random
 
 class SequencesViewModel(app: Application) : AndroidViewModel(app) {
+    //lateinit var sequencesAdapter: SequenceRecyclerAdapter
+
     private val _sequencesList: MutableLiveData<MutableList<Sequence>> =
         MutableLiveData<MutableList<Sequence>>(mutableListOf())
 
@@ -114,5 +116,9 @@ class SequencesViewModel(app: Application) : AndroidViewModel(app) {
 
     fun deleteSequence(position: Int) {
         _sequencesList.value!!.removeAt(position)
+    }
+
+    fun updateSequence(position: Int, seq: Sequence) {
+        _sequencesList.value!![position] = seq
     }
 }

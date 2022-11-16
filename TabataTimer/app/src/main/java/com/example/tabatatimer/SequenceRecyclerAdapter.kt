@@ -11,12 +11,14 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import com.google.gson.Gson
 import kotlin.math.min
 import kotlin.random.Random
 
 class SequenceRecyclerAdapter(
     private val seqViewModel: SequencesViewModel,
-    private val activityContext: Context
+    private val activityContext: Context,
+    private val parentActivity: MainActivity
 ) :
     RecyclerView.Adapter<SequenceRecyclerAdapter.SequenceViewHolder>() {
 
@@ -93,6 +95,7 @@ class SequenceRecyclerAdapter(
             val intent = Intent(activityContext, SequenceEditActivity::class.java)
             intent.putExtra("currentSequencePosition", position)
             activityContext.startActivity(intent)
+            parentActivity.finish()
         }
     }
 
