@@ -33,11 +33,17 @@ class PhaseRecyclerAdapter(
         holder.descrEditText.setText(phase.description)
         holder.durationEditText.setText(phase.durationSec.toString())
 
+        val phasesTypes = listOf("warmup", "work", "rest", "cooldown")
+
         val count: Int = holder.typeRadioGroup.childCount
         for (i in 0 until count) {
             val currButton = holder.typeRadioGroup.getChildAt(i) as RadioButton
             val id: Int = activity.resources.getIdentifier(phase.type, "string", activity.packageName)
             currButton.isChecked = currButton.text == activity.getString(id)
+
+            currButton.setOnClickListener {
+                currSequence.phasesList[position].type = phasesTypes[i]
+            }
         }
     }
 
