@@ -63,14 +63,22 @@ class PhaseRecyclerAdapter(
     override fun onBindViewHolder(holder: PhaseViewHolder, position: Int) {
         val phase = currSequence.phasesList[position]
 
-        holder.durationTextView.setText(phase.durationSec.toString())
+        holder.durationTextView.text = phase.durationSec.toString()
 
         holder.increaseDurationButton.setOnClickListener {
             phase.durationSec++
+            if (phase.durationSec > 999) { phase.durationSec = 999 }
+
             holder.durationTextView.text = phase.durationSec.toString()
         }
         holder.decreaseDurationButton.setOnClickListener {
             phase.durationSec--
+            if (phase.durationSec < 1) {
+                phase.durationSec = 1
+                Toast.makeText(activity, activity.getString(R.string.cannot_set_duration_less), Toast.LENGTH_SHORT)
+                    .show()
+            }
+
             holder.durationTextView.text = phase.durationSec.toString()
         }
 

@@ -33,4 +33,5 @@
     <string name="duration">Duration (seconds)</string>
     <string name="save">Save</string>
     <string name="training">Training</string>
+    <string name="cannot_set_duration_less">Cannot set duration less than 1!</string>
 </resources>

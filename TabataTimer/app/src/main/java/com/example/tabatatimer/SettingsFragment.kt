@@ -9,6 +9,7 @@ import androidx.core.os.LocaleListCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import java.io.File
 
 class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -49,7 +50,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun deleteAllData() {
-        // for now, only delete all settings
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
         val editor: SharedPreferences.Editor =
@@ -62,6 +62,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         updateTheme()
         updateLanguage("en")
+
+        val file = File(requireContext().filesDir, "sequences.json")
+        file.delete()
     }
 
     private fun updateTheme() {
