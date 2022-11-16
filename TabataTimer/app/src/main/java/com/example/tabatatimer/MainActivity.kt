@@ -39,7 +39,7 @@ class MainActivity : ActivityBase() {
                     Color.parseColor("#FF8FB391"),
                     getString(R.string.training),
                     1,
-                    listOf(
+                    mutableListOf(
                         Phase("warmup", 20),
                         Phase("work", 15),
                         Phase("rest", 15),

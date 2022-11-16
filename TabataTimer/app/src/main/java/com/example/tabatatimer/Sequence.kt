@@ -9,5 +9,5 @@ data class Sequence(
     var color: Int,
     var title: String,
     var numRepetitions: Int,
-    var phasesList: List<Phase>
+    var phasesList: MutableList<Phase>
 )
