@@ -8,7 +8,6 @@
     android:layout_margin="8dp">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -46,23 +45,32 @@
                 android:text="@string/cooldown" />
         </RadioGroup>
 
-        <EditText
-            style="?textBody"
-            android:id="@+id/phase_descr_edittext"
-            android:layout_width="300dp"
-            android:layout_height="100dp"
-            android:inputType="text"
-            android:maxLength="200"
-            android:hint="@string/description" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            style="?textBody"
-            android:id="@+id/phase_duration_sec_edittext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="3"
-            android:hint="@string/duration" />
+            <Button
+                style="?textTitle"
+                android:id="@+id/decrease_duration_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-" />
+
+            <TextView
+                style="?textTitle"
+                android:id="@+id/phase_duration_sec_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                style="?textTitle"
+                android:id="@+id/increase_duration_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -90,21 +90,22 @@ class SequencesViewModel(app: Application) : AndroidViewModel(app) {
 
         loadSequencesFromFile()
 
-        /*for (i in 1..5) {
+        /*for (i in 1..1) {
             _sequencesList.value!!.add(
                 Sequence(
-                    getRandomColor(),
+                    //getRandomColor(),
+                    Color.parseColor("#FF8FB391"),
                     "basic training",
                     2,
                     listOf(
-                        Phase("warmup","", 20),
-                        Phase("work", "", 10),
-                        Phase("rest", "", 10),
-                        Phase("work", "", 10),
-                        Phase("rest", "", 10),
-                        Phase("work", "", 10),
-                        Phase("rest", "", 10),
-                        Phase("cooldown", "", 20)
+                        Phase("warmup",20),
+                        Phase("work", 10),
+                        Phase("rest", 10),
+                        Phase("work", 10),
+                        Phase("rest", 10),
+                        Phase("work", 10),
+                        Phase("rest", 10),
+                        Phase("cooldown", 20)
                     )
                 )
             )
