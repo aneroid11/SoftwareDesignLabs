@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RadioGroup
+        android:id="@+id/phase_type_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            style="?textBody"
+            android:id="@+id/warmup_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/warmup"
+            android:checked="true" />
+        <RadioButton
+            style="?textBody"
+            android:id="@+id/work_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/work" />
+        <RadioButton
+            style="?textBody"
+            android:id="@+id/rest_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rest" />
+        <RadioButton
+            style="?textBody"
+            android:id="@+id/cooldown_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cooldown" />
+    </RadioGroup>
+
+    <EditText
+        style="?textBody"
+        android:id="@+id/phase_descr_edittext"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:inputType="text"
+        android:maxLength="200"
+        android:hint="@string/description" />
+
+    <EditText
+        style="?textBody"
+        android:id="@+id/phase_duration_sec_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:maxLength="3"
+        android:hint="@string/duration" />
+
+</LinearLayout>

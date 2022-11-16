@@ -36,6 +36,9 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.google.code.gson:gson:2.8.5'
 
+    // color picker
+    implementation 'com.github.madrapps:pikolo:2.0.2'
+
     // LiveData
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     // ViewModel

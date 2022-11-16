@@ -47,25 +47,26 @@
         style="?textBody"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_textview" />
+        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_textview"
+        app:layout_constraintBottom_toTopOf="@id/color_picker"/>
 
-    <TextView
-        android:id="@+id/sequence_color_textview"
+    <!--
+    <com.madrapps.pikolo.HSLColorPicker
+        android:id="@+id/color_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_edittext"
-        app:layout_constraintBottom_toTopOf="@id/color_picker_radiogroup"
-        style="?textBody" />
+        />
+    -->
 
     <RadioGroup
-        android:id="@+id/color_picker_radiogroup"
+        android:id="@+id/color_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/sequence_color_textview"
+        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_edittext"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
