@@ -74,8 +74,7 @@
             android:id="@+id/radio_color_0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/pick_color_0"
-            android:checked="true" />
+            android:background="@color/pick_color_0" />
         <RadioButton
             android:id="@+id/radio_color_1"
             android:layout_width="wrap_content"

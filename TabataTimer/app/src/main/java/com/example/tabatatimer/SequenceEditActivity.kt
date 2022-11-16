@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -12,9 +13,11 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
+import androidx.core.view.children
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
+import kotlinx.coroutines.NonCancellable.children
 
 
 class SequenceEditActivity : ActivityBase() {
@@ -41,6 +44,8 @@ class SequenceEditActivity : ActivityBase() {
                 handleBackPressed()
             }
         })
+
+        setCurrentColor()
 
         val phasesRecyclerView: RecyclerView = findViewById(R.id.phases_recyclerview)
         phasesRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -74,6 +79,26 @@ class SequenceEditActivity : ActivityBase() {
                 currSeq.title = s.toString()
             }
         })
+    }
+
+    private fun setCurrentColor() {
+        val colorPickerGroup: RadioGroup = findViewById(R.id.color_picker)
+        val count: Int = colorPickerGroup.childCount
+        Log.d("SequenceEditActivity", "count = $count")
+        Log.d("SequenceEditActivity", "currSeq.color = ${currSeq.color}")
+
+        val listOfButtons = ArrayList<RadioButton>()
+
+        for (i in 0 until count) {
+            listOfButtons.add(colorPickerGroup.getChildAt(i) as RadioButton)
+        }
+
+        for (button in listOfButtons) {
+            val clDrawable: ColorDrawable = button.background as ColorDrawable
+            val color: Int = clDrawable.color
+            Log.d("SequenceEditActivity", "current button color: $color")
+            button.isChecked = currSeq.color == color
+        }
     }
 
     private fun handleBackPressed() {
