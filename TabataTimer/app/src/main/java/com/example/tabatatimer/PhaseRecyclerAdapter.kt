@@ -7,10 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 
 class PhaseRecyclerAdapter(
@@ -22,6 +19,8 @@ class PhaseRecyclerAdapter(
         val typeRadioGroup: RadioGroup = itemView.findViewById(R.id.phase_type_selector)
         //val descrEditText: EditText = itemView.findViewById(R.id.phase_descr_edittext)
         val durationTextView: TextView = itemView.findViewById(R.id.phase_duration_sec_textview)
+        val increaseDurationButton: Button = itemView.findViewById(R.id.increase_duration_button)
+        val decreaseDurationButton: Button = itemView.findViewById(R.id.decrease_duration_button)
 
         /*fun setListenersForEditTexts() {
             descrEditText.addTextChangedListener(object : TextWatcher {
@@ -65,6 +64,15 @@ class PhaseRecyclerAdapter(
         val phase = currSequence.phasesList[position]
 
         holder.durationTextView.setText(phase.durationSec.toString())
+
+        holder.increaseDurationButton.setOnClickListener {
+            phase.durationSec++
+            holder.durationTextView.text = phase.durationSec.toString()
+        }
+        holder.decreaseDurationButton.setOnClickListener {
+            phase.durationSec--
+            holder.durationTextView.text = phase.durationSec.toString()
+        }
 
         val phasesTypes = listOf("warmup", "work", "rest", "cooldown")
 
