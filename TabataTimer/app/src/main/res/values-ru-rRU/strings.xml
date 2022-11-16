@@ -28,4 +28,5 @@
     <string name="description">Описание</string>
     <string name="duration">Продолжительность (секунд)</string>
     <string name="save">Сохранить</string>
+    <string name="training">Тренировка</string>
 </resources>

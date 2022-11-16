@@ -2,11 +2,13 @@ package com.example.tabatatimer
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
@@ -28,6 +30,30 @@ class MainActivity : ActivityBase() {
         val adapter = SequenceRecyclerAdapter(sequencesViewModel, this, this)
         //sequencesViewModel.sequencesAdapter =
         seqRecyclerView.adapter = adapter
+
+        val addSequenceButton: Button = findViewById(R.id.add_sequence_button)
+        addSequenceButton.setOnClickListener {
+            val numSequences = sequencesViewModel.sequencesList.value!!.size
+            sequencesViewModel.sequencesList.value!!.add(
+                Sequence(
+                    Color.parseColor("#FF8FB391"),
+                    getString(R.string.training),
+                    1,
+                    listOf(
+                        Phase("warmup", 20),
+                        Phase("work", 15),
+                        Phase("rest", 15),
+                        Phase("cooldown", 30)
+                    )
+                )
+            )
+            sequencesViewModel.writeSequencesToFile()
+
+            val intent = Intent(this, SequenceEditActivity::class.java)
+            intent.putExtra("currentSequencePosition", numSequences)
+            startActivity(intent)
+            finish()
+        }
 
         updateTheme()  // this is normal
         //updateLanguage() // this is not
