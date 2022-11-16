@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <Button
@@ -55,6 +55,14 @@
             android:id="@+id/list_of_phases"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="?textBody" />
+
+        <Button
+            android:id="@+id/run_sequence_button"
+            android:text="@string/run"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             style="?textBody" />
     </LinearLayout>
 

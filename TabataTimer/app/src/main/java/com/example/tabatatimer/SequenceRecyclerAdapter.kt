@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ class SequenceRecyclerAdapter(
         val phasesListView: TextView = itemView.findViewById(R.id.list_of_phases)
         val deleteButton: Button = itemView.findViewById(R.id.delete_sequence_button)
         val editButton: Button = itemView.findViewById(R.id.edit_sequence_button)
+        val runButton: Button = itemView.findViewById(R.id.run_sequence_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SequenceViewHolder {
@@ -96,6 +98,9 @@ class SequenceRecyclerAdapter(
             intent.putExtra("currentSequencePosition", position)
             activityContext.startActivity(intent)
             parentActivity.finish()
+        }
+        holder.runButton.setOnClickListener {
+            Log.d("SequenceRecyclerAdapter", "start timer")
         }
     }
 
