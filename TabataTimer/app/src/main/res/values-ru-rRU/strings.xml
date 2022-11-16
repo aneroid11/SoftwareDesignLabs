@@ -26,5 +26,6 @@
     <string name="repetitions_number">Количество повторений</string>
     <string name="color">Цвет</string>
     <string name="description">Описание</string>
-    <string name="duration">Продолжительность</string>
+    <string name="duration">Продолжительность (секунд)</string>
+    <string name="save">Сохранить</string>
 </resources>

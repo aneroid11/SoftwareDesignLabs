@@ -103,9 +103,20 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         tools:listitem="@layout/recyclerview_phase_item"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/save_sequence_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/color_picker" />
+
+    <Button
+        android:id="@+id/save_sequence_button"
+        style="?textBody"
+        android:text="@string/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/phases_recyclerview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

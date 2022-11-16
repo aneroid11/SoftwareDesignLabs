@@ -30,5 +30,6 @@
     <string name="repetitions_number">Repetitions number</string>
     <string name="color">Color</string>
     <string name="description">Description</string>
-    <string name="duration">Duration</string>
+    <string name="duration">Duration (seconds)</string>
+    <string name="save">Save</string>
 </resources>

@@ -91,6 +91,7 @@ class SequenceRecyclerAdapter(
         }
         holder.editButton.setOnClickListener {
             val intent = Intent(activityContext, SequenceEditActivity::class.java)
+            intent.putExtra("currentSequencePosition", position)
             activityContext.startActivity(intent)
         }
     }
