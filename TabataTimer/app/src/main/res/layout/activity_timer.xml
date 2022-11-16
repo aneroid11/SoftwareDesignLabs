@@ -17,4 +17,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+        style="?textBody"
+        android:id="@+id/timer_back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/timer_pause_button"
+        app:layout_constraintTop_toBottomOf="@id/remaining_seconds_textview" />
+
+    <Button
+        style="?textBody"
+        android:id="@+id/timer_pause_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pause"
+        app:layout_constraintStart_toEndOf="@id/timer_back_button"
+        app:layout_constraintEnd_toStartOf="@id/timer_forth_button"
+        app:layout_constraintTop_toBottomOf="@id/remaining_seconds_textview" />
+
+    <Button
+        style="?textBody"
+        android:id="@+id/timer_forth_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forth"
+        app:layout_constraintStart_toEndOf="@id/timer_pause_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/remaining_seconds_textview" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
