@@ -101,6 +101,10 @@ class SequenceRecyclerAdapter(
         }
         holder.runButton.setOnClickListener {
             Log.d("SequenceRecyclerAdapter", "start timer")
+            val intent = Intent(activityContext, TimerActivity::class.java)
+            intent.putExtra("currentSequencePosition", position)
+            activityContext.startActivity(intent)
+            parentActivity.finish()
         }
     }
 
