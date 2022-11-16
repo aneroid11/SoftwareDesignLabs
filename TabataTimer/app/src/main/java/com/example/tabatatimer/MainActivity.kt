@@ -28,7 +28,6 @@ class MainActivity : ActivityBase() {
         seqRecyclerView.layoutManager = LinearLayoutManager(this)
 
         val adapter = SequenceRecyclerAdapter(sequencesViewModel, this, this)
-        //sequencesViewModel.sequencesAdapter =
         seqRecyclerView.adapter = adapter
 
         val addSequenceButton: Button = findViewById(R.id.add_sequence_button)
