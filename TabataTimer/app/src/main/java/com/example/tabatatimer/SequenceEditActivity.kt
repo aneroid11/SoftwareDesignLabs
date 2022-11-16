@@ -6,18 +6,15 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
-import androidx.core.view.children
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import kotlinx.coroutines.NonCancellable.children
 
 
 class SequenceEditActivity : ActivityBase() {
@@ -51,7 +48,8 @@ class SequenceEditActivity : ActivityBase() {
         phasesRecyclerView.layoutManager = LinearLayoutManager(this)
         phasesRecyclerView.adapter =
             PhaseRecyclerAdapter(
-                currSeq
+                currSeq,
+                this
             )
 
         val saveButton: Button = findViewById(R.id.save_sequence_button)
@@ -99,8 +97,8 @@ class SequenceEditActivity : ActivityBase() {
     private fun setCurrentColor() {
         val colorPickerGroup: RadioGroup = findViewById(R.id.color_picker)
         val count: Int = colorPickerGroup.childCount
-        Log.d("SequenceEditActivity", "count = $count")
-        Log.d("SequenceEditActivity", "currSeq.color = ${currSeq.color}")
+        //Log.d("SequenceEditActivity", "count = $count")
+        //Log.d("SequenceEditActivity", "currSeq.color = ${currSeq.color}")
 
         val listOfButtons = ArrayList<RadioButton>()
 
