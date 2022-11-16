@@ -26,4 +26,7 @@
     <string name="work">Work</string>
     <string name="rest">Rest</string>
     <string name="cooldown">Cool down</string>
+    <string name="title">Title</string>
+    <string name="repetitions_number">Repetitions number</string>
+    <string name="color">Color</string>
 </resources>

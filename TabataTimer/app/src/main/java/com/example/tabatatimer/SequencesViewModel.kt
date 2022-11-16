@@ -79,9 +79,9 @@ class SequencesViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     init {
-        //loadSequencesFromFile()
+        loadSequencesFromFile()
 
-        for (i in 1..5) {
+        /*for (i in 1..5) {
             _sequencesList.value!!.add(
                 Sequence(
                     getRandomColor(),
@@ -101,7 +101,7 @@ class SequencesViewModel(app: Application) : AndroidViewModel(app) {
             )
         }
 
-        writeSequencesToFile()
+        writeSequencesToFile()*/
     }
 
     fun deleteSequence(position: Int) {

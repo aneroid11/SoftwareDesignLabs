@@ -22,4 +22,7 @@
     <string name="work">Работа</string>
     <string name="rest">Отдых</string>
     <string name="cooldown">Успокоиться</string>
+    <string name="title">Название</string>
+    <string name="repetitions_number">Количество повторений</string>
+    <string name="color">Цвет</string>
 </resources>

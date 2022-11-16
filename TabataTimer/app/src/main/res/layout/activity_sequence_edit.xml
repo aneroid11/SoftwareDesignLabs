@@ -7,13 +7,79 @@
     tools:context=".SequenceEditActivity">
 
     <TextView
-        android:text="some text"
+        android:id="@+id/sequence_title_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?textBody"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/sequence_title_edittext"
+        style="?textTitle" />
+
+    <EditText
+        android:id="@+id/sequence_title_edittext"
+        android:inputType="text"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:maxLength="100"
+        style="?textTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sequence_title_textview" />
+
+    <TextView
+        android:id="@+id/sequence_repetitions_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/repetitions_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sequence_title_edittext"
+        style="?textBody" />
+
+    <EditText
+        android:id="@+id/sequence_repetitions_edittext"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:inputType="number"
+        android:maxLength="2"
+        style="?textBody"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_textview" />
+
+    <TextView
+        android:id="@+id/sequence_color_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_edittext"
+        app:layout_constraintBottom_toTopOf="@id/color_picker_radiogroup"
+        style="?textBody" />
+
+    <RadioGroup
+        android:id="@+id/color_picker_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/sequence_color_textview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <RadioButton
+            android:id="@+id/radio_color_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/teal_700"
+            android:checked="true" />
+        <RadioButton
+            android:id="@+id/radio_color_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_700" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
