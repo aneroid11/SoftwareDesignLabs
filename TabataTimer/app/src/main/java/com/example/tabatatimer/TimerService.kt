@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
@@ -48,7 +49,8 @@ class TimerService : Service() {
     private var numRepetitions: Int = 1
 
     private lateinit var phasesDurations: ArrayList<Int>
-    private var currPhaseIndex = -1
+    //private var currPhaseIndex = -1
+    private var currPhaseIndex = 0
 
     private var trainingFinished: Boolean = false
 
@@ -71,10 +73,7 @@ class TimerService : Service() {
         val durations = intent.getIntegerArrayListExtra("phasesDurations")
         if (durations != null) {
             phasesDurations = durations
-
-            if (currPhaseIndex == -1) {
-                timeRemaining = phasesDurations[0]
-            }
+            timeRemaining = phasesDurations[0]
         }
 
         when (action) {
@@ -121,6 +120,32 @@ class TimerService : Service() {
         sendBroadcast(statusIntent)
     }
 
+    private fun increaseCurrPhaseIndex() {
+        currPhaseIndex++
+        if (currPhaseIndex >= phasesDurations.size) {
+            currRepetition++
+
+            if (currRepetition >= numRepetitions) {
+                Log.d("TimerService", "finish training")
+                trainingFinished = true
+                timeRemaining = 0
+                timer.cancel()
+            }
+            else {
+                currPhaseIndex = 0
+                timeRemaining = phasesDurations[currPhaseIndex]
+            }
+        }
+        else {
+            timeRemaining = phasesDurations[currPhaseIndex]
+        }
+
+        val intent = Intent()
+        intent.action = TIMER_PHASE
+        intent.putExtra(CURRENT_PHASE, currPhaseIndex)
+        sendBroadcast(intent)
+    }
+
     private fun startTimer() {
         isTimerRunning = true
 
@@ -142,28 +167,7 @@ class TimerService : Service() {
                     timeRemaining--
 
                     if (timeRemaining < 1) {
-                        currPhaseIndex++
-                        if (currPhaseIndex >= phasesDurations.size) {
-                            currRepetition++
-
-                            if (currRepetition >= numRepetitions) {
-                                Log.d("TimerService", "finish training")
-                                trainingFinished = true
-                                timer.cancel()
-                            }
-                            else {
-                                currPhaseIndex = 0
-                                timeRemaining = phasesDurations[currPhaseIndex]
-                            }
-                        }
-                        else {
-                            timeRemaining = phasesDurations[currPhaseIndex]
-                        }
-
-                        val intent = Intent()
-                        intent.action = TIMER_PHASE
-                        intent.putExtra(CURRENT_PHASE, currPhaseIndex)
-                        sendBroadcast(intent)
+                        increaseCurrPhaseIndex()
                     }
                 }
 
@@ -188,11 +192,23 @@ class TimerService : Service() {
     }
 
     private fun switchToNextPhase() {
+        if (trainingFinished) {
+            Toast.makeText(applicationContext, getString(R.string.training_already_finished), Toast.LENGTH_SHORT).show()
+            return
+        }
+        increaseCurrPhaseIndex()
         Log.d("TimerService", "switch to next phase")
     }
 
     private fun switchToPrevPhase() {
+        if (trainingFinished) {
+            Toast.makeText(applicationContext, getString(R.string.training_already_finished), Toast.LENGTH_SHORT).show()
+            return
+        }
+
         Log.d("TimerService", "switch to prev phase")
+
+
     }
 
     private fun buildNotification(): Notification {

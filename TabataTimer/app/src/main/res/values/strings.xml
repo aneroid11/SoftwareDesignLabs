@@ -39,4 +39,5 @@
     <string name="resume">Start</string>
     <string name="back">Back</string>
     <string name="forth">Forth</string>
+    <string name="training_already_finished">Training already finished!</string>
 </resources>
