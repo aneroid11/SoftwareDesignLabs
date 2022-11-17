@@ -65,6 +65,10 @@ class TimerService : Service() {
         val durations = intent.getIntegerArrayListExtra("phasesDurations")
         if (durations != null) {
             phasesDurations = durations
+
+            if (currPhaseIndex == -1) {
+                timeRemaining = phasesDurations[0]
+            }
         }
 
         when (action) {
