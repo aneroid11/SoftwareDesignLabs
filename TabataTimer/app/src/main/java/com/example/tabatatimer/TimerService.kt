@@ -76,6 +76,7 @@ class TimerService : Service() {
         timer.cancel()
         updateTimer.cancel()
         //
+        mediaPlayer.release()
 
         super.onDestroy()
     }
@@ -170,8 +171,6 @@ class TimerService : Service() {
     }
 
     private fun increaseCurrPhaseIndex() {
-        mediaPlayer.start()
-
         currPhaseIndex++
         if (currPhaseIndex >= phasesDurations.size) {
             currRepetition++
@@ -221,6 +220,7 @@ class TimerService : Service() {
                     timeRemaining--
 
                     if (timeRemaining < 1) {
+                        mediaPlayer.start()
                         increaseCurrPhaseIndex()
                     }
                 }
