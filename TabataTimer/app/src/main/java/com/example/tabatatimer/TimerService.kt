@@ -18,6 +18,7 @@ class TimerService : Service() {
         const val CHANNEL_ID = "Timer_Notifications"
 
         // Service Actions
+        const val INITIALIZE = "INITIALIZE"
         const val STOP = "STOP"
         const val START = "START"
         const val PAUSE = "PAUSE"
@@ -78,7 +79,7 @@ class TimerService : Service() {
         val action = intent?.getStringExtra(TIMER_ACTION)
         Log.d("TimerService", "onStartCommand Action: $action")
 
-        val oldNumRepetitions = numRepetitions
+        /*val oldNumRepetitions = numRepetitions
         numRepetitions = intent!!.getIntExtra("numRepetitions", -1)
         if (numRepetitions < 0) { numRepetitions = oldNumRepetitions }
 
@@ -88,12 +89,16 @@ class TimerService : Service() {
 
             if (timeRemaining < 0) { timeRemaining = phasesDurations[0] }
             //timeRemaining = phasesDurations[0]
-        }
+        }*/
 
         when (action) {
+            INITIALIZE -> {
+                numRepetitions = intent.getIntExtra("numRepetitions", -1)
+                phasesDurations = intent.getIntegerArrayListExtra("phasesDurations")!!
+                if (timeRemaining < 0) { timeRemaining = phasesDurations[0] }
+            }
             STOP -> {
                 stopSelf()
-                return START_NOT_STICKY
             }
             START -> startTimer()
             PAUSE -> pauseTimer()

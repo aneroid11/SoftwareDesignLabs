@@ -64,6 +64,8 @@ class TimerActivity : ActivityBase() {
                 handleBackPressed()
             }
         })
+
+        initializeTimer()
     }
 
     private fun stopTimerService() {
@@ -198,18 +200,28 @@ class TimerActivity : ActivityBase() {
         phaseAdapter.setCurrentPhase(phaseIndex)*/
     }
 
-    private fun getTimerStatus() {
+    private fun initializeTimer() {
         val intent = Intent(this, TimerService::class.java)
-        intent.putExtra(TimerService.TIMER_ACTION, TimerService.GET_STATUS)
-
+        intent.putExtra(TimerService.TIMER_ACTION, TimerService.INITIALIZE)
         intent.putExtra("numRepetitions", currSeq.numRepetitions)
-
         val phasesDurations = arrayListOf<Int>()
         for (phase in currSeq.phasesList) {
             phasesDurations.add(phase.durationSec)
         }
         intent.putIntegerArrayListExtra("phasesDurations", phasesDurations)
+        startService(intent)
+    }
 
+    private fun getTimerStatus() {
+        val intent = Intent(this, TimerService::class.java)
+        intent.putExtra(TimerService.TIMER_ACTION, TimerService.GET_STATUS)
+        /*intent.putExtra("numRepetitions", currSeq.numRepetitions)
+
+        val phasesDurations = arrayListOf<Int>()
+        for (phase in currSeq.phasesList) {
+            phasesDurations.add(phase.durationSec)
+        }
+        intent.putIntegerArrayListExtra("phasesDurations", phasesDurations)*/
         startService(intent)
         //startTimer()
     }
