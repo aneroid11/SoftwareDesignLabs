@@ -44,7 +44,7 @@ class TimerService : Service() {
     private var timer = Timer()
     private var updateTimer = Timer()
     private var isTimerRunning: Boolean = false
-    private var timeRemaining: Int = 0
+    private var timeRemaining: Int = -1
 
     private var currRepetition: Int = 0
     private var numRepetitions: Int = 1
@@ -63,8 +63,10 @@ class TimerService : Service() {
     override fun onDestroy() {
         Log.d("TimerService", "timer service destroy")
 
+        // we NEED to cancel ALL timers to properly destroy the service
         timer.cancel()
         updateTimer.cancel()
+        //
 
         super.onDestroy()
     }
@@ -83,7 +85,9 @@ class TimerService : Service() {
         val durations = intent.getIntegerArrayListExtra("phasesDurations")
         if (durations != null) {
             phasesDurations = durations
-            timeRemaining = phasesDurations[0]
+
+            if (timeRemaining < 0) { timeRemaining = phasesDurations[0] }
+            //timeRemaining = phasesDurations[0]
         }
 
         when (action) {
@@ -134,6 +138,24 @@ class TimerService : Service() {
         sendBroadcast(statusIntent)
     }
 
+    private fun decreaseCurrPhaseIndex() {
+        Log.d("TimerService", "decreaseCurrPhaseIndex()")
+
+        currPhaseIndex--
+
+        if (currPhaseIndex < 0) {
+            currPhaseIndex = 0
+        }
+        else {
+            timeRemaining = phasesDurations[currPhaseIndex]
+            val intent = Intent()
+            intent.action = TIMER_PHASE
+            intent.putExtra(CURRENT_PHASE, currPhaseIndex)
+            intent.putExtra(TIME_REMAINING, timeRemaining)
+            sendBroadcast(intent)
+        }
+    }
+
     private fun increaseCurrPhaseIndex() {
         currPhaseIndex++
         if (currPhaseIndex >= phasesDurations.size) {
@@ -142,6 +164,7 @@ class TimerService : Service() {
             if (currRepetition >= numRepetitions) {
                 Log.d("TimerService", "finish training")
                 trainingFinished = true
+                isTimerRunning = false
                 timeRemaining = 0
                 timer.cancel()
             }
@@ -155,9 +178,10 @@ class TimerService : Service() {
         }
 
         val intent = Intent()
-        intent.action = TIMER_PHASE
+        intent.action = TIMER_STATUS
         intent.putExtra(CURRENT_PHASE, currPhaseIndex)
         intent.putExtra(TIME_REMAINING, timeRemaining)
+        intent.putExtra(IS_TIMER_RUNNING, isTimerRunning)
         sendBroadcast(intent)
     }
 
@@ -223,6 +247,7 @@ class TimerService : Service() {
             return
         }
 
+        decreaseCurrPhaseIndex()
         Log.d("TimerService", "switch to prev phase")
     }
 
