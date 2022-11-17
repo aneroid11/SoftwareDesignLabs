@@ -29,6 +29,8 @@ class TimerActivity : ActivityBase() {
     var currPhase: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("TimerActivity", "onCreate()")
+
         seqPos = intent.getIntExtra("currentSequencePosition", 0)
         currSeq = sequencesViewModel.sequencesList.value!![seqPos]
 
@@ -203,6 +205,7 @@ class TimerActivity : ActivityBase() {
     private fun initializeTimer() {
         val intent = Intent(this, TimerService::class.java)
         intent.putExtra(TimerService.TIMER_ACTION, TimerService.INITIALIZE)
+        intent.putExtra("currentSequencePosition", seqPos)
         intent.putExtra("numRepetitions", currSeq.numRepetitions)
         val phasesDurations = arrayListOf<Int>()
         for (phase in currSeq.phasesList) {

@@ -52,6 +52,7 @@ class TimerService : Service() {
     private var currRepetition: Int = 0
     private var numRepetitions: Int = 1
 
+    private var currentSequencePosition: Int = 0
     private lateinit var phasesDurations: ArrayList<Int>
     //private var currPhaseIndex = -1
     private var currPhaseIndex = 0
@@ -102,6 +103,7 @@ class TimerService : Service() {
 
         when (action) {
             INITIALIZE -> {
+                currentSequencePosition = intent.getIntExtra("currentSequencePosition", 0)
                 numRepetitions = intent.getIntExtra("numRepetitions", -1)
                 phasesDurations = intent.getIntegerArrayListExtra("phasesDurations")!!
                 if (timeRemaining < 0) { timeRemaining = phasesDurations[0] }
@@ -267,19 +269,25 @@ class TimerService : Service() {
     }
 
     private fun buildNotification(): Notification {
-        val title = if (isTimerRunning) {
+        /*val title = if (isTimerRunning) {
             "Timer is running!"
         } else {
             "Timer is paused!"
-        }
+        }*/
 
         /*val hours: Int = timeElapsed.div(60).div(60)
         val minutes: Int = timeElapsed.div(60)
         val seconds: Int = timeElapsed.rem(60)*/
 
         val intent = Intent(this, TimerActivity::class.java)
+        intent.putExtra("currentSequencePosition", currentSequencePosition)
         //val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        //val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
         //clickPendingIntent()
 
