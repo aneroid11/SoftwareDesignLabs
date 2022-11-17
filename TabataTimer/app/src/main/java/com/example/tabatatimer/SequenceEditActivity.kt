@@ -46,11 +46,12 @@ class SequenceEditActivity : ActivityBase() {
 
         val phasesRecyclerView: RecyclerView = findViewById(R.id.phases_recyclerview)
         phasesRecyclerView.layoutManager = LinearLayoutManager(this)
-        phasesRecyclerView.adapter =
-            PhaseRecyclerAdapter(
-                currSeq,
-                this
-            )
+        val adapter = PhaseRecyclerAdapter(
+            currSeq,
+            this
+        )
+        phasesRecyclerView.adapter = adapter
+
 
         /*val saveButton: Button = findViewById(R.id.save_sequence_button)
         saveButton.setOnClickListener {
@@ -116,7 +117,10 @@ class SequenceEditActivity : ActivityBase() {
 
         val addPhaseButton: Button = findViewById(R.id.add_phase_button)
         addPhaseButton.setOnClickListener {
-
+            currSeq.phasesList.add(
+                Phase("work", 10)
+            )
+            adapter.notifyItemInserted(currSeq.phasesList.size - 1)
         }
     }
 
