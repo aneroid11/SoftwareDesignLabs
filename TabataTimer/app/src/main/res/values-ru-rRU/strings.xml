@@ -30,6 +30,7 @@
     <string name="save">Сохранить</string>
     <string name="training">Тренировка</string>
     <string name="cannot_set_duration_less">Невозможно установить продолжительность меньше 1!</string>
+    <string name="cannot_set_rep_num_less">Невозможно установить количество повторений меньше 1!</string>
     <string name="run">Запуск</string>
     <string name="pause">Стоп</string>
     <string name="resume">Старт</string>

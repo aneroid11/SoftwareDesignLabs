@@ -76,6 +76,25 @@ class SequenceEditActivity : ActivityBase() {
 
         val repetitionsNumTextView: TextView = findViewById(R.id.sequence_repetitions_number_textview)
         repetitionsNumTextView.text = currSeq.numRepetitions.toString()
+
+        val increaseRepNumButton: Button = findViewById(R.id.increase_reps_button)
+        increaseRepNumButton.setOnClickListener {
+            currSeq.numRepetitions++
+            if (currSeq.numRepetitions > 99) { currSeq.numRepetitions = 99 }
+
+            repetitionsNumTextView.text = currSeq.numRepetitions.toString()
+        }
+
+        val decreaseRepNumButton: Button = findViewById(R.id.decrease_reps_button)
+        decreaseRepNumButton.setOnClickListener {
+            currSeq.numRepetitions--
+            if (currSeq.numRepetitions < 1) {
+                currSeq.numRepetitions = 1
+                Toast.makeText(this, getString(R.string.cannot_set_rep_num_less), Toast.LENGTH_SHORT).show()
+            }
+
+            repetitionsNumTextView.text = currSeq.numRepetitions.toString()
+        }
         /*val repetitionsEditText: EditText = findViewById(R.id.sequence_repetitions_edittext)
         repetitionsEditText.setText(currSeq.numRepetitions.toString())
         repetitionsEditText.addTextChangedListener(object : TextWatcher {
