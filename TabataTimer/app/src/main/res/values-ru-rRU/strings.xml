@@ -3,7 +3,7 @@
     <string name="enable_night_theme">Включить ночную тему</string>
     <string name="select_font_size">Выбрать размер шрифта</string>
     <string name="clear">Очистить</string>
-    <string name="press_this_to_clear_data">Нажмите, чтобы очистить все данные (все настройки также сбросятся)</string>
+    <string name="press_this_to_clear_data">Нажмите, чтобы очистить список тренировок</string>
     <string name="select_language">Выбрать язык</string>
     <string name="small">Маленький</string>
     <string name="medium">Средний</string>

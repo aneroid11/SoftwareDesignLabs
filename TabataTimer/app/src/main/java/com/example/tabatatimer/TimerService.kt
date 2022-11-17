@@ -29,13 +29,13 @@ class TimerService : Service() {
         const val IS_TIMER_RUNNING = "IS_TIMER_RUNNING"
 
         // Intent Actions
-        const val TIMER_TICK = "STOPWATCH_TICK"
-        const val TIMER_STATUS = "STOPWATCH_STATUS"
+        const val TIMER_TICK = "TIMER_TICK"
+        const val TIMER_STATUS = "TIMER_STATUS"
     }
 
     private lateinit var notificationManager: NotificationManager
     private lateinit var timer: Timer
-    private lateinit var updateTimer: Timer
+    private val updateTimer = Timer()
     private var isTimerRunning: Boolean = false
     private var timeElapsed: Int = 0
 
@@ -161,7 +161,7 @@ class TimerService : Service() {
         if (isTimerRunning) {
             startForeground(1, buildNotification())
 
-            updateTimer = Timer()
+            //updateTimer = Timer()
 
             updateTimer.scheduleAtFixedRate(object : TimerTask() {
                 override fun run() {
