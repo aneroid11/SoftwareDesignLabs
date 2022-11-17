@@ -113,6 +113,11 @@ class SequenceEditActivity : ActivityBase() {
                 if (currSeq.numRepetitions == 0) { currSeq.numRepetitions = 1 }
             }
         })*/
+
+        val addPhaseButton: Button = findViewById(R.id.add_phase_button)
+        addPhaseButton.setOnClickListener {
+
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
