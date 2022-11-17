@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -22,8 +23,10 @@ class TimerActivity : ActivityBase() {
 
     private lateinit var timerStatusReceiver: BroadcastReceiver
     private lateinit var timerTimeReceiver: BroadcastReceiver
+    private lateinit var timerCurrPhaseReceiver: BroadcastReceiver
 
     private var isTimerRunning: Boolean = false
+    var currPhase: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         seqPos = intent.getIntExtra("currentSequencePosition", 0)
@@ -77,6 +80,7 @@ class TimerActivity : ActivityBase() {
         super.onPause()
         unregisterReceiver(timerStatusReceiver)
         unregisterReceiver(timerTimeReceiver)
+        unregisterReceiver(timerCurrPhaseReceiver)
         // Moving the service to foreground when the app is in background / not visible
         moveToForeground()
     }
@@ -94,9 +98,11 @@ class TimerActivity : ActivityBase() {
                 val isRunning = intent?.getBooleanExtra(TimerService.IS_TIMER_RUNNING, false)!!
                 isTimerRunning = isRunning
                 val timeRemaining = intent.getIntExtra(TimerService.TIME_REMAINING, 0)
+                val currPhaseIndex = intent.getIntExtra(TimerService.CURRENT_PHASE, 0)
 
-                updateLayout(isTimerRunning)
+                updateButtons(isTimerRunning)
                 updateTimerValue(timeRemaining)
+                updatePhase(currPhaseIndex)
             }
         }
         registerReceiver(timerStatusReceiver, statusFilter)
@@ -111,6 +117,18 @@ class TimerActivity : ActivityBase() {
             }
         }
         registerReceiver(timerTimeReceiver, timeFilter)
+
+        val phaseFilter = IntentFilter()
+        phaseFilter.addAction(TimerService.TIMER_PHASE)
+        timerCurrPhaseReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                val currPhaseIndex = intent!!.getIntExtra(TimerService.CURRENT_PHASE, 0)
+                updatePhase(currPhaseIndex)
+                //val timeRemaining = intent?.getIntExtra(TimerService.TIME_REMAINING, 0)!!
+                //updateTimerValue(timeRemaining)
+            }
+        }
+        registerReceiver(timerCurrPhaseReceiver, phaseFilter)
     }
 
     private fun updateTimerValue(value: Int) {
@@ -123,7 +141,7 @@ class TimerActivity : ActivityBase() {
         //timerValueTextView.text = "${"%02d".format(hours)}:${"%02d".format(minutes)}:${"%02d".format(seconds)}"
     }
 
-    private fun updateLayout(isTimerRunning: Boolean) {
+    private fun updateButtons(isTimerRunning: Boolean) {
         if (isTimerRunning) {
             val pauseButton: Button =
                 findViewById(R.id.timer_pause_button)
@@ -139,6 +157,14 @@ class TimerActivity : ActivityBase() {
                 ContextCompat.getDrawable(this, R.drawable.ic_play)
             binding.resetImageView.visibility = View.VISIBLE*/
         }
+    }
+
+    private fun updatePhase(phaseIndex: Int) {
+        currPhase = phaseIndex
+        /*Log.d("TimerActivity", "current phase: $phaseIndex")
+        val phaseRecyclerView: RecyclerView = findViewById(R.id.timer_phases_recyclerview)
+        val phaseAdapter: TimerPhaseRecyclerAdapter = phaseRecyclerView.adapter as TimerPhaseRecyclerAdapter
+        phaseAdapter.setCurrentPhase(phaseIndex)*/
     }
 
     private fun getTimerStatus() {

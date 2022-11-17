@@ -28,9 +28,11 @@ class TimerService : Service() {
         const val TIMER_ACTION = "TIMER_ACTION"
         const val TIME_REMAINING = "TIME_REMAINING"
         const val IS_TIMER_RUNNING = "IS_TIMER_RUNNING"
+        const val CURRENT_PHASE = "CURRENT_PHASE"
 
         // Intent Actions
         const val TIMER_TICK = "TIMER_TICK"
+        const val TIMER_PHASE = "TIMER_PHASE"
         const val TIMER_STATUS = "TIMER_STATUS"
     }
 
@@ -111,6 +113,7 @@ class TimerService : Service() {
         statusIntent.action = TIMER_STATUS
         statusIntent.putExtra(IS_TIMER_RUNNING, isTimerRunning)
         statusIntent.putExtra(TIME_REMAINING, timeRemaining)
+        statusIntent.putExtra(CURRENT_PHASE, currPhaseIndex)
         sendBroadcast(statusIntent)
     }
 
@@ -122,7 +125,10 @@ class TimerService : Service() {
         timer = Timer()
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
-                if (trainingFinished) { return }
+                if (trainingFinished) {
+                    Log.d("TimerService", "training already finished")
+                    return
+                }
 
                 if (currPhaseIndex < 0) {
                     currPhaseIndex++
@@ -137,6 +143,7 @@ class TimerService : Service() {
                             currRepetition++
 
                             if (currRepetition >= numRepetitions) {
+                                Log.d("TimerService", "finish training")
                                 trainingFinished = true
                             }
                             else {
@@ -147,15 +154,12 @@ class TimerService : Service() {
                         else {
                             timeRemaining = phasesDurations[currPhaseIndex]
                         }
-                    }
 
-                    /*if (timeRemaining < 1 && currRepetition < numRepetitions) {
-                        currRepetition++
-                        timeRemaining = 10
+                        val intent = Intent()
+                        intent.action = TIMER_PHASE
+                        intent.putExtra(CURRENT_PHASE, currPhaseIndex)
+                        sendBroadcast(intent)
                     }
-                    else if (timeRemaining < 1) {
-                        timeRemaining = 0
-                    }*/
                 }
 
                 val timerIntent = Intent()

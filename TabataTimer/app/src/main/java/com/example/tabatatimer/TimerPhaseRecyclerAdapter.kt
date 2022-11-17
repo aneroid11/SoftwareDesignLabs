@@ -1,5 +1,6 @@
 package com.example.tabatatimer
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,10 @@ class TimerPhaseRecyclerAdapter(
         val currPhaseType: String = currSequence.phasesList[position].type
         val phaseName = activity.getString(activity.resources.getIdentifier(currPhaseType, "string", activity.packageName))
         holder.phaseButton.text = (position + 1).toString() + ". " + phaseName
+
+        if (position == activity.currPhase) {
+            holder.phaseButton.setBackgroundColor(Color.rgb(255, 0, 0))
+        }
     }
 
     override fun getItemCount(): Int {
