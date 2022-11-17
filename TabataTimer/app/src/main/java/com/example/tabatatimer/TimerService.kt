@@ -55,7 +55,9 @@ class TimerService : Service() {
         val action = intent?.getStringExtra(TIMER_ACTION)
         Log.d("TimerService", "onStartCommand Action: $action")
 
-        numRepetitions = intent!!.getIntExtra("numRepetitions", 1)
+        val oldNumRepetitions = numRepetitions
+        numRepetitions = intent!!.getIntExtra("numRepetitions", -1)
+        if (numRepetitions < 0) { numRepetitions = oldNumRepetitions }
 
         when (action) {
             START -> startTimer()
@@ -106,11 +108,18 @@ class TimerService : Service() {
         timer = Timer()
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
-                val timerIntent = Intent()
-                timerIntent.action = TIMER_TICK
-
                 timeRemaining--
 
+                if (timeRemaining < 1 && currRepetition < numRepetitions) {
+                    currRepetition++
+                    timeRemaining = 10
+                }
+                else if (timeRemaining < 1) {
+                    timeRemaining = 0
+                }
+
+                val timerIntent = Intent()
+                timerIntent.action = TIMER_TICK
                 timerIntent.putExtra(TIME_REMAINING, timeRemaining)
                 sendBroadcast(timerIntent)
             }
