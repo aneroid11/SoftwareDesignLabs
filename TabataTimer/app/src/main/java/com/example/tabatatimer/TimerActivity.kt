@@ -67,13 +67,18 @@ class TimerActivity : ActivityBase() {
     }
 
     private fun stopTimerService() {
-        val timerServiceIntent = Intent(this, TimerService::class.java)
+        Log.d("TimerActivity", "Stop timer service")
+
         //resetTimer()
-        stopService(timerServiceIntent)
+        //pauseTimer()
+        val intent = Intent(this, TimerService::class.java)
+        //intent.putExtra(TimerService.TIMER_ACTION, TimerService.STOP)
+        //startService(intent)
+        stopService(intent)
     }
 
     private fun handleBackPressed() {
-        stopTimerService()
+        //stopTimerService()
 
         val context = this
         val intent = Intent(context, MainActivity::class.java)
@@ -143,8 +148,8 @@ class TimerActivity : ActivityBase() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 val currPhaseIndex = intent!!.getIntExtra(TimerService.CURRENT_PHASE, 0)
                 updatePhase(currPhaseIndex)
-                //val timeRemaining = intent?.getIntExtra(TimerService.TIME_REMAINING, 0)!!
-                //updateTimerValue(timeRemaining)
+                val timeRemaining = intent.getIntExtra(TimerService.TIME_REMAINING, 0)
+                updateTimerValue(timeRemaining)
             }
         }
         registerReceiver(timerCurrPhaseReceiver, phaseFilter)

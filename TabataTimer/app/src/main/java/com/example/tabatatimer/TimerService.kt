@@ -18,6 +18,7 @@ class TimerService : Service() {
         const val CHANNEL_ID = "Timer_Notifications"
 
         // Service Actions
+        const val STOP = "STOP"
         const val START = "START"
         const val PAUSE = "PAUSE"
         const val RESET = "RESET"
@@ -59,6 +60,15 @@ class TimerService : Service() {
         return null
     }
 
+    override fun onDestroy() {
+        Log.d("TimerService", "timer service destroy")
+
+        timer.cancel()
+        updateTimer.cancel()
+
+        super.onDestroy()
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         createChannel()
         getNotificationManager()
@@ -77,6 +87,10 @@ class TimerService : Service() {
         }
 
         when (action) {
+            STOP -> {
+                stopSelf()
+                return START_NOT_STICKY
+            }
             START -> startTimer()
             PAUSE -> pauseTimer()
             RESET -> resetTimer()
@@ -87,7 +101,7 @@ class TimerService : Service() {
             SWITCH_TO_PREV_PHASE -> switchToPrevPhase()
         }
 
-        return START_STICKY
+        return START_NOT_STICKY
     }
 
     private fun createChannel() {
@@ -143,6 +157,7 @@ class TimerService : Service() {
         val intent = Intent()
         intent.action = TIMER_PHASE
         intent.putExtra(CURRENT_PHASE, currPhaseIndex)
+        intent.putExtra(TIME_REMAINING, timeRemaining)
         sendBroadcast(intent)
     }
 
@@ -187,7 +202,9 @@ class TimerService : Service() {
 
     private fun resetTimer() {
         pauseTimer()
-        timeRemaining = 10
+        currRepetition = 0
+        currPhaseIndex = 0
+        timeRemaining = phasesDurations[0]
         sendStatus()
     }
 
@@ -207,8 +224,6 @@ class TimerService : Service() {
         }
 
         Log.d("TimerService", "switch to prev phase")
-
-
     }
 
     private fun buildNotification(): Notification {
