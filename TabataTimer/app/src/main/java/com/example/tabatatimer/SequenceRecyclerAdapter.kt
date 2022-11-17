@@ -89,9 +89,6 @@ class SequenceRecyclerAdapter(
 
         holder.deleteButton.setOnClickListener {
             seqViewModel.deleteSequence(position)
-
-            //android.R.drawable.ic_menu_directions
-            //android.R.drawable.arrow_up_float
             seqViewModel.writeSequencesToFile()
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, seqList.size)

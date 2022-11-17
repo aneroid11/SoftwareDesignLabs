@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import java.util.*
 
 class PhaseRecyclerAdapter(
     private var currSequence: Sequence,
@@ -21,6 +22,8 @@ class PhaseRecyclerAdapter(
         val increaseDurationButton: Button = itemView.findViewById(R.id.increase_duration_button)
         val decreaseDurationButton: Button = itemView.findViewById(R.id.decrease_duration_button)
         val deletePhaseButton: Button = itemView.findViewById(R.id.delete_phase_button)
+        val moveUpButton: Button = itemView.findViewById(R.id.move_phase_up_button)
+        val moveDownButton: Button = itemView.findViewById(R.id.move_phase_down_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhaseViewHolder {
@@ -31,6 +34,12 @@ class PhaseRecyclerAdapter(
         val phaseViewHolder = PhaseViewHolder(itemView)
         //phaseViewHolder.setListenersForEditTexts()
         return phaseViewHolder
+    }
+
+    private fun swapItems(pos1: Int, pos2: Int) {
+        Collections.swap(currSequence.phasesList, pos1, pos2)
+        notifyItemMoved(pos1, pos2)
+        notifyItemRangeChanged(pos1, pos2)
     }
 
     override fun onBindViewHolder(holder: PhaseViewHolder, position: Int) {
@@ -64,6 +73,22 @@ class PhaseRecyclerAdapter(
             currSequence.phasesList.removeAt(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, currSequence.phasesList.size)
+        }
+
+        holder.moveUpButton.setOnClickListener {
+            if (position < 1) {
+                Toast.makeText(activity, activity.getString(R.string.already_on_top), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            swapItems(position, position - 1)
+        }
+
+        holder.moveDownButton.setOnClickListener {
+            if (position >= currSequence.phasesList.size) {
+                Toast.makeText(activity, activity.getString(R.string.already_on_bottom), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            swapItems(position, position + 1)
         }
 
         val phasesTypes = listOf("warmup", "work", "rest", "cooldown")

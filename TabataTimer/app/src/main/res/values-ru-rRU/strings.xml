@@ -39,4 +39,6 @@
     <string name="training_already_finished">Тренировка уже закончена!</string>
     <string name="add_phase">Добавить фазу</string>
     <string name="cannot_delete_all_phases">Нельзя удалить все фазы!</string>
+    <string name="already_on_top">Эта фаза уже наверху!</string>
+    <string name="already_on_bottom">Эта фаза уже внизу!</string>
 </resources>
