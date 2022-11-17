@@ -147,6 +147,12 @@ class TimerActivity : ActivityBase() {
 
         intent.putExtra("numRepetitions", currSeq.numRepetitions)
 
+        val phasesDurations = arrayListOf<Int>()
+        for (phase in currSeq.phasesList) {
+            phasesDurations.add(phase.durationSec)
+        }
+        intent.putIntegerArrayListExtra("phasesDurations", phasesDurations)
+
         startService(intent)
         //startTimer()
     }

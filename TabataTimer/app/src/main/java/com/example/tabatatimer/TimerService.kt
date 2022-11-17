@@ -38,10 +38,13 @@ class TimerService : Service() {
     private var timer = Timer()
     private var updateTimer = Timer()
     private var isTimerRunning: Boolean = false
-    private var timeRemaining: Int = 10
+    private var timeRemaining: Int = 0
 
-    private var currRepetition: Int = 0
+    private var currRepetition: Int = 1
     private var numRepetitions: Int = 1
+
+    private lateinit var phasesDurations: ArrayList<Int>
+    private var currPhaseIndex = -1
 
     override fun onBind(intent: Intent?): IBinder? {
         Log.d("TimerService", "TimerService onBind()")
@@ -58,6 +61,11 @@ class TimerService : Service() {
         val oldNumRepetitions = numRepetitions
         numRepetitions = intent!!.getIntExtra("numRepetitions", -1)
         if (numRepetitions < 0) { numRepetitions = oldNumRepetitions }
+
+        val durations = intent.getIntegerArrayListExtra("phasesDurations")
+        if (durations != null) {
+            phasesDurations = durations
+        }
 
         when (action) {
             START -> startTimer()
@@ -108,14 +116,20 @@ class TimerService : Service() {
         timer = Timer()
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
-                timeRemaining--
-
-                if (timeRemaining < 1 && currRepetition < numRepetitions) {
-                    currRepetition++
-                    timeRemaining = 10
+                if (currPhaseIndex < 0) {
+                    currPhaseIndex++
+                    timeRemaining = phasesDurations[currPhaseIndex]
                 }
-                else if (timeRemaining < 1) {
-                    timeRemaining = 0
+                else {
+                    timeRemaining--
+
+                    /*if (timeRemaining < 1 && currRepetition < numRepetitions) {
+                        currRepetition++
+                        timeRemaining = 10
+                    }
+                    else if (timeRemaining < 1) {
+                        timeRemaining = 0
+                    }*/
                 }
 
                 val timerIntent = Intent()
