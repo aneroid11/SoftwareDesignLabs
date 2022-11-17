@@ -160,7 +160,14 @@ class TimerActivity : ActivityBase() {
     }
 
     private fun updatePhase(phaseIndex: Int) {
+        //currPhase = if (phaseIndex >= currSeq.phasesList.size) { 0 } else { phaseIndex }
         currPhase = phaseIndex
+        if (currPhase < 0) { currPhase = 0 }
+
+        Log.d("TimerActivity", "current phase: $currPhase")
+
+        val phaseRecyclerView: RecyclerView = findViewById(R.id.timer_phases_recyclerview)
+        phaseRecyclerView.adapter!!.notifyDataSetChanged()
         /*Log.d("TimerActivity", "current phase: $phaseIndex")
         val phaseRecyclerView: RecyclerView = findViewById(R.id.timer_phases_recyclerview)
         val phaseAdapter: TimerPhaseRecyclerAdapter = phaseRecyclerView.adapter as TimerPhaseRecyclerAdapter

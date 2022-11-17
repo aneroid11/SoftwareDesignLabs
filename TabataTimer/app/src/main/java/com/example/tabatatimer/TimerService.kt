@@ -145,6 +145,7 @@ class TimerService : Service() {
                             if (currRepetition >= numRepetitions) {
                                 Log.d("TimerService", "finish training")
                                 trainingFinished = true
+                                timer.cancel()
                             }
                             else {
                                 currPhaseIndex = 0

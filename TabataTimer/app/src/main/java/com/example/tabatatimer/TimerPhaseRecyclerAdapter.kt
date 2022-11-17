@@ -31,6 +31,9 @@ class TimerPhaseRecyclerAdapter(
         if (position == activity.currPhase) {
             holder.phaseButton.setBackgroundColor(Color.rgb(255, 0, 0))
         }
+        else {
+            holder.phaseButton.setBackgroundColor(Color.rgb(50, 50, 50))
+        }
     }
 
     override fun getItemCount(): Int {
