@@ -91,7 +91,7 @@ class SequenceRecyclerAdapter(
             seqViewModel.deleteSequence(position)
             seqViewModel.writeSequencesToFile()
             notifyItemRemoved(position)
-            notifyItemRangeChanged(position, seqList.size);
+            notifyItemRangeChanged(position, seqList.size)
         }
         holder.editButton.setOnClickListener {
             val intent = Intent(activityContext, SequenceEditActivity::class.java)

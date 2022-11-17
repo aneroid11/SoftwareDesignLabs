@@ -17,37 +17,10 @@ class PhaseRecyclerAdapter(
 
     class PhaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val typeRadioGroup: RadioGroup = itemView.findViewById(R.id.phase_type_selector)
-        //val descrEditText: EditText = itemView.findViewById(R.id.phase_descr_edittext)
         val durationTextView: TextView = itemView.findViewById(R.id.phase_duration_sec_textview)
         val increaseDurationButton: Button = itemView.findViewById(R.id.increase_duration_button)
         val decreaseDurationButton: Button = itemView.findViewById(R.id.decrease_duration_button)
-
-        /*fun setListenersForEditTexts() {
-            descrEditText.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable) {}
-                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                    Log.d("PhaseRecyclerAdapter", "description changed in position: $absoluteAdapterPosition")
-                    //phase.description = s.toString()
-                }
-            })
-            durationEditText.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable) {}
-                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                    /*try {
-                        phase.durationSec = s.toString().toInt()
-                    }
-                    catch (e: Exception) {
-                        phase.durationSec = 1
-                    }
-
-                    if (phase.durationSec == 0) { phase.durationSec = 1 }*/
-                }
-            })
-        }*/
+        val deletePhaseButton: Button = itemView.findViewById(R.id.delete_phase_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhaseViewHolder {
@@ -80,6 +53,17 @@ class PhaseRecyclerAdapter(
             }
 
             holder.durationTextView.text = phase.durationSec.toString()
+        }
+
+        holder.deletePhaseButton.setOnClickListener {
+            if (currSequence.phasesList.size < 2) {
+                Toast.makeText(activity, activity.getString(R.string.cannot_delete_all_phases), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            currSequence.phasesList.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, currSequence.phasesList.size)
         }
 
         val phasesTypes = listOf("warmup", "work", "rest", "cooldown")

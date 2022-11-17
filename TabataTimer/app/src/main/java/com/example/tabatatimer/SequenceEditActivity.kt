@@ -52,17 +52,6 @@ class SequenceEditActivity : ActivityBase() {
         )
         phasesRecyclerView.adapter = adapter
 
-
-        /*val saveButton: Button = findViewById(R.id.save_sequence_button)
-        saveButton.setOnClickListener {
-            saveCurrentSequence()
-            onBackPressedDispatcher.onBackPressed()
-
-            val intent = Intent(this, MainActivity::class.java)
-            this.startActivity(intent)
-            finish()
-        }*/
-
         val sequenceTitleEdittext: EditText = findViewById(R.id.sequence_title_edittext)
         sequenceTitleEdittext.setText(currSeq.title)
         sequenceTitleEdittext.addTextChangedListener(object : TextWatcher {
@@ -96,24 +85,6 @@ class SequenceEditActivity : ActivityBase() {
 
             repetitionsNumTextView.text = currSeq.numRepetitions.toString()
         }
-        /*val repetitionsEditText: EditText = findViewById(R.id.sequence_repetitions_edittext)
-        repetitionsEditText.setText(currSeq.numRepetitions.toString())
-        repetitionsEditText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
-                try {
-                    currSeq.numRepetitions = s.toString().toInt()
-                }
-                catch (e: Exception) {
-                    currSeq.numRepetitions = 1
-                }
-
-                if (currSeq.numRepetitions == 0) { currSeq.numRepetitions = 1 }
-            }
-        })*/
 
         val addPhaseButton: Button = findViewById(R.id.add_phase_button)
         addPhaseButton.setOnClickListener {
