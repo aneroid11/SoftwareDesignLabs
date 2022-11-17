@@ -35,7 +35,7 @@ class TimerService : Service() {
 
     private lateinit var notificationManager: NotificationManager
     private lateinit var timer: Timer
-    private val updateTimer = Timer()
+    private var updateTimer = Timer()
     private var isTimerRunning: Boolean = false
     private var timeElapsed: Int = 0
 
@@ -135,7 +135,10 @@ class TimerService : Service() {
         val seconds: Int = timeElapsed.rem(60)
 
         val intent = Intent(this, MainActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        //val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+        //clickPendingIntent()
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(title)
@@ -161,8 +164,7 @@ class TimerService : Service() {
         if (isTimerRunning) {
             startForeground(1, buildNotification())
 
-            //updateTimer = Timer()
-
+            updateTimer = Timer()
             updateTimer.scheduleAtFixedRate(object : TimerTask() {
                 override fun run() {
                     updateNotification()
