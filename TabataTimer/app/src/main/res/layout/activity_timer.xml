@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="100sp"
         android:textStyle="bold"
-        android:text="99"
+        android:text=""
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/timer_phases_recyclerview"
         app:layout_constraintStart_toStartOf="parent"

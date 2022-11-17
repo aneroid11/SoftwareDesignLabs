@@ -21,7 +21,7 @@
         android:id="@+id/sequence_title_edittext"
         android:inputType="text"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:maxLength="100"
         style="?textTitle"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +38,42 @@
         app:layout_constraintTop_toBottomOf="@id/sequence_title_edittext"
         style="?textBody" />
 
+    <Button
+        style="?textTitle"
+        android:id="@+id/decrease_reps_button"
+        android:text="-"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/sequence_repetitions_number_textview"
+        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_textview"
+        app:layout_constraintBottom_toTopOf="@id/color_picker" />
+
+    <TextView
+        android:id="@+id/sequence_repetitions_number_textview"
+        style="?textTitle"
+        android:text="99"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@id/color_picker"
+        app:layout_constraintEnd_toStartOf="@id/increase_reps_button"
+        app:layout_constraintStart_toEndOf="@id/decrease_reps_button"
+        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_textview" />
+
+    <Button
+        style="?textTitle"
+        android:id="@+id/increase_reps_button"
+        android:text="+"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/sequence_repetitions_number_textview"
+        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_textview"
+        app:layout_constraintBottom_toTopOf="@id/color_picker" />
+
+    <!--
     <EditText
         android:id="@+id/sequence_repetitions_edittext"
         android:layout_width="300dp"
@@ -49,6 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_textview"
         app:layout_constraintBottom_toTopOf="@id/color_picker"/>
+    -->
 
     <!--
     <com.madrapps.pikolo.HSLColorPicker
@@ -66,7 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_edittext"
+        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_number_textview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 

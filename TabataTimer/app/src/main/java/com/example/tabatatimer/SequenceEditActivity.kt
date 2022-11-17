@@ -9,10 +9,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.RadioGroup
+import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -77,7 +74,9 @@ class SequenceEditActivity : ActivityBase() {
             }
         })
 
-        val repetitionsEditText: EditText = findViewById(R.id.sequence_repetitions_edittext)
+        val repetitionsNumTextView: TextView = findViewById(R.id.sequence_repetitions_number_textview)
+        repetitionsNumTextView.text = currSeq.numRepetitions.toString()
+        /*val repetitionsEditText: EditText = findViewById(R.id.sequence_repetitions_edittext)
         repetitionsEditText.setText(currSeq.numRepetitions.toString())
         repetitionsEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
@@ -94,7 +93,7 @@ class SequenceEditActivity : ActivityBase() {
 
                 if (currSeq.numRepetitions == 0) { currSeq.numRepetitions = 1 }
             }
-        })
+        })*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
