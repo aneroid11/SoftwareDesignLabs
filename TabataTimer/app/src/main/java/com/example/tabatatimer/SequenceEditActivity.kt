@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.Menu
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
@@ -92,6 +93,11 @@ class SequenceEditActivity : ActivityBase() {
                 if (currSeq.numRepetitions == 0) { currSeq.numRepetitions = 1 }
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.sequence_edit_activity_menu, menu)
+        return true
     }
 
     private fun setCurrentColor() {
