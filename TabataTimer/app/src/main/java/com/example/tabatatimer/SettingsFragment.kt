@@ -50,7 +50,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun deleteAllData() {
-        val prefs: SharedPreferences =
+        /*val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
         val editor: SharedPreferences.Editor =
             prefs.edit()
@@ -61,7 +61,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         editor.commit()
 
         updateTheme()
-        updateLanguage("en")
+        updateLanguage("en")*/
 
         val file = File(requireContext().filesDir, "sequences.json")
         file.delete()

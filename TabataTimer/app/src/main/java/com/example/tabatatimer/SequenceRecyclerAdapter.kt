@@ -54,7 +54,7 @@ class SequenceRecyclerAdapter(
     private fun getTotalTimeInMinutes(seconds: Int): String {
         val minutes = seconds / 60
         val restSeconds = seconds - minutes * 60
-        return String.format("%d:%d", minutes, restSeconds)
+        return String.format("%02d:%02d", minutes, restSeconds)
     }
 
     private fun getPhasesListText(seq: Sequence): String {
