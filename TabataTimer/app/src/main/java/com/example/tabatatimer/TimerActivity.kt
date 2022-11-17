@@ -44,10 +44,19 @@ class TimerActivity : ActivityBase() {
             this
         )
 
-        val pauseButton: Button =
-            findViewById(R.id.timer_pause_button)
+        val pauseButton: Button = findViewById(R.id.timer_pause_button)
         pauseButton.setOnClickListener {
             if (isTimerRunning) { pauseTimer() } else { startTimer() }
+        }
+
+        val prevPhaseButton: Button = findViewById(R.id.timer_back_button)
+        prevPhaseButton.setOnClickListener {
+            setPrevTimerPhase()
+        }
+
+        val nextPhaseButton: Button = findViewById(R.id.timer_forth_button)
+        nextPhaseButton.setOnClickListener {
+            setNextTimerPhase()
         }
 
         onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
@@ -198,6 +207,18 @@ class TimerActivity : ActivityBase() {
 
         startService(intent)
         //startTimer()
+    }
+
+    private fun setNextTimerPhase() {
+        val intent = Intent(this, TimerService::class.java)
+        intent.putExtra(TimerService.TIMER_ACTION, TimerService.SWITCH_TO_NEXT_PHASE)
+        startService(intent)
+    }
+
+    private fun setPrevTimerPhase() {
+        val intent = Intent(this, TimerService::class.java)
+        intent.putExtra(TimerService.TIMER_ACTION, TimerService.SWITCH_TO_PREV_PHASE)
+        startService(intent)
     }
 
     private fun startTimer() {

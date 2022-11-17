@@ -23,6 +23,8 @@ class TimerService : Service() {
         const val GET_STATUS = "GET_STATUS"
         const val MOVE_TO_FOREGROUND = "MOVE_TO_FOREGROUND"
         const val MOVE_TO_BACKGROUND = "MOVE_TO_BACKGROUND"
+        const val SWITCH_TO_NEXT_PHASE = "SWITCH_TO_NEXT_PHASE"
+        const val SWITCH_TO_PREV_PHASE  = "SWITCH_TO_PREV_PHASE"
 
         // Intent Extras
         const val TIMER_ACTION = "TIMER_ACTION"
@@ -82,6 +84,8 @@ class TimerService : Service() {
             GET_STATUS -> sendStatus()
             MOVE_TO_FOREGROUND -> moveToForeground()
             MOVE_TO_BACKGROUND -> moveToBackground()
+            SWITCH_TO_NEXT_PHASE -> switchToNextPhase()
+            SWITCH_TO_PREV_PHASE -> switchToPrevPhase()
         }
 
         return START_STICKY
@@ -181,6 +185,14 @@ class TimerService : Service() {
         pauseTimer()
         timeRemaining = 10
         sendStatus()
+    }
+
+    private fun switchToNextPhase() {
+        Log.d("TimerService", "switch to next phase")
+    }
+
+    private fun switchToPrevPhase() {
+        Log.d("TimerService", "switch to prev phase")
     }
 
     private fun buildNotification(): Notification {
