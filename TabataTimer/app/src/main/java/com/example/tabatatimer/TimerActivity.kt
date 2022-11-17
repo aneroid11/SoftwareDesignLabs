@@ -53,6 +53,10 @@ class TimerActivity : ActivityBase() {
     }
 
     private fun handleBackPressed() {
+        val timerServiceIntent = Intent(this, TimerService::class.java)
+        resetTimer()
+        stopService(timerServiceIntent)
+
         val context = this
         val intent = Intent(context, MainActivity::class.java)
         context.startActivity(intent)

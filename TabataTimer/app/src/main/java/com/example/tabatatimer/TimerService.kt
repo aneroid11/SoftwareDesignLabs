@@ -34,7 +34,7 @@ class TimerService : Service() {
     }
 
     private lateinit var notificationManager: NotificationManager
-    private lateinit var timer: Timer
+    private var timer = Timer()
     private var updateTimer = Timer()
     private var isTimerRunning: Boolean = false
     private var timeElapsed: Int = 0
@@ -134,7 +134,7 @@ class TimerService : Service() {
         val minutes: Int = timeElapsed.div(60)
         val seconds: Int = timeElapsed.rem(60)
 
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, TimerActivity::class.java)
         //val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
