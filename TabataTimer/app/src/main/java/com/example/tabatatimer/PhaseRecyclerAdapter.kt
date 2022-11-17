@@ -38,8 +38,10 @@ class PhaseRecyclerAdapter(
 
     private fun swapItems(pos1: Int, pos2: Int) {
         Collections.swap(currSequence.phasesList, pos1, pos2)
-        notifyItemMoved(pos1, pos2)
-        notifyItemRangeChanged(pos1, pos2)
+        //notifyItemMoved(pos1, pos2)
+        val minPos = kotlin.math.min(pos1, pos2)
+        notifyItemRangeChanged(minPos, currSequence.phasesList.size)
+        //notifyItemRangeChanged(pos1, currSequence.phasesList.size)
     }
 
     override fun onBindViewHolder(holder: PhaseViewHolder, position: Int) {
@@ -76,6 +78,8 @@ class PhaseRecyclerAdapter(
         }
 
         holder.moveUpButton.setOnClickListener {
+            Log.d("PhaseRecyclerAdapter", "move up from $position")
+
             if (position < 1) {
                 Toast.makeText(activity, activity.getString(R.string.already_on_top), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -84,7 +88,9 @@ class PhaseRecyclerAdapter(
         }
 
         holder.moveDownButton.setOnClickListener {
-            if (position >= currSequence.phasesList.size) {
+            Log.d("PhaseRecyclerAdapter", "move down from $position")
+
+            if (position + 1 >= currSequence.phasesList.size) {
                 Toast.makeText(activity, activity.getString(R.string.already_on_bottom), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
