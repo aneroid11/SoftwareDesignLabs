@@ -1,5 +1,6 @@
 package com.example.tabatatimer
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
@@ -53,7 +55,7 @@ class SequenceEditActivity : ActivityBase() {
                 this
             )
 
-        val saveButton: Button = findViewById(R.id.save_sequence_button)
+        /*val saveButton: Button = findViewById(R.id.save_sequence_button)
         saveButton.setOnClickListener {
             saveCurrentSequence()
             onBackPressedDispatcher.onBackPressed()
@@ -61,7 +63,7 @@ class SequenceEditActivity : ActivityBase() {
             val intent = Intent(this, MainActivity::class.java)
             this.startActivity(intent)
             finish()
-        }
+        }*/
 
         val sequenceTitleEdittext: EditText = findViewById(R.id.sequence_title_edittext)
         sequenceTitleEdittext.setText(currSeq.title)
@@ -98,6 +100,21 @@ class SequenceEditActivity : ActivityBase() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.sequence_edit_activity_menu, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.save_sequence_item) {
+            saveCurrentSequence()
+            onBackPressedDispatcher.onBackPressed()
+
+            val intent = Intent(this, MainActivity::class.java)
+            this.startActivity(intent)
+            finish()
+
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setCurrentColor() {
