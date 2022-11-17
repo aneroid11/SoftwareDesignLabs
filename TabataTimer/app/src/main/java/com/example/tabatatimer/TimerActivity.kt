@@ -18,14 +18,16 @@ import androidx.recyclerview.widget.RecyclerView
 class TimerActivity : ActivityBase() {
     private val sequencesViewModel: SequencesViewModel by viewModels()
     private var seqPos: Int = 0
+    private lateinit var currSeq: Sequence
 
     private lateinit var timerStatusReceiver: BroadcastReceiver
     private lateinit var timerTimeReceiver: BroadcastReceiver
 
-    private var isTimerRunning: Boolean = true
+    private var isTimerRunning: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         seqPos = intent.getIntExtra("currentSequencePosition", 0)
+        currSeq = sequencesViewModel.sequencesList.value!![seqPos]
 
         setTextTheme()
 
@@ -91,10 +93,10 @@ class TimerActivity : ActivityBase() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 val isRunning = intent?.getBooleanExtra(TimerService.IS_TIMER_RUNNING, false)!!
                 isTimerRunning = isRunning
-                val timeElapsed = intent.getIntExtra(TimerService.TIME_ELAPSED, 0)
+                val timeRemaining = intent.getIntExtra(TimerService.TIME_REMAINING, 0)
 
                 updateLayout(isTimerRunning)
-                updateTimerValue(timeElapsed)
+                updateTimerValue(timeRemaining)
             }
         }
         registerReceiver(timerStatusReceiver, statusFilter)
@@ -104,20 +106,21 @@ class TimerActivity : ActivityBase() {
         timeFilter.addAction(TimerService.TIMER_TICK)
         timerTimeReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                val timeElapsed = intent?.getIntExtra(TimerService.TIME_ELAPSED, 0)!!
-                updateTimerValue(timeElapsed)
+                val timeRemaining = intent?.getIntExtra(TimerService.TIME_REMAINING, 0)!!
+                updateTimerValue(timeRemaining)
             }
         }
         registerReceiver(timerTimeReceiver, timeFilter)
     }
 
-    private fun updateTimerValue(timeElapsed: Int) {
-        val hours: Int = (timeElapsed / 60) / 60
+    private fun updateTimerValue(value: Int) {
+        /*val hours: Int = (timeElapsed / 60) / 60
         val minutes: Int = timeElapsed / 60
-        val seconds: Int = timeElapsed % 60
+        val seconds: Int = timeElapsed % 60*/
 
         val timerValueTextView: TextView = findViewById(R.id.remaining_seconds_textview)
-        timerValueTextView.text = "${"%02d".format(hours)}:${"%02d".format(minutes)}:${"%02d".format(seconds)}"
+        timerValueTextView.text = value.toString()
+        //timerValueTextView.text = "${"%02d".format(hours)}:${"%02d".format(minutes)}:${"%02d".format(seconds)}"
     }
 
     private fun updateLayout(isTimerRunning: Boolean) {
@@ -139,9 +142,13 @@ class TimerActivity : ActivityBase() {
     }
 
     private fun getTimerStatus() {
-        val timerServiceIntent = Intent(this, TimerService::class.java)
-        timerServiceIntent.putExtra(TimerService.TIMER_ACTION, TimerService.GET_STATUS)
-        startService(timerServiceIntent)
+        val intent = Intent(this, TimerService::class.java)
+        intent.putExtra(TimerService.TIMER_ACTION, TimerService.GET_STATUS)
+
+        intent.putExtra("numRepetitions", currSeq.numRepetitions)
+
+        startService(intent)
+        //startTimer()
     }
 
     private fun startTimer() {
@@ -164,19 +171,13 @@ class TimerActivity : ActivityBase() {
 
     private fun moveToForeground() {
         val intent = Intent(this, TimerService::class.java)
-        intent.putExtra(
-            TimerService.TIMER_ACTION,
-            TimerService.MOVE_TO_FOREGROUND
-        )
+        intent.putExtra(TimerService.TIMER_ACTION, TimerService.MOVE_TO_FOREGROUND)
         startService(intent)
     }
 
     private fun moveToBackground() {
         val intent = Intent(this, TimerService::class.java)
-        intent.putExtra(
-            TimerService.TIMER_ACTION,
-            TimerService.MOVE_TO_BACKGROUND
-        )
+        intent.putExtra(TimerService.TIMER_ACTION, TimerService.MOVE_TO_BACKGROUND)
         startService(intent)
     }
 }

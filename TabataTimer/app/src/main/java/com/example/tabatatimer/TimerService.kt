@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import java.util.*
@@ -25,7 +26,7 @@ class TimerService : Service() {
 
         // Intent Extras
         const val TIMER_ACTION = "TIMER_ACTION"
-        const val TIME_ELAPSED = "TIME_ELAPSED"
+        const val TIME_REMAINING = "TIME_REMAINING"
         const val IS_TIMER_RUNNING = "IS_TIMER_RUNNING"
 
         // Intent Actions
@@ -37,7 +38,10 @@ class TimerService : Service() {
     private var timer = Timer()
     private var updateTimer = Timer()
     private var isTimerRunning: Boolean = false
-    private var timeElapsed: Int = 0
+    private var timeRemaining: Int = 10
+
+    private var currRepetition: Int = 0
+    private var numRepetitions: Int = 1
 
     override fun onBind(intent: Intent?): IBinder? {
         Log.d("TimerService", "TimerService onBind()")
@@ -50,6 +54,8 @@ class TimerService : Service() {
 
         val action = intent?.getStringExtra(TIMER_ACTION)
         Log.d("TimerService", "onStartCommand Action: $action")
+
+        numRepetitions = intent!!.getIntExtra("numRepetitions", 1)
 
         when (action) {
             START -> startTimer()
@@ -88,7 +94,7 @@ class TimerService : Service() {
         val statusIntent = Intent()
         statusIntent.action = TIMER_STATUS
         statusIntent.putExtra(IS_TIMER_RUNNING, isTimerRunning)
-        statusIntent.putExtra(TIME_ELAPSED, timeElapsed)
+        statusIntent.putExtra(TIME_REMAINING, timeRemaining)
         sendBroadcast(statusIntent)
     }
 
@@ -103,9 +109,9 @@ class TimerService : Service() {
                 val timerIntent = Intent()
                 timerIntent.action = TIMER_TICK
 
-                timeElapsed++
+                timeRemaining--
 
-                timerIntent.putExtra(TIME_ELAPSED, timeElapsed)
+                timerIntent.putExtra(TIME_REMAINING, timeRemaining)
                 sendBroadcast(timerIntent)
             }
         }, 0, 1000)
@@ -119,7 +125,7 @@ class TimerService : Service() {
 
     private fun resetTimer() {
         pauseTimer()
-        timeElapsed = 0
+        timeRemaining = 10
         sendStatus()
     }
 
@@ -130,9 +136,9 @@ class TimerService : Service() {
             "Timer is paused!"
         }
 
-        val hours: Int = timeElapsed.div(60).div(60)
+        /*val hours: Int = timeElapsed.div(60).div(60)
         val minutes: Int = timeElapsed.div(60)
-        val seconds: Int = timeElapsed.rem(60)
+        val seconds: Int = timeElapsed.rem(60)*/
 
         val intent = Intent(this, TimerActivity::class.java)
         //val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
@@ -141,9 +147,11 @@ class TimerService : Service() {
         //clickPendingIntent()
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle(title)
+            //.setContentTitle(title)
+            .setContentTitle("$timeRemaining")
             .setOngoing(true)
-            .setContentText("${"%02d".format(hours)}:${"%02d".format(minutes)}:${"%02d".format(seconds)}")
+            //.setContentText("${"%02d".format(hours)}:${"%02d".format(minutes)}:${"%02d".format(seconds)}")
+            .setContentText("")
             .setColorized(true)
             .setColor(Color.parseColor("#BEAEE2"))
             .setSmallIcon(R.drawable.ic_launcher_foreground)

@@ -31,8 +31,8 @@
     <string name="training">Тренировка</string>
     <string name="cannot_set_duration_less">Невозможно установить продолжительность меньше 1!</string>
     <string name="run">Запуск</string>
-    <string name="pause">Пауза</string>
-    <string name="resume">Продолжить</string>
+    <string name="pause">Стоп</string>
+    <string name="resume">Старт</string>
     <string name="back">Назад</string>
     <string name="forth">Вперёд</string>
 </resources>

@@ -35,8 +35,8 @@
     <string name="training">Training</string>
     <string name="cannot_set_duration_less">Cannot set duration less than 1!</string>
     <string name="run">Run</string>
-    <string name="pause">Pause</string>
-    <string name="resume">Resume</string>
+    <string name="pause">Stop</string>
+    <string name="resume">Start</string>
     <string name="back">Back</string>
     <string name="forth">Forth</string>
 </resources>
