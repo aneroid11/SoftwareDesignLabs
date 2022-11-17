@@ -3,8 +3,10 @@ package com.example.tabatatimer
 import android.app.*
 import android.content.Intent
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.IBinder
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -55,6 +57,12 @@ class TimerService : Service() {
     private var currPhaseIndex = 0
 
     private var trainingFinished: Boolean = false
+
+    private lateinit var mediaPlayer: MediaPlayer
+
+    override fun onCreate() {
+        mediaPlayer = MediaPlayer.create(this, Settings.System.DEFAULT_NOTIFICATION_URI)
+    }
 
     override fun onBind(intent: Intent?): IBinder? {
         Log.d("TimerService", "TimerService onBind()")
@@ -162,6 +170,8 @@ class TimerService : Service() {
     }
 
     private fun increaseCurrPhaseIndex() {
+        mediaPlayer.start()
+
         currPhaseIndex++
         if (currPhaseIndex >= phasesDurations.size) {
             currRepetition++
