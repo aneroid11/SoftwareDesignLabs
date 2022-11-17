@@ -62,7 +62,8 @@ class TimerService : Service() {
     private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate() {
-        mediaPlayer = MediaPlayer.create(this, Settings.System.DEFAULT_NOTIFICATION_URI)
+        //mediaPlayer = MediaPlayer.create(this, Settings.System.DEFAULT_NOTIFICATION_URI)
+        mediaPlayer = MediaPlayer.create(this, R.raw.notification)
     }
 
     override fun onBind(intent: Intent?): IBinder? {
