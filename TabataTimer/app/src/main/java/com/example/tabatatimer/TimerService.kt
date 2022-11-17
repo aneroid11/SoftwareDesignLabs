@@ -40,11 +40,13 @@ class TimerService : Service() {
     private var isTimerRunning: Boolean = false
     private var timeRemaining: Int = 0
 
-    private var currRepetition: Int = 1
+    private var currRepetition: Int = 0
     private var numRepetitions: Int = 1
 
     private lateinit var phasesDurations: ArrayList<Int>
     private var currPhaseIndex = -1
+
+    private var trainingFinished: Boolean = false
 
     override fun onBind(intent: Intent?): IBinder? {
         Log.d("TimerService", "TimerService onBind()")
@@ -120,12 +122,32 @@ class TimerService : Service() {
         timer = Timer()
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
+                if (trainingFinished) { return }
+
                 if (currPhaseIndex < 0) {
                     currPhaseIndex++
                     timeRemaining = phasesDurations[currPhaseIndex]
                 }
                 else {
                     timeRemaining--
+
+                    if (timeRemaining < 1) {
+                        currPhaseIndex++
+                        if (currPhaseIndex >= phasesDurations.size) {
+                            currRepetition++
+
+                            if (currRepetition >= numRepetitions) {
+                                trainingFinished = true
+                            }
+                            else {
+                                currPhaseIndex = 0
+                                timeRemaining = phasesDurations[currPhaseIndex]
+                            }
+                        }
+                        else {
+                            timeRemaining = phasesDurations[currPhaseIndex]
+                        }
+                    }
 
                     /*if (timeRemaining < 1 && currRepetition < numRepetitions) {
                         currRepetition++
