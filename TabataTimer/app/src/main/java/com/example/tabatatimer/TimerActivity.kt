@@ -57,15 +57,25 @@ class TimerActivity : ActivityBase() {
         })
     }
 
-    private fun handleBackPressed() {
+    private fun stopTimerService() {
         val timerServiceIntent = Intent(this, TimerService::class.java)
-        resetTimer()
+        //resetTimer()
         stopService(timerServiceIntent)
+    }
+
+    private fun handleBackPressed() {
+        stopTimerService()
 
         val context = this
         val intent = Intent(context, MainActivity::class.java)
         context.startActivity(intent)
         finish()
+    }
+
+    override fun onDestroy() {
+        stopTimerService()
+
+        super.onDestroy()
     }
 
     override fun onStart() {
