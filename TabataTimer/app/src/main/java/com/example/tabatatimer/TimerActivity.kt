@@ -82,7 +82,7 @@ class TimerActivity : ActivityBase() {
     }
 
     private fun handleBackPressed() {
-        //stopTimerService()
+        stopTimerService()
 
         val context = this
         val intent = Intent(context, MainActivity::class.java)
@@ -91,8 +91,7 @@ class TimerActivity : ActivityBase() {
     }
 
     override fun onDestroy() {
-        stopTimerService()
-
+        //stopTimerService()
         super.onDestroy()
     }
 

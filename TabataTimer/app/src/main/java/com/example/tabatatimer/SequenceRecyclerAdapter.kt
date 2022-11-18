@@ -20,8 +20,7 @@ class SequenceRecyclerAdapter(
     private val seqViewModel: SequencesViewModel,
     private val activityContext: Context,
     private val parentActivity: MainActivity
-) :
-    RecyclerView.Adapter<SequenceRecyclerAdapter.SequenceViewHolder>() {
+) : RecyclerView.Adapter<SequenceRecyclerAdapter.SequenceViewHolder>() {
 
     class SequenceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardView: MaterialCardView = itemView.findViewById(R.id.card)

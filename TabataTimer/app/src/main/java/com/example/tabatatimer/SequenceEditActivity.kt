@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 
-
 class SequenceEditActivity : ActivityBase() {
     private val sequencesViewModel: SequencesViewModel by viewModels()
     private var seqPos: Int = 0

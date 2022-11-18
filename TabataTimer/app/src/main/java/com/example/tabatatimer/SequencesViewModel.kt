@@ -12,8 +12,6 @@ import java.lang.Exception
 import kotlin.random.Random
 
 class SequencesViewModel(app: Application) : AndroidViewModel(app) {
-    //lateinit var sequencesAdapter: SequenceRecyclerAdapter
-
     private val _sequencesList: MutableLiveData<MutableList<Sequence>> =
         MutableLiveData<MutableList<Sequence>>(mutableListOf())
 
