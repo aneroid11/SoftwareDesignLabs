@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreferenceCompat
+        android:key="night_theme_on"
+        android:title="@string/enable_night_theme" />
+
+    <DropDownPreference
+        android:key="font_size"
+        android:title="@string/select_font_size"
+        android:entries="@array/font_size_entries"
+        android:entryValues="@array/font_size_entry_values" />
+
+    <Preference
+        android:key="clear_data"
+        android:title="@string/clear"
+        android:summary="@string/press_this_to_clear_data" />
+
+    <DropDownPreference
+        android:key="select_lang"
+        android:title="@string/select_language"
+        android:entries="@array/select_lang_entries"
+        android:entryValues="@array/select_lang_entry_values" />
+</PreferenceScreen>

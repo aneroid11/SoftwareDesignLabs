@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_night_theme">Включить ночную тему</string>
+    <string name="select_font_size">Выбрать размер шрифта</string>
+    <string name="clear">Очистить</string>
+    <string name="press_this_to_clear_data">Нажмите, чтобы очистить список тренировок</string>
+    <string name="select_language">Выбрать язык</string>
+    <string name="small">Маленький</string>
+    <string name="medium">Средний</string>
+    <string name="large">Большой</string>
+    <string name="english">Английский</string>
+    <string name="russian">Русский</string>
+    <string name="only_after_app_restart">Применится только после перезапуска приложения</string>
+    <string name="home_activity">Домашнаяя активность</string>
+    <string name="font_size_changed">Размер текста изменён на: </string>
+    <string name="edit">изменить</string>
+    <string name="delete">удалить</string>
+    <string name="add_sequence">добавить тренировку</string>
+    <string name="repetitions">Повторений:</string>
+    <string name="sec">сек</string>
+    <string name="warmup">Разминка</string>
+    <string name="work">Работа</string>
+    <string name="rest">Отдых</string>
+    <string name="cooldown">Успокоиться</string>
+    <string name="title">Название</string>
+    <string name="repetitions_number">Количество повторений</string>
+    <string name="color">Цвет</string>
+    <string name="description">Описание</string>
+    <string name="duration">Продолжительность (секунд)</string>
+    <string name="save">Сохранить</string>
+    <string name="training">Тренировка</string>
+    <string name="cannot_set_duration_less">Невозможно установить продолжительность меньше 1!</string>
+    <string name="cannot_set_rep_num_less">Невозможно установить количество повторений меньше 1!</string>
+    <string name="run">Запуск</string>
+    <string name="pause">Стоп</string>
+    <string name="resume">Старт</string>
+    <string name="back">Назад</string>
+    <string name="forth">Вперёд</string>
+    <string name="training_already_finished">Тренировка уже закончена!</string>
+    <string name="add_phase">Добавить фазу</string>
+    <string name="cannot_delete_all_phases">Нельзя удалить все фазы!</string>
+    <string name="already_on_top">Эта фаза уже наверху!</string>
+    <string name="already_on_bottom">Эта фаза уже внизу!</string>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="font_size_entries">
+        <item>@string/medium</item>
+        <item>@string/large</item>
+    </array>
+
+    <array name="font_size_entry_values">
+        <item>@string/medium_eng</item>
+        <item>@string/large_eng</item>
+    </array>
+
+    <array name="select_lang_entries">
+        <item>@string/english</item>
+        <item>@string/russian</item>
+    </array>
+
+    <array name="select_lang_entry_values">
+        <item>@string/english_loc</item>
+        <item>@string/russian_loc</item>
+    </array>
+</resources>

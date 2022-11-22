@@ -1,3 +1,48 @@
 <resources>
-    <string name="app_name">Tabata Timer</string>
+    <string name="app_name" translatable="false">Tabata Timer</string>
+    <string name="enable_night_theme">Enable the night theme</string>
+    <string name="select_font_size">Select font size</string>
+    <string name="clear">Clear</string>
+    <string name="press_this_to_clear_data">Press this button to delete all sequences</string>
+    <string name="select_language">Select the language</string>
+    <string name="small">Small</string>
+    <string name="medium">Medium</string>
+    <string name="large">Large</string>
+    <string name="medium_eng" translatable="false">medium</string>
+    <string name="large_eng" translatable="false">large</string>
+    <string name="english">English</string>
+    <string name="russian">Russian</string>
+    <string name="russian_loc" translatable="false">ru</string>
+    <string name="english_loc" translatable="false">en</string>
+    <string name="only_after_app_restart">This will apply only after the app restart</string>
+    <string name="home_activity">home activity</string>
+    <string name="font_size_changed">Font size changed to: </string>
+    <string name="edit">edit</string>
+    <string name="delete">delete</string>
+    <string name="add_sequence">add sequence</string>
+    <string name="repetitions">Repetitions:</string>
+    <string name="sec">sec</string>
+    <string name="warmup">Warm-up</string>
+    <string name="work">Work</string>
+    <string name="rest">Rest</string>
+    <string name="cooldown">Cool down</string>
+    <string name="title">Title</string>
+    <string name="repetitions_number">Repetitions number</string>
+    <string name="color">Color</string>
+    <string name="description">Description</string>
+    <string name="duration">Duration (seconds)</string>
+    <string name="save">Save</string>
+    <string name="training">Training</string>
+    <string name="cannot_set_duration_less">Cannot set duration less than 1!</string>
+    <string name="cannot_set_rep_num_less">Cannot set repetitions number less than 1!</string>
+    <string name="run">Run</string>
+    <string name="pause">Stop</string>
+    <string name="resume">Start</string>
+    <string name="back">Back</string>
+    <string name="forth">Forth</string>
+    <string name="training_already_finished">Training already finished!</string>
+    <string name="add_phase">Add phase</string>
+    <string name="cannot_delete_all_phases">Cannot delete all phases!</string>
+    <string name="already_on_top">This phase is already on top!</string>
+    <string name="already_on_bottom">This phase is already on bottom!</string>
 </resources>

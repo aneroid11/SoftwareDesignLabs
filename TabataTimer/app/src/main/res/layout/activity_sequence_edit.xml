@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SequenceEditActivity">
+
+    <TextView
+        android:id="@+id/sequence_title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/sequence_title_edittext"
+        style="?textTitle" />
+
+    <EditText
+        android:id="@+id/sequence_title_edittext"
+        android:inputType="text"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:maxLength="100"
+        style="?textTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sequence_title_textview" />
+
+    <TextView
+        android:id="@+id/sequence_repetitions_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/repetitions_number"
+        app:layout_constraintBottom_toTopOf="@id/decrease_reps_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sequence_title_edittext"
+        style="?textBody" />
+
+    <Button
+        style="?textTitle"
+        android:id="@+id/decrease_reps_button"
+        android:text="-"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/sequence_repetitions_number_textview"
+        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_textview"
+        app:layout_constraintBottom_toTopOf="@id/color_picker" />
+
+    <TextView
+        android:id="@+id/sequence_repetitions_number_textview"
+        style="?textTitle"
+        android:text="99"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintEnd_toStartOf="@id/increase_reps_button"
+        app:layout_constraintStart_toEndOf="@id/decrease_reps_button"
+        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_textview"
+        app:layout_constraintBottom_toTopOf="@id/color_picker"/>
+
+    <Button
+        style="?textTitle"
+        android:id="@+id/increase_reps_button"
+        android:text="+"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/sequence_repetitions_number_textview"
+        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_textview"
+        app:layout_constraintBottom_toTopOf="@id/color_picker" />
+
+    <!--
+    <EditText
+        android:id="@+id/sequence_repetitions_edittext"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:inputType="number"
+        android:maxLength="2"
+        style="?textBody"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_textview"
+        app:layout_constraintBottom_toTopOf="@id/color_picker"/>
+    -->
+
+    <!--
+    <com.madrapps.pikolo.HSLColorPicker
+        android:id="@+id/color_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sequence_repetitions_edittext"
+        />
+    -->
+
+    <RadioGroup
+        android:id="@+id/color_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/decrease_reps_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <RadioButton
+            android:id="@+id/radio_color_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/pick_color_0" />
+        <RadioButton
+            android:id="@+id/radio_color_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/pick_color_1" />
+        <RadioButton
+            android:id="@+id/radio_color_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/pick_color_2" />
+        <RadioButton
+            android:id="@+id/radio_color_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/pick_color_3" />
+        <RadioButton
+            android:id="@+id/radio_color_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/pick_color_4" />
+    </RadioGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/phases_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:listitem="@layout/recyclerview_phase_item"
+        app:layout_constraintBottom_toTopOf="@id/add_phase_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/color_picker" />
+
+    <Button
+        android:id="@+id/add_phase_button"
+        style="?textBody"
+        android:text="@string/add_phase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/phases_recyclerview" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
